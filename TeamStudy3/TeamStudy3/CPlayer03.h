@@ -1,13 +1,11 @@
 ﻿#pragma once
-
-#include "Cobject.h"
-#include "Define.h"
-
-class CPlayer : public CObject
+#include "CPlayer.h"
+class CPlayer03 :
+    public CPlayer
 {
 public:
-    CPlayer();
-    virtual ~CPlayer();
+    CPlayer03();
+    ~CPlayer03() override;
 
 public:
     void Initialize() override;
@@ -16,8 +14,8 @@ public:
     void Render(HDC hDC) override;
     void Release() override;
 
-private:
-    void		Key_Input();
+public:
+    void Key_Input();
 
 private:
     Vec3		m_vPoint[4];
@@ -25,5 +23,6 @@ private:
 
     Vec3		m_vPosin;
     Vec3		m_vOriginPosin;
+
 };
 

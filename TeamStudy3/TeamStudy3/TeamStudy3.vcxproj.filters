@@ -55,6 +55,9 @@
     <Filter Include="98. Degisn">
       <UniqueIdentifier>{b204644f-34c7-49e0-8c42-abbb1775d60b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Object\02. Bullet">
+      <UniqueIdentifier>{1bbd273b-4c3b-4ebc-8a2e-3e277521bca6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -126,6 +129,12 @@
     <ClInclude Include="CAbstractFactory.h">
       <Filter>98. Degisn</Filter>
     </ClInclude>
+    <ClInclude Include="CBullet03.h">
+      <Filter>01.Object\02. Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer03.h">
+      <Filter>01.Object\00. Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamStudy3.cpp">
@@ -181,6 +190,12 @@
     </ClCompile>
     <ClCompile Include="CMyBmp.cpp">
       <Filter>99.Manager\04. Bmp\00. MyBmp</Filter>
+    </ClCompile>
+    <ClCompile Include="CBullet03.cpp">
+      <Filter>01.Object\02. Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer03.cpp">
+      <Filter>01.Object\00. Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

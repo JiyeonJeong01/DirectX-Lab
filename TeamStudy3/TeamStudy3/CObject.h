@@ -17,6 +17,12 @@ public:
 public:
     const INFO* Get_Info() const { return &m_tInfo; }
 
+    void Set_Pos(Vec3 _Pos)
+    {
+        m_tInfo.vPos.x = _Pos.x;
+        m_tInfo.vPos.y = _Pos.y;
+    }
+
 protected:
     INFO m_tInfo;
 
@@ -25,5 +31,7 @@ protected:
 	int				m_iHp;
 	int				m_iAttack;	
 	bool			m_bDead;
+
+    CObject*        m_pTarget;
 
 };

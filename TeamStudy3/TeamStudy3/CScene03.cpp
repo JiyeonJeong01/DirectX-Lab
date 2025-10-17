@@ -6,6 +6,7 @@
 #include "CBmpManager.h"
 #include "CMonster.h"
 #include "CPlayer.h"
+#include "CPlayer03.h"
 #include "CScrollManager.h"
 
 CScene03::CScene03()
@@ -22,7 +23,7 @@ void CScene03::Initialize()
 {
     CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Ground.bmp", L"Ground");
 
-    CObjectManager::Get_Instance()->AddObject(PLAYER, CAbstractFactory<CPlayer>::Create());
+    CObjectManager::Get_Instance()->AddObject(PLAYER, CAbstractFactory<CPlayer03>::Create());
 
     for (int i = 0; i < 6; ++i)
     {
