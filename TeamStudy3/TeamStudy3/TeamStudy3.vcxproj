@@ -116,7 +116,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d9.lib;d3dx9.llib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -139,7 +139,9 @@
     <ClInclude Include="CAbstractFactory.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CObject.h" />
+    <ClInclude Include="CObjectFourth.h" />
     <ClInclude Include="CObjectManager.h" />
+    <ClInclude Include="CPlayerForth.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CScene01.h" />
     <ClInclude Include="CScene02.h" />
@@ -156,7 +158,9 @@
   <ItemGroup>
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CObject.cpp" />
+    <ClCompile Include="CObjectFourth.cpp" />
     <ClCompile Include="CObjectManager.cpp" />
+    <ClCompile Include="CPlayerForth.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CScene01.cpp" />
     <ClCompile Include="CScene02.cpp" />

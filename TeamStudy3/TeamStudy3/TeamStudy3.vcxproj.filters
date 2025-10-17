@@ -28,6 +28,12 @@
     <Filter Include="98. ObjectManager">
       <UniqueIdentifier>{a87b21c2-ad17-4242-9cf6-cf49200157b2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CObjectFourth">
+      <UniqueIdentifier>{befd69a3-21a8-4442-aee6-1d2970334b8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CObjectFourth\CPlayerFourth">
+      <UniqueIdentifier>{edeca72b-0fed-48a4-b7bf-90eeb22549c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -78,6 +84,12 @@
     <ClInclude Include="CScene04.h">
       <Filter>02.Scene</Filter>
     </ClInclude>
+    <ClInclude Include="CPlayerForth.h">
+      <Filter>CObjectFourth\CPlayerFourth</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjectFourth.h">
+      <Filter>CObjectFourth</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamStudy3.cpp">
@@ -112,6 +124,12 @@
     </ClCompile>
     <ClCompile Include="CScene04.cpp">
       <Filter>02.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerForth.cpp">
+      <Filter>CObjectFourth\CPlayerFourth</Filter>
+    </ClCompile>
+    <ClCompile Include="CObjectFourth.cpp">
+      <Filter>CObjectFourth</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

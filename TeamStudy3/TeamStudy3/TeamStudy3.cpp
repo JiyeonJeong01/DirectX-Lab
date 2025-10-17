@@ -31,7 +31,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadStringW(hInstance, IDI_TEAMSTUDY3, szWindowClass, MAX_LOADSTRING);
+    LoadStringW(hInstance, IDC_TEAMSTUDY3, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
 
     if (!InitInstance(hInstance, nCmdShow))

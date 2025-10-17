@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #define	WINCX			800
 #define	WINCY			600
@@ -18,7 +18,7 @@ typedef struct tagInfo
 	D3DXVECTOR3		vLook;
 
 	D3DXVECTOR3		vNormal;
-
+    D3DXMATRIX matWorld;
 }INFO;
 
 enum OBJECT
