@@ -14,7 +14,6 @@ void CMyBmp::Load_Bmp(const TCHAR* pFilePath)
 {
 	HDC	hDC = GetDC(g_hWnd);
 
-
 	// CreateCompatibleDC : 매개 변수로 전달한 dc와 호환되는 dc를 생성
 	m_hMemDC = CreateCompatibleDC(hDC);
 

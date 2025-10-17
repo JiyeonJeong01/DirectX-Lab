@@ -31,8 +31,6 @@ void CMainGame::Update()
 
     // 스크롤 추가할사람은 각자 스테이지에서
     //SCROLL->Scroll_Lock();
-
-    cout << "현재 스테이지 : " << CSceneManager::Get_Instance()->Get_SceneNumber() << endl;
 }
 
 void CMainGame::Late_Update()
@@ -42,11 +40,10 @@ void CMainGame::Late_Update()
 
 void CMainGame::Render()
 {
-
     HDC hBackDC = CBmpManager::Get_Instance()->Find_Img(L"Back");
-
+    
     CSceneManager::Get_Instance()->Render(hBackDC);
-
+    
     BitBlt(m_hDC, 0, 0, WINCX, WINCY, hBackDC, 0, 0, SRCCOPY);
 }
 

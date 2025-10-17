@@ -70,6 +70,7 @@ void CSceneManager::Render(HDC hdc)
     {
         m_pScene->Render(hdc);
     }
+
 }
 
 void CSceneManager::Release()
