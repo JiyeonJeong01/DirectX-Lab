@@ -15,6 +15,7 @@ public:
     void Late_Update() override;
     void Render(HDC hDC) override;
     void Release() override;
+    void		On_Collision(CObject* _pColObj, Vec3 _vColSize)	PURE;
 
 private:
     void		Key_Input();

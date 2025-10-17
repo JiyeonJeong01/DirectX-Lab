@@ -24,10 +24,10 @@ void CScene03::Initialize()
 
     CObjectManager::Get_Instance()->AddObject(PLAYER, CAbstractFactory<CPlayer>::Create());
 
-    for (int i = 0; i < 6; ++i)
-    {
-        //CObjectManager::Get_Instance()->AddObject(MONSTER, CAbstractFactory<CMonster>::Create(rand() % WINCX, rand() % WINCY));
-    }
+    //for (int i = 0; i < 6; ++i)
+    //{
+    //    //CObjectManager::Get_Instance()->AddObject(MONSTER, CAbstractFactory<CMonster>::Create(rand() % WINCX, rand() % WINCY));
+    //}
 
 }
 
