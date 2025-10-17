@@ -19,13 +19,16 @@
     <Filter Include="01.Object">
       <UniqueIdentifier>{f08f671b-700a-45c4-9c8b-e33f194833ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="99. SceneManager">
-      <UniqueIdentifier>{7adcb7bc-d054-4b61-87d1-5815a234088d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Scene">
       <UniqueIdentifier>{fdf04334-0ff6-4f74-90a9-b874c2e06a6f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="98. ObjectManager">
+    <Filter Include="99.Manager">
+      <UniqueIdentifier>{64079c8a-5e96-47e4-a526-67e3834adbb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Manager\01. ObjectMgr">
+      <UniqueIdentifier>{7adcb7bc-d054-4b61-87d1-5815a234088d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Manager\00. SceneMgr">
       <UniqueIdentifier>{a87b21c2-ad17-4242-9cf6-cf49200157b2}</UniqueIdentifier>
     </Filter>
     <Filter Include="CObjectFourth">
@@ -33,6 +36,30 @@
     </Filter>
     <Filter Include="CObjectFourth\CPlayerFourth">
       <UniqueIdentifier>{edeca72b-0fed-48a4-b7bf-90eeb22549c6}</UniqueIdentifier>
+    </Filter>
+	<Filter Include="01.Object\00. Player">
+      <UniqueIdentifier>{83c3aeca-63fa-4137-a860-7fbeee9819f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\01. Monster">
+      <UniqueIdentifier>{7316edd7-c4e3-4a8d-84d5-b609c0460b11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Manager\02. Collision">
+      <UniqueIdentifier>{edaaea22-8f1d-415a-b77c-a67890147f7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Manager\03. Key">
+      <UniqueIdentifier>{e07827c1-1143-452a-934c-db57fd8a6259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Manager\04. Bmp">
+      <UniqueIdentifier>{15f27c63-9374-4305-b7a6-8c09767dc5b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Manager\04. Bmp\00. MyBmp">
+      <UniqueIdentifier>{80981e02-c867-49d1-a0f9-f238119b3175}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Manager\05. Scroll">
+      <UniqueIdentifier>{58576875-96d1-4844-8465-5a3c7df78b30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. Degisn">
+      <UniqueIdentifier>{b204644f-34c7-49e0-8c42-abbb1775d60b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -60,17 +87,8 @@
     <ClInclude Include="CObject.h">
       <Filter>01.Object</Filter>
     </ClInclude>
-    <ClInclude Include="CSceneManager.h">
-      <Filter>99. SceneManager</Filter>
-    </ClInclude>
-    <ClInclude Include="CAbstractFactory.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CScene.h">
       <Filter>02.Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="CObjectManager.h">
-      <Filter>98. ObjectManager</Filter>
     </ClInclude>
     <ClInclude Include="CScene01.h">
       <Filter>02.Scene</Filter>
@@ -89,6 +107,36 @@
     </ClInclude>
     <ClInclude Include="CObjectFourth.h">
       <Filter>CObjectFourth</Filter>
+	  </ClInclude>
+    <ClInclude Include="CObjectManager.h">
+      <Filter>99.Manager\01. ObjectMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneManager.h">
+      <Filter>99.Manager\00. SceneMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>01.Object\00. Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonster.h">
+      <Filter>01.Object\01. Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CScrollManager.h">
+      <Filter>99.Manager\05. Scroll</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollisionManager.h">
+      <Filter>99.Manager\02. Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="CKeyManager.h">
+      <Filter>99.Manager\03. Key</Filter>
+    </ClInclude>
+    <ClInclude Include="CBmpManager.h">
+      <Filter>99.Manager\04. Bmp</Filter>
+    </ClInclude>
+    <ClInclude Include="CMyBmp.h">
+      <Filter>99.Manager\04. Bmp\00. MyBmp</Filter>
+    </ClInclude>
+    <ClInclude Include="CAbstractFactory.h">
+      <Filter>98. Degisn</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -104,14 +152,8 @@
     <ClCompile Include="CObject.cpp">
       <Filter>01.Object</Filter>
     </ClCompile>
-    <ClCompile Include="CSceneManager.cpp">
-      <Filter>99. SceneManager</Filter>
-    </ClCompile>
     <ClCompile Include="CScene.cpp">
       <Filter>02.Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="CObjectManager.cpp">
-      <Filter>98. ObjectManager</Filter>
     </ClCompile>
     <ClCompile Include="CScene01.cpp">
       <Filter>02.Scene</Filter>
@@ -130,6 +172,33 @@
     </ClCompile>
     <ClCompile Include="CObjectFourth.cpp">
       <Filter>CObjectFourth</Filter>
+	  </ClCompile>
+    <ClCompile Include="CObjectManager.cpp">
+      <Filter>99.Manager\01. ObjectMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneManager.cpp">
+      <Filter>99.Manager\00. SceneMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>01.Object\00. Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonster.cpp">
+      <Filter>01.Object\01. Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CScrollManager.cpp">
+      <Filter>99.Manager\05. Scroll</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollisionManager.cpp">
+      <Filter>99.Manager\02. Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="CKeyManager.cpp">
+      <Filter>99.Manager\03. Key</Filter>
+    </ClCompile>
+    <ClCompile Include="CBmpManager.cpp">
+      <Filter>99.Manager\04. Bmp</Filter>
+    </ClCompile>
+    <ClCompile Include="CMyBmp.cpp">
+      <Filter>99.Manager\04. Bmp\00. MyBmp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

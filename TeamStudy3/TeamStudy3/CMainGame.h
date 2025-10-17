@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Define.h"
 
 class CMainGame
@@ -16,5 +16,8 @@ public:
 
 private:
 	HDC				m_hDC;
+
+    DWORD           m_dwTime;
+    int             m_iFPS;
 };
 

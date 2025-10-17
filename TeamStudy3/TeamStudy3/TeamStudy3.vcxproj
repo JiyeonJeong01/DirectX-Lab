@@ -117,6 +117,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -137,17 +138,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CAbstractFactory.h" />
+    <ClInclude Include="CBmpManager.h" />
+    <ClInclude Include="CCollisionManager.h" />
+    <ClInclude Include="CKeyManager.h" />
     <ClInclude Include="CMainGame.h" />
+    <ClInclude Include="CMonster.h" />
+    <ClInclude Include="CMyBmp.h" />
     <ClInclude Include="CObject.h" />
-    <ClInclude Include="CObjectFourth.h" />
     <ClInclude Include="CObjectManager.h" />
-    <ClInclude Include="CPlayerForth.h" />
+    <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CScene01.h" />
     <ClInclude Include="CScene02.h" />
     <ClInclude Include="CScene03.h" />
     <ClInclude Include="CScene04.h" />
     <ClInclude Include="CSceneManager.h" />
+    <ClInclude Include="CScrollManager.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
@@ -156,17 +162,22 @@
     <ClInclude Include="TeamStudy3.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CBmpManager.cpp" />
+    <ClCompile Include="CCollisionManager.cpp" />
+    <ClCompile Include="CKeyManager.cpp" />
     <ClCompile Include="CMainGame.cpp" />
+    <ClCompile Include="CMonster.cpp" />
+    <ClCompile Include="CMyBmp.cpp" />
     <ClCompile Include="CObject.cpp" />
-    <ClCompile Include="CObjectFourth.cpp" />
     <ClCompile Include="CObjectManager.cpp" />
-    <ClCompile Include="CPlayerForth.cpp" />
+    <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CScene01.cpp" />
     <ClCompile Include="CScene02.cpp" />
     <ClCompile Include="CScene03.cpp" />
     <ClCompile Include="CScene04.cpp" />
     <ClCompile Include="CSceneManager.cpp" />
+    <ClCompile Include="CScrollManager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
