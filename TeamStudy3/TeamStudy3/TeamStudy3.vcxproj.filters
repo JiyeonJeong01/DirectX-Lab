@@ -37,7 +37,7 @@
     <Filter Include="CObjectFourth\CPlayerFourth">
       <UniqueIdentifier>{edeca72b-0fed-48a4-b7bf-90eeb22549c6}</UniqueIdentifier>
     </Filter>
-	<Filter Include="01.Object\00. Player">
+    <Filter Include="01.Object\00. Player">
       <UniqueIdentifier>{83c3aeca-63fa-4137-a860-7fbeee9819f4}</UniqueIdentifier>
     </Filter>
     <Filter Include="01.Object\01. Monster">
@@ -60,6 +60,9 @@
     </Filter>
     <Filter Include="98. Degisn">
       <UniqueIdentifier>{b204644f-34c7-49e0-8c42-abbb1775d60b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CObjectFourth\CBoxFourth">
+      <UniqueIdentifier>{9cb202f7-c36b-41b2-ad92-2fa040e9ecbb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -102,12 +105,6 @@
     <ClInclude Include="CScene04.h">
       <Filter>02.Scene</Filter>
     </ClInclude>
-    <ClInclude Include="CPlayerForth.h">
-      <Filter>CObjectFourth\CPlayerFourth</Filter>
-    </ClInclude>
-    <ClInclude Include="CObjectFourth.h">
-      <Filter>CObjectFourth</Filter>
-	  </ClInclude>
     <ClInclude Include="CObjectManager.h">
       <Filter>99.Manager\01. ObjectMgr</Filter>
     </ClInclude>
@@ -138,6 +135,15 @@
     <ClInclude Include="CAbstractFactory.h">
       <Filter>98. Degisn</Filter>
     </ClInclude>
+    <ClInclude Include="CObjectFourth.h">
+      <Filter>CObjectFourth</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerFourth.h">
+      <Filter>CObjectFourth\CPlayerFourth</Filter>
+    </ClInclude>
+    <ClInclude Include="CBoxFourth.h">
+      <Filter>CObjectFourth\CBoxFourth</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamStudy3.cpp">
@@ -167,12 +173,6 @@
     <ClCompile Include="CScene04.cpp">
       <Filter>02.Scene</Filter>
     </ClCompile>
-    <ClCompile Include="CPlayerForth.cpp">
-      <Filter>CObjectFourth\CPlayerFourth</Filter>
-    </ClCompile>
-    <ClCompile Include="CObjectFourth.cpp">
-      <Filter>CObjectFourth</Filter>
-	  </ClCompile>
     <ClCompile Include="CObjectManager.cpp">
       <Filter>99.Manager\01. ObjectMgr</Filter>
     </ClCompile>
@@ -199,6 +199,15 @@
     </ClCompile>
     <ClCompile Include="CMyBmp.cpp">
       <Filter>99.Manager\04. Bmp\00. MyBmp</Filter>
+    </ClCompile>
+    <ClCompile Include="CObjectFourth.cpp">
+      <Filter>CObjectFourth</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerFourth.cpp">
+      <Filter>CObjectFourth\CPlayerFourth</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoxFourth.cpp">
+      <Filter>CObjectFourth\CBoxFourth</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

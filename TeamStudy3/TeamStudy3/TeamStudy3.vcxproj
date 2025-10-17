@@ -139,14 +139,17 @@
   <ItemGroup>
     <ClInclude Include="CAbstractFactory.h" />
     <ClInclude Include="CBmpManager.h" />
+    <ClInclude Include="CBoxFourth.h" />
     <ClInclude Include="CCollisionManager.h" />
     <ClInclude Include="CKeyManager.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CMyBmp.h" />
     <ClInclude Include="CObject.h" />
+    <ClInclude Include="CObjectFourth.h" />
     <ClInclude Include="CObjectManager.h" />
     <ClInclude Include="CPlayer.h" />
+    <ClInclude Include="CPlayerFourth.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CScene01.h" />
     <ClInclude Include="CScene02.h" />
@@ -163,14 +166,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CBmpManager.cpp" />
+    <ClCompile Include="CBoxFourth.cpp" />
     <ClCompile Include="CCollisionManager.cpp" />
     <ClCompile Include="CKeyManager.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CMyBmp.cpp" />
     <ClCompile Include="CObject.cpp" />
+    <ClCompile Include="CObjectFourth.cpp" />
     <ClCompile Include="CObjectManager.cpp" />
     <ClCompile Include="CPlayer.cpp" />
+    <ClCompile Include="CPlayerFourth.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CScene01.cpp" />
     <ClCompile Include="CScene02.cpp" />

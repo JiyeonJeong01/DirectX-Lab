@@ -1,12 +1,12 @@
 ﻿#pragma once
 #include "CObjectFourth.h"
-class CPlayerForth : public CObjectFourth
+class CPlayerFourth : public CObjectFourth
 {
 private:
     void KeyInput();
 public:
-    CPlayerForth();
-    virtual ~CPlayerForth();
+    CPlayerFourth();
+    virtual ~CPlayerFourth();
 
 public:
     void Initialize() override;

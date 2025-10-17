@@ -1,31 +1,31 @@
 ﻿#include "pch.h"
-#include "CPlayerForth.h"
+#include "CPlayerFourth.h"
 
-CPlayerForth::CPlayerForth()
+CPlayerFourth::CPlayerFourth()
 {
 }
 
-CPlayerForth::~CPlayerForth()
+CPlayerFourth::~CPlayerFourth()
 {
     Release();
 }
 
-void CPlayerForth::Initialize()
+void CPlayerFourth::Initialize()
 {
     m_tInfo.vPos = { 400.f, 300.f, 0.f };
     m_tInfo.vDir = { 1.f, 0.f, 0.f };
     m_tInfo.vLook = { 0.f, -1.f, 0.f };
     m_fSpeed = 5.f;
 
-    m_vPoint[0] = { m_tInfo.vPos.x - 30.f, m_tInfo.vPos.y - 30.f, 0.f };
-    m_vPoint[1] = { m_tInfo.vPos.x + 30.f, m_tInfo.vPos.y - 30.f, 0.f };
-    m_vPoint[2] = { m_tInfo.vPos.x + 30.f, m_tInfo.vPos.y + 30.f, 0.f };
-    m_vPoint[3] = { m_tInfo.vPos.x - 30.f, m_tInfo.vPos.y + 30.f, 0.f };
+    m_vPoint[0] = { m_tInfo.vPos.x - 15.f, m_tInfo.vPos.y - 15.f, 0.f };
+    m_vPoint[1] = { m_tInfo.vPos.x + 15.f, m_tInfo.vPos.y - 15.f, 0.f };
+    m_vPoint[2] = { m_tInfo.vPos.x + 15.f, m_tInfo.vPos.y + 15.f, 0.f };
+    m_vPoint[3] = { m_tInfo.vPos.x - 15.f, m_tInfo.vPos.y + 15.f, 0.f };
     for (int i = 0; i < 4; ++i)
         m_vOriginPoint[i] = m_vPoint[i];
 }
 
-int CPlayerForth::Update()
+int CPlayerFourth::Update()
 {
     KeyInput();
 
@@ -47,21 +47,30 @@ int CPlayerForth::Update()
     return OBJ_NOEVENT;
 }
 
-void CPlayerForth::Render(HDC hDC)
+void CPlayerFourth::Render(HDC hDC)
 {
     MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y, nullptr);
     for (int i = 0; i < 4; ++i)
     {
         LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
+
+        if (i > 1)
+            continue;
+
+        Ellipse(hDC,
+            int(m_vPoint[i].x - 5.f),
+            int(m_vPoint[i].y - 5.f),
+            int(m_vPoint[i].x + 5.f),
+            int(m_vPoint[i].y + 5.f));
     }
     LineTo(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y);
 }
 
-void CPlayerForth::Release()
+void CPlayerFourth::Release()
 {
 }
 
-void CPlayerForth::KeyInput()
+void CPlayerFourth::KeyInput()
 {
     if (GetAsyncKeyState('D'))
     {
