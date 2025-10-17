@@ -58,8 +58,6 @@ int CPlayer::Update()
 
     D3DXVec3TransformCoord(&m_vPosin, &m_vPosin, &m_tInfo.matWorld);
 
-    cout << "Player Pos : " << m_tInfo.vPos.x << endl;
-
     return OBJ_NOEVENT;
 }
 
