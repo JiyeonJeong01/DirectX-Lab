@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Define.h"
 
 class CObject
@@ -8,13 +8,18 @@ public:
 	virtual ~CObject();
 
 public:
-	virtual void		Initialize()										PURE;
-	virtual int			Update()											PURE;
-	virtual void		Late_Update()										PURE;
-	virtual void		Render(HDC _hDC)									PURE;
-	virtual void		Release()											PURE;
+	virtual void		Initialize()		PURE;
+	virtual int			Update()			PURE;
+	virtual void		Late_Update()		PURE;
+	virtual void		Render(HDC _hDC)	PURE;
+	virtual void		Release()			PURE;
 
-private:
+public:
+    const INFO* Get_Info() const { return &m_tInfo; }
+
+protected:
+    INFO m_tInfo;
+
 	float			m_fSpeed;
 	float			m_fAngle;
 	int				m_iHp;

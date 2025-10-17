@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "CSceneManager.h"
 #include "CScene01.h"
 #include "CScene02.h"
@@ -66,6 +66,10 @@ void CSceneManager::Late_Update()
 
 void CSceneManager::Render(HDC hdc)
 {
+    if (m_pScene)
+    {
+        m_pScene->Render(hdc);
+    }
 }
 
 void CSceneManager::Release()

@@ -5,6 +5,9 @@
 #include "framework.h"
 #include "TeamStudy3.h"
 #include "CMainGame.h"
+#include <locale.h>
+
+FILE* debug;
 
 #define MAX_LOADSTRING 100
 
@@ -31,7 +34,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadStringW(hInstance, IDI_TEAMSTUDY3, szWindowClass, MAX_LOADSTRING);
+    LoadStringW(hInstance, IDC_TEAMSTUDY3, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
 
     if (!InitInstance(hInstance, nCmdShow))
@@ -48,11 +51,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     CMainGame GAME;
     GAME.Initialize();
 
-    while (1)
+    while (true)
     {
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            if (msg.message == WM_QUIT) break;
+            if (msg.message == WM_QUIT)
+                break;
 
             if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
             {
@@ -117,11 +121,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     {
         return FALSE;
     }
+
     g_hWnd = hWnd;
     ShowWindow(hWnd, nCmdShow);
     UpdateWindow(hWnd);
 
-    g_hWnd = hWnd;
     return TRUE;
 }
 
@@ -129,6 +133,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+#pragma region Debug Log
+    case WM_CREATE:
+        AllocConsole();
+        _tfreopen_s(&debug, _T("CONOUT$"), _T("w"), stdout);
+        _tfreopen_s(&debug, _T("CONIN$"), _T("r"), stdin);
+        _tfreopen_s(&debug, _T("CONERR"), _T("w"), stderr);
+        _tsetlocale(LC_ALL, _T(""));
+        break;
+    case WM_CLOSE:
+        FreeConsole();
+        DestroyWindow(hWnd);
+        break;
+#pragma endregion      
+
     case WM_COMMAND:
     {
         int wmId = LOWORD(wParam);
@@ -138,14 +156,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
             break;
         case IDM_EXIT:
-            DestroyWindow(hWnd);
+            DestroyWindow(g_hWnd);
             break;
         default:
             return DefWindowProc(hWnd, message, wParam, lParam);
         }
     }
     break;
+
     case WM_KEYDOWN:
+
         switch (wParam)
         {
         case VK_ESCAPE:
@@ -153,6 +173,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             break;
         }
         break;
+
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
