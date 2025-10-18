@@ -64,6 +64,12 @@
     <Filter Include="97. Components">
       <UniqueIdentifier>{90ade1a5-5a34-45e0-bd5e-eaafe8d8ac44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Object\04. KimJun">
+      <UniqueIdentifier>{61ad135b-1948-4e23-a8ff-2c61e3ca3a68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\05. Etc">
+      <UniqueIdentifier>{1fc27635-cc67-435c-99f4-057f9aa27064}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -135,20 +141,41 @@
     <ClInclude Include="CAbstractFactory.h">
       <Filter>98. Degisn</Filter>
     </ClInclude>
+    <ClInclude Include="CHelper.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CBoxFourth.h">
+      <Filter>01.Object\04. KimJun</Filter>
+    </ClInclude>
     <ClInclude Include="CBullet_Base.h">
       <Filter>01.Object\02. Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="CCollisionMgr04.h">
+      <Filter>99.Manager\02. Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="CComponent.h">
+      <Filter>97. Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjectFourth.h">
+      <Filter>01.Object\04. KimJun</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlatform.h">
+      <Filter>01.Object\05. Etc</Filter>
+    </ClInclude>
     <ClInclude Include="CPlayer03.h">
+      <Filter>01.Object\00. Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerFourth.h">
+      <Filter>01.Object\00. Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage01Player.h">
       <Filter>01.Object\00. Player</Filter>
     </ClInclude>
     <ClInclude Include="CTimeManager.h">
       <Filter>99.Manager\06. Time</Filter>
     </ClInclude>
-    <ClInclude Include="CHelper.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CComponent.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="CWallFourth.h">
+      <Filter>01.Object\04. KimJun</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -206,17 +233,38 @@
     <ClCompile Include="CMyBmp.cpp">
       <Filter>99.Manager\04. Bmp\00. MyBmp</Filter>
     </ClCompile>
+    <ClCompile Include="CBoxFourth.cpp">
+      <Filter>01.Object\04. KimJun</Filter>
+    </ClCompile>
     <ClCompile Include="CBullet_Base.cpp">
       <Filter>01.Object\02. Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="CCollisionMgr04.cpp">
+      <Filter>99.Manager\02. Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="CComponent.cpp">
+      <Filter>97. Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CObjectFourth.cpp">
+      <Filter>01.Object\04. KimJun</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlatform.cpp">
+      <Filter>01.Object\05. Etc</Filter>
+    </ClCompile>
     <ClCompile Include="CPlayer03.cpp">
+      <Filter>01.Object\00. Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerFourth.cpp">
+      <Filter>01.Object\00. Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage01Player.cpp">
       <Filter>01.Object\00. Player</Filter>
     </ClCompile>
     <ClCompile Include="CTimeManager.cpp">
       <Filter>99.Manager\06. Time</Filter>
     </ClCompile>
-    <ClCompile Include="CComponent.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="CWallFourth.cpp">
+      <Filter>01.Object\04. KimJun</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

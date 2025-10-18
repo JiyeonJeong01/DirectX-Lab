@@ -15,20 +15,15 @@ public:
 	virtual void		Late_Update()		PURE;
 	virtual void		Render(HDC _hDC)	PURE;
 	virtual void		Release()			PURE;
-    virtual void		On_Collision(CObject* _pColObj, Vec3 _vColSize)	PURE;
+
+    virtual void		On_Collision(CObject* _pColObj, Vec3 _vColSize) {}
 
 public:
     const INFO* Get_Info() const { return &m_tInfo; }
     void	Set_Pos(const Vec3& _vPos) { m_tInfo.vPos = _vPos; }
 
-    void Set_Pos(Vec3 _Pos)
-    {
-        m_tInfo.vPos.x = _Pos.x;
-        m_tInfo.vPos.y = _Pos.y;
-    }
-
-    void Set_Dead() { m_bDead = true; }
-    void Set_Owner(CObject* _Owner) { m_Owner = _Owner; }
+    void    Set_Dead() { m_bDead = true; }
+    void    Set_Owner(CObject* _Owner) { m_Owner = _Owner; }
 
     CObject* Get_Owner()  { return m_Owner; }
     int      Get_TeamID() { return m_TeamID; }
