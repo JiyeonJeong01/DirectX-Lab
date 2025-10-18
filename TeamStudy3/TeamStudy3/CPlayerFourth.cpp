@@ -2,7 +2,7 @@
 #include "CPlayerFourth.h"
 #include "CCollisionMgr04.h"
 
-CPlayerFourth::CPlayerFourth() : isMove(true), preAngle(0.f), vecWall(nullptr), sHp(3), isInvincible(false), dwInvincibleTime(0)
+CPlayerFourth::CPlayerFourth() : isMove(true), preAngle(0.f), vecWall(nullptr), sHp(70), isInvincible(false), dwInvincibleTime(0)
 {
     ZeroMemory(&prePos, sizeof(D3DXVECTOR3));
 }
@@ -121,7 +121,6 @@ int CPlayerFourth::Update()
 
 void CPlayerFourth::Render(HDC hDC)
 {
-    cout << "hp : " << sHp << endl;
     MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y, nullptr);
     for (int i = 0; i < 4; ++i)
     {

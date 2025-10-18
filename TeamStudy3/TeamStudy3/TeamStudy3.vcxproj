@@ -144,6 +144,7 @@
     <ClInclude Include="CCollisionManager.h" />
     <ClInclude Include="CCollisionMgr04.h" />
     <ClInclude Include="CComponent.h" />
+    <ClInclude Include="CGoalFourth.h" />
     <ClInclude Include="CHelper.h" />
     <ClInclude Include="CKeyManager.h" />
     <ClInclude Include="CMainGame.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="CCollisionManager.cpp" />
     <ClCompile Include="CCollisionMgr04.cpp" />
     <ClCompile Include="CComponent.cpp" />
+    <ClCompile Include="CGoalFourth.cpp" />
     <ClCompile Include="CKeyManager.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CMonster.cpp" />

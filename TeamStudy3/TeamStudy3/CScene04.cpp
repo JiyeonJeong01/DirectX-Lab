@@ -4,8 +4,10 @@
 #include "CCollisionMgr04.h"
 #define EPSILON 0.03f
 
-CScene04::CScene04() : pPlayer(nullptr), pObstacle(nullptr)
+CScene04::CScene04() : pPlayer(nullptr), pObstacle(nullptr), sScore(0)
 {
+    pGoal[0] = nullptr;
+    pGoal[1] = nullptr;
 }
 
 CScene04::~CScene04()
@@ -28,6 +30,16 @@ void CScene04::Initialize()
         pObstacle = new CObstacleFourth;
         pObstacle->Initialize();
     }
+
+    for (int i = 0; i < 2; ++i)
+    {
+        if (pGoal[i] == nullptr)
+        {
+            pGoal[i] = new CGoalFourth;
+            pGoal[i]->Initialize();
+        }
+    }
+    pGoal[1]->SetAllPoint({ 625.f, 425.f, 0.f }, 40.f);
 
     for (int i = 0; i < 2; ++i)
     {
@@ -74,6 +86,11 @@ void CScene04::Late_Update()
 {
     D3DXVECTOR3* playerPoint = pPlayer->GetPoint();
     D3DXVECTOR3* obstaclePoint = pObstacle->GetPoint();
+    D3DXVECTOR3* goalPoint[2] = {};
+    for (int i = 0; i < 2; ++i)
+    {
+        goalPoint[i] = pGoal[i]->GetPoint();
+    }
     vector<D3DXVECTOR3*> pBoxPoint(vecBox.size(), 0);
     for (int i = 0; i < vecBox.size(); ++i)
         pBoxPoint[i] = vecBox[i]->GetPoint();
@@ -191,6 +208,37 @@ void CScene04::Late_Update()
             }
         }
     }
+
+    for (int i = 0; i < 2; ++i)
+    {
+        for (int j = 0; j < 4; ++j)
+        {
+            for (auto& pBox : pBoxPoint)
+            {
+                for (int k = 0; k < 4; ++k)
+                {
+                    if (CCollisionMgr04::CollisionLineToLine(goalPoint[i][j], goalPoint[i][j + 1], pBox[k], pBox[k + 1]))
+                    {
+                        dynamic_cast<CGoalFourth*>(pGoal[i])->SetGoal(true);
+                        break;
+                    }
+                }
+                if (dynamic_cast<CGoalFourth*>(pGoal[i])->GetGoal())
+                {
+                    break;
+                }
+            }
+            if (dynamic_cast<CGoalFourth*>(pGoal[i])->GetGoal())
+            {
+                break;
+            }
+        }
+    }
+
+    if (dynamic_cast<CGoalFourth*>(pGoal[0])->GetGoal() && dynamic_cast<CGoalFourth*>(pGoal[1])->GetGoal())
+    {
+        return;
+    }
 }
 
 void CScene04::Render(HDC _hDC)
@@ -198,6 +246,12 @@ void CScene04::Render(HDC _hDC)
     HDC	hGroundDC = CBmpManager::Get_Instance()->Find_Img(L"Ground");
     BitBlt(_hDC, 0, 0, 1920, 1280, hGroundDC, 0, 0, SRCCOPY);
     pPlayer->Render(_hDC);
+    for (int i = 0; i < 2; ++i)
+    {
+        pGoal[i]->Render(_hDC);
+    }
+
+
     pObstacle->Render(_hDC);
     for (auto pBox : vecBox)
     {
@@ -213,6 +267,10 @@ void CScene04::Release()
 {
     Safe_Delete<CObjectFourth*>(pPlayer);
     Safe_Delete<CObjectFourth*>(pObstacle);
+    for (int i = 0; i < 2; ++i)
+    {
+        Safe_Delete<CObjectFourth*>(pGoal[i]);
+    }
     for_each(vecBox.begin(), vecBox.end()
         , [](CObjectFourth* _p) -> void {
             if (_p)
