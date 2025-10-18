@@ -67,6 +67,9 @@
     <Filter Include="CCollisionMgr04">
       <UniqueIdentifier>{b5724c76-7072-418b-a657-2d8830875f36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CObjectFourth\CWallFourth">
+      <UniqueIdentifier>{c4945d1e-5e76-4c60-ad6a-c07ca6866f91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -150,6 +153,9 @@
     <ClInclude Include="CCollisionMgr04.h">
       <Filter>CCollisionMgr04</Filter>
     </ClInclude>
+    <ClInclude Include="CWallFourth.h">
+      <Filter>CObjectFourth\CWallFourth</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamStudy3.cpp">
@@ -217,6 +223,9 @@
     </ClCompile>
     <ClCompile Include="CCollisionMgr04.cpp">
       <Filter>CCollisionMgr04</Filter>
+    </ClCompile>
+    <ClCompile Include="CWallFourth.cpp">
+      <Filter>CObjectFourth\CWallFourth</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

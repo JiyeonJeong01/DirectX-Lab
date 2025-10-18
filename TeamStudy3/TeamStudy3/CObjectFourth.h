@@ -22,6 +22,7 @@ public:
     D3DXVECTOR3 GetPos() { return m_tInfo.vPos; }
     const float GetSpeed() const { return m_fSpeed; }
 
+    void SetPos(D3DXVECTOR3 vPos) { m_tInfo.vPos = vPos; }
     void SetPosX(float vPosX) { m_tInfo.vPos.x = vPosX; }
     void SetPosY(float vPosY) { m_tInfo.vPos.y = vPosY; }
     void SetAllPoint(D3DXVECTOR3 vPosInput, float fSize);
