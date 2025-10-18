@@ -22,12 +22,4 @@ public:
 
         return pObject;
     }
-
-    static CObject* Create(float x, float y, float z = 0.f) 
-    {
-        CObject* p = new T;
-        p->Set_Pos(Vec3(x, y, z));
-        p->Initialize();
-        return p;
-    }
 };
