@@ -239,6 +239,10 @@ void CScene04::Late_Update()
     {
         return;
     }
+    for (int i = 0; i < 2; ++i)
+    {
+        dynamic_cast<CGoalFourth*>(pGoal[i])->SetGoal(false);
+    }
 }
 
 void CScene04::Render(HDC _hDC)
