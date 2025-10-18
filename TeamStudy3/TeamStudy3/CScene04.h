@@ -19,5 +19,4 @@ public:
 	void		Late_Update()	override;
 	void		Render(HDC _hDC)override;
 	void		Release()		override;
-
 };

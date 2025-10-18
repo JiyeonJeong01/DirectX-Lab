@@ -48,6 +48,8 @@ void CScene04::Initialize()
     vecWall[7]->SetPoint({ 250.f, 500.f, 0.f }, { 250.f, 350.f, 0.f });
     vecWall[8]->SetPoint({ 250.f, 350.f, 0.f }, { 300.f, 350.f, 0.f });
     vecWall[9]->SetPoint({ 300.f, 350.f, 0.f }, { 300.f, 500.f, 0.f });
+
+    dynamic_cast<CPlayerFourth*>(pPlayer)->SetWallVector(&vecWall);
 }
 
 int CScene04::Update()
@@ -196,54 +198,6 @@ void CScene04::Late_Update()
                 boxPos += moveVec;
                 vecBox[s]->SetPos(boxPos);
             }
-        }
-    }
-
-    for (int i = 0; i < 3; ++i)
-    {
-        for (auto& pWall : wallLines)
-        {
-            if (CCollisionMgr04::CollisionLineToLine(playerPoint[i], playerPoint[i + 1], pWall.first, pWall.second))
-            {
-                float playerSpeed = pPlayer->GetSpeed();
-                if (i == 0)
-                {
-                    playerPoint[0] -= {0.f, -playerSpeed, 0.f};
-                    playerPoint[1] -= {0.f, -playerSpeed, 0.f};
-                    playerPoint[2] -= {0.f, -playerSpeed, 0.f};
-                    playerPoint[3] -= {0.f, -playerSpeed, 0.f};
-                    pPlayer->SetPosY(pPlayer->GetPos().y + playerSpeed);
-                }
-                else if (i == 1)
-                {
-                    playerPoint[0] = { -playerSpeed, 0.f, 0.f };
-                    playerPoint[1] = { -playerSpeed, 0.f, 0.f };
-                    playerPoint[2] = { -playerSpeed, 0.f, 0.f };
-                    playerPoint[3] = { -playerSpeed, 0.f, 0.f };
-                    pPlayer->SetPosX(pPlayer->GetPos().x - playerSpeed);
-                }
-                else if (i == 2)
-                {
-                    playerPoint[0] -= {0.f, playerSpeed, 0.f};
-                    playerPoint[1] -= {0.f, playerSpeed, 0.f};
-                    playerPoint[2] -= {0.f, playerSpeed, 0.f};
-                    playerPoint[3] -= {0.f, playerSpeed, 0.f};
-                    pPlayer->SetPosY(pPlayer->GetPos().y - playerSpeed);
-                }
-            }
-        }
-    }
-
-    for (auto& pWall : wallLines)
-    {
-        float playerSpeed = pPlayer->GetSpeed();
-        if (CCollisionMgr04::CollisionLineToLine(playerPoint[3], playerPoint[0], pWall.first, pWall.second))
-        {
-            playerPoint[0] = { playerSpeed, 0.f, 0.f };
-            playerPoint[1] = { playerSpeed, 0.f, 0.f };
-            playerPoint[2] = { playerSpeed, 0.f, 0.f };
-            playerPoint[3] = { playerSpeed, 0.f, 0.f };
-            pPlayer->SetPosX(pPlayer->GetPos().x + playerSpeed);
         }
     }
 }
