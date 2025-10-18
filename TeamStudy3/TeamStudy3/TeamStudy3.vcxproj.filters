@@ -135,19 +135,40 @@
     <ClInclude Include="CAbstractFactory.h">
       <Filter>98. Degisn</Filter>
     </ClInclude>
+    <ClInclude Include="CPlatform.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage01Player.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CBoxFourth.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
     <ClInclude Include="CBullet_Base.h">
-      <Filter>01.Object\02. Bullet</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CPlayer03.h">
-      <Filter>01.Object\00. Player</Filter>
+    <ClInclude Include="CCollisionMgr04.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CTimeManager.h">
-      <Filter>99.Manager\06. Time</Filter>
+    <ClInclude Include="CComponent.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CHelper.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CComponent.h">
+    <ClInclude Include="CObjectFourth.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer03.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerFourth.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CTimeManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CWallFourth.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -206,16 +227,37 @@
     <ClCompile Include="CMyBmp.cpp">
       <Filter>99.Manager\04. Bmp\00. MyBmp</Filter>
     </ClCompile>
+    <ClCompile Include="CPlatform.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage01Player.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoxFourth.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="CBullet_Base.cpp">
-      <Filter>01.Object\02. Bullet</Filter>
+      <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CPlayer03.cpp">
-      <Filter>01.Object\00. Player</Filter>
-    </ClCompile>
-    <ClCompile Include="CTimeManager.cpp">
-      <Filter>99.Manager\06. Time</Filter>
+    <ClCompile Include="CCollisionMgr04.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CComponent.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CObjectFourth.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer03.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerFourth.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimeManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CWallFourth.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
