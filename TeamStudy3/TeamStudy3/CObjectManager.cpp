@@ -60,6 +60,7 @@ void CObjectManager::Late_Update()
 			obj->Late_Update();
 
     CCollisionManager::Collision_Circle(m_ObjectList[BULLET], m_ObjectList[MONSTER]);
+    CCollisionManager::Collision_Circle(m_ObjectList[ITEM], m_ObjectList[PLAYER]);
 }
 
 void CObjectManager::Render(HDC hdc)

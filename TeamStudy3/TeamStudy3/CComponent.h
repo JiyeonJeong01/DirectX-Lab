@@ -9,15 +9,15 @@ public:
     virtual ~CComponent() = default;
 
 public:
-    virtual void BeginPlay()		abstract {}
-    virtual void TickComponent()	abstract {}
-    virtual void Release()			abstract {}
+    virtual void BeginPlay()	 PURE;
+    virtual void TickComponent() PURE;
+    virtual void Release()		 PURE;
 
 public:
     void	 Set_Owner(CObject* _Owner) { m_Owner = _Owner; }
     CObject* Get_Owner() { return m_Owner; }
 
-private:
+protected:
     CObject* m_Owner = nullptr;
 };
 

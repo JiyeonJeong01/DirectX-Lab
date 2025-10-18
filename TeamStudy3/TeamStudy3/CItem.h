@@ -2,11 +2,11 @@
 
 #include "CObject.h"
 
-class CBullet_Base : public CObject
+class CItem : public CObject
 {
 public:
-    CBullet_Base();
-    ~CBullet_Base() override;
+    CItem();
+    virtual ~CItem();
 
 public:
     void Initialize() override;
@@ -16,10 +16,10 @@ public:
     void Release() override;
 
 public:
-    bool CheckToBounds();
-    
+    virtual void OnComponentBeginOverlap(CObject* _Dst) override;
+    virtual void Use_Item(CObject* _HitObject);
 
 private:
-
+    Vec3		m_vPoint[4];
 };
 

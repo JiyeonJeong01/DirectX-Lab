@@ -36,11 +36,12 @@ void CCollisionManager::Collision_Circle(list<CObject*> _Dst, list<CObject*> _Sr
                 if (bCheck) return;
                 if (Dst->IsDead() || Src->IsDead()) continue;
 
-                // Dst 가 총알기준
+                // Dst 총알
 				Dst->Set_Dead();
 
-                // 몬스터 체력감소
-                Src->TakeDamage(Dst->Get_Attack());
+                //Src->TakeDamage(Dst->Get_Attack());
+                Src->OnComponentBeginOverlap(Dst);
+                Dst->OnComponentBeginOverlap(Src);
 			}
 		}
 	}
