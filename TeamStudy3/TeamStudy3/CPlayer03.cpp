@@ -71,8 +71,8 @@ int CPlayer03::Update()
 
         D3DXVec3TransformCoord(&m_vPoint[i], &m_vPoint[i], &m_tInfo.matWorld);
     }
-    // 포신
 
+    // 포신
     m_vPosin = m_vOriginPosin;
     m_vPosin -= Vec3(400.f, 300.f, 0.f);
 

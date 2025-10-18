@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "CCollisionManager.h"
+#include "CHelper.h"
 
 void CCollisionManager::Collision_Rect(list<CObject*> _Dst, list<CObject*> _Src)
 {
@@ -27,8 +28,17 @@ void CCollisionManager::Collision_Circle(list<CObject*> _Dst, list<CObject*> _Sr
 		{
 			if (Check_Circle(Dst, Src))
 			{
+                bool bCheck = false;
+                bCheck |= ::IsSameOwner(Dst, Src);
+                bCheck |= ::IsSameTeam(Dst, Src);
+                bCheck |= ::IsSameOwnerTeam(Dst, Src);
+
+                if (bCheck) return;
+
+                // Dst 가 총알기준
 				Dst->Set_Dead();
-				Src->Set_Dead();
+
+			    Src->Set_Dead();
 			}
 		}
 	}
