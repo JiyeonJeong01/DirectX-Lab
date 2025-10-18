@@ -177,6 +177,9 @@
     <ClInclude Include="CWallFourth.h">
       <Filter>01.Object\04. KimJun</Filter>
     </ClInclude>
+    <ClInclude Include="CObstacleFourth.h">
+      <Filter>01.Object\04. KimJun</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamStudy3.cpp">
@@ -264,6 +267,9 @@
       <Filter>99.Manager\06. Time</Filter>
     </ClCompile>
     <ClCompile Include="CWallFourth.cpp">
+      <Filter>01.Object\04. KimJun</Filter>
+    </ClCompile>
+    <ClCompile Include="CObstacleFourth.cpp">
       <Filter>01.Object\04. KimJun</Filter>
     </ClCompile>
   </ItemGroup>

@@ -90,10 +90,6 @@ int CPlayerFourth::Update()
         m_fAngle = preAngle;
         m_tInfo.vPos = prePos;
     }
-    else
-    {
-
-    }
     isMove = true;
     //D3DXMatrixRotationZ(&matRotZ, m_fAngle);
     //D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
