@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include "Define.h"
 
+class CComponent;
+
 class CObject
 {
 public:
@@ -23,8 +25,17 @@ public:
         m_tInfo.vPos.y = _Pos.y;
     }
 
+    void Set_Dead() { m_bDead = true; }
+    void Set_Owner(CObject* _Owner) { m_Owner = _Owner; }
+
+    CObject* Get_Owner()  { return m_Owner; }
+    int      Get_TeamID() { return m_TeamID; }
+
+public:
+    virtual void AddComponent(CComponent* _Component) {}
+
 protected:
-    INFO m_tInfo;
+    INFO            m_tInfo;
 
 	float			m_fSpeed;
 	float			m_fAngle;
@@ -33,5 +44,10 @@ protected:
 	bool			m_bDead;
 
     CObject*        m_pTarget;
+    CObject*        m_Owner;
+
+    int             m_TeamID;
+
+    std::vector<CComponent*> m_Components;
 
 };

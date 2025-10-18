@@ -24,11 +24,8 @@ void CScene03::Initialize()
     CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Ground.bmp", L"Ground");
 
     CObjectManager::Get_Instance()->AddObject(PLAYER, CAbstractFactory<CPlayer03>::Create());
-
-    for (int i = 0; i < 6; ++i)
-    {
-        //CObjectManager::Get_Instance()->AddObject(MONSTER, CAbstractFactory<CMonster>::Create(rand() % WINCX, rand() % WINCY));
-    }
+    
+    CObjectManager::Get_Instance()->AddObject(MONSTER, CAbstractFactory<CMonster>::Create());
 
 }
 

@@ -2,11 +2,11 @@
 
 #include "CObject.h"
 
-class CBullet03 : CObject
+class CBullet_Base : public CObject
 {
 public:
-    CBullet03();
-    ~CBullet03() override;
+    CBullet_Base();
+    ~CBullet_Base() override;
 
 public:
     void Initialize() override;
@@ -14,5 +14,9 @@ public:
     void Late_Update() override;
     void Render(HDC _hDC) override;
     void Release() override;
+
+private:
+    float m_Damage;
+
 };
 

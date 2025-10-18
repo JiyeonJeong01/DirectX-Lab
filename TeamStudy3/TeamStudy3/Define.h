@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "CTimeManager.h"
+
 #define	WINCX			800
 #define	WINCY			600
 #define PURE			= 0
@@ -8,18 +10,23 @@
 #define	PI				3.14f
 #define VK_MAX			0xff
 
+#define DELTA CTimeManager::Get_Instance()->Get_Delta()
+#define TIME  CTimeManager::Get_Instance()
+
 extern HWND g_hWnd;
 
 using Vec3 = D3DXVECTOR3;
 
+
 typedef struct tagInfo
 {
-    D3DXVECTOR3		vPos;
+    Vec3		vPos;
+    Vec3        vSize;
 
-    D3DXVECTOR3		vDir;
-    D3DXVECTOR3		vLook;
+    Vec3		vDir;
+    Vec3		vLook;
 
-    D3DXVECTOR3		vNormal;
+    Vec3		vNormal;
 
     D3DXMATRIX		matWorld;
 
@@ -29,6 +36,7 @@ enum OBJECT
 {
     PLAYER,
     MONSTER,
+    BULLET,
     MOUSE,
     OBJ_END
 };
@@ -92,3 +100,5 @@ struct tagFinder
 
     const TCHAR* m_pTag;
 };
+
+
