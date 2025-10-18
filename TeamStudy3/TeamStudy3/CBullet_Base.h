@@ -16,7 +16,6 @@ public:
     void Release() override;
 
 private:
-    float m_Damage;
 
 };
 

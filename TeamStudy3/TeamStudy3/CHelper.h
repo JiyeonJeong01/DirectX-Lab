@@ -1,13 +1,19 @@
 ﻿#pragma once
 
 #include "CObject.h"
+#include "CPlayer03.h"
 
 static bool IsSameTeam(CObject* Dst, CObject* Src)
 {
     return Dst->Get_TeamID() == Src->Get_TeamID();
 }
 
-static bool IsOwnerSameTeam(CObject* Dst, CObject* Src)
+static bool IsSameOwner(CObject* Dst, CObject* Src)
+{
+    return Dst->Get_Owner() == Src->Get_Owner();
+}
+
+static bool IsSameOwnerTeam(CObject* Dst, CObject* Src)
 {
     return Dst->Get_Owner()->Get_TeamID() == Src->Get_Owner()->Get_TeamID();
 }
@@ -36,7 +42,8 @@ static T* GetComponent(CObject* _Owner)
     if (_Owner == nullptr)
         return nullptr;
 
-    const auto& components = _Owner->GetAllComponents();
+    const auto& components
+        = dynamic_cast<CPlayer03*>(_Owner)->GetAllComponents();
 
     for (const auto& component : components)
     {

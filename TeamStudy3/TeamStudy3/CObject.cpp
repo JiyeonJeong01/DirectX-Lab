@@ -12,3 +12,13 @@ CObject::~CObject()
 {
 
 }
+
+void CObject::TakeDamage(int _iAttack)
+{
+    int currentHP = Get_Hp(); 
+
+    Set_Hp(currentHP - _iAttack);
+
+    if (Get_Hp() <= 0)
+        Set_Dead();
+}

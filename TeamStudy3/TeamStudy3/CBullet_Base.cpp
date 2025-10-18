@@ -1,7 +1,7 @@
 ﻿#include "pch.h"
 #include "CBullet_Base.h"
 
-CBullet_Base::CBullet_Base(): m_Damage(5.f)
+CBullet_Base::CBullet_Base()
 {
 }
 
@@ -15,6 +15,7 @@ void CBullet_Base::Initialize()
     m_tInfo.vDir     = Vec3(0.f, -1.f, 0.f);
     m_tInfo.vSize  = Vec3(10.f, 10.f, 0.f);
 
+    m_iAttack = 5.f;
     m_fSpeed = 5.f;
 
 }

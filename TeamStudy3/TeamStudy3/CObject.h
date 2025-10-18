@@ -20,13 +20,19 @@ public:
 
 public:
     const INFO* Get_Info() const { return &m_tInfo; }
-    void	Set_Pos(const Vec3& _vPos) { m_tInfo.vPos = _vPos; }
+    void	 Set_Pos(const Vec3& _vPos) { m_tInfo.vPos = _vPos; }
 
-    void    Set_Dead() { m_bDead = true; }
-    void    Set_Owner(CObject* _Owner) { m_Owner = _Owner; }
+    void     Set_Dead() { m_bDead = true; }
+    void     Set_Owner(CObject* _Owner) { m_Owner = _Owner; }
+    void     Set_Hp(int _Hp) { m_iHp = _Hp; }
 
     CObject* Get_Owner()  { return m_Owner; }
     int      Get_TeamID() { return m_TeamID; }
+    int      Get_Hp()     { return m_iHp; }
+    int      Get_Attack() { return m_iAttack; }
+    bool     IsDead()     { return m_bDead; }
+     
+    void     TakeDamage(int _iAttack);
 
 public:
     virtual void AddComponent(CComponent* _Component) {}

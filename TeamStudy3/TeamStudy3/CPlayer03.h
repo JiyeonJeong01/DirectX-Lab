@@ -15,7 +15,7 @@ public:
     void Release() override;
 
     virtual void AddComponent(CComponent* _Component) override;
-
+    const std::vector<CComponent*>& GetAllComponents() const { return m_Components; }
 public:
     void Key_Input();
     void Fire();
