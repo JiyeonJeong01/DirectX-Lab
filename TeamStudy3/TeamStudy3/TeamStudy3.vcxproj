@@ -141,6 +141,7 @@
     <ClInclude Include="CBmpManager.h" />
     <ClInclude Include="CBoxFourth.h" />
     <ClInclude Include="CCollisionManager.h" />
+    <ClInclude Include="CCollisionMgr04.h" />
     <ClInclude Include="CKeyManager.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CMonster.h" />
@@ -168,6 +169,7 @@
     <ClCompile Include="CBmpManager.cpp" />
     <ClCompile Include="CBoxFourth.cpp" />
     <ClCompile Include="CCollisionManager.cpp" />
+    <ClCompile Include="CCollisionMgr04.cpp" />
     <ClCompile Include="CKeyManager.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CMonster.cpp" />

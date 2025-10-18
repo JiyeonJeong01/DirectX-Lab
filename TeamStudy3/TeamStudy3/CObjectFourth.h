@@ -24,6 +24,7 @@ public:
 
     void SetPosX(float vPosX) { m_tInfo.vPos.x = vPosX; }
     void SetPosY(float vPosY) { m_tInfo.vPos.y = vPosY; }
+    void SetAllPoint(D3DXVECTOR3 vPosInput, float fSize);
 protected:
     INFO		m_tInfo;
 
