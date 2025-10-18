@@ -12,7 +12,7 @@ CPlayerFourth::~CPlayerFourth()
 
 void CPlayerFourth::Initialize()
 {
-    m_tInfo.vPos = { 400.f, 300.f, 0.f };
+    m_tInfo.vPos = { 175.f, 450.f, 0.f };
     m_tInfo.vDir = { 1.f, 0.f, 0.f };
     m_tInfo.vLook = { 0.f, -1.f, 0.f };
     m_fSpeed = 5.f;
@@ -39,7 +39,7 @@ int CPlayerFourth::Update()
     for (int i = 0; i < 4; ++i)
     {
         m_vPoint[i] = m_vOriginPoint[i];
-        m_vPoint[i] -= {400.f, 300.f, 0.f};
+        m_vPoint[i] -= {175.f, 450.f, 0.f};
         D3DXVec3TransformCoord(&m_vPoint[i], &m_vPoint[i], &m_tInfo.matWorld);
     }
 
