@@ -20,7 +20,5 @@ public:
     void Set_PlatformSize(float w, float h);
     void Update_Rect();
 
-private:
-    Vec3 m_vSize = { 0.f, 0.f, 0.f };
 };
 

@@ -10,11 +10,13 @@
 
 extern HWND g_hWnd;
 
+using Vec2 = D3DXVECTOR2;
 using Vec3 = D3DXVECTOR3;
 
 typedef struct tagInfo
 {
     D3DXVECTOR3		vPos;
+    D3DXVECTOR3		vSize;
 
     D3DXVECTOR3		vDir;
     D3DXVECTOR3		vLook;
@@ -30,6 +32,7 @@ enum OBJECT
     PLAYER,
     MONSTER,
     MOUSE,
+    BLOCK,
     OBJ_END
 };
 

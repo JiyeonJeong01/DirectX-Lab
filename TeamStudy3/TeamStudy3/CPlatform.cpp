@@ -12,7 +12,7 @@ CPlatform::~CPlatform()
 
 void CPlatform::Initialize()
 {
-    m_vSize = { 128.f, 48.f, 0.f };
+    m_tInfo.vSize = { 50.f, 50.f, 0.f };
     m_fSpeed = 0.f;
     Update_Rect();
 }

@@ -101,6 +101,10 @@ void CPlayer::Release()
 
 }
 
+void CPlayer::On_Collision(CObject* _pColObj, Vec3 _vColSize)
+{
+}
+
 void CPlayer::Key_Input()
 {
     if (GetAsyncKeyState('D'))
