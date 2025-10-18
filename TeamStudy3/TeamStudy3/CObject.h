@@ -28,8 +28,10 @@ public:
 
     CObject* Get_Owner()  { return m_Owner; }
     int      Get_TeamID() { return m_TeamID; }
-    int      Get_Hp() { return m_iHp; }
-
+    int      Get_Hp()     { return m_iHp; }
+    int      Get_Attack() { return m_iAttack; }
+    bool     IsDead()     { return m_bDead; }
+     
     void     TakeDamage(int _iAttack);
 
 public:

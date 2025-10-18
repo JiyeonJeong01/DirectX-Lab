@@ -4,6 +4,7 @@
 
 CMonster::CMonster()
 {
+    m_TeamID = 1;
 }
 
 CMonster::~CMonster()
@@ -18,6 +19,7 @@ void CMonster::Initialize()
 
     m_pPlayer = CObjectManager::Get_Instance()->Get_Player()->front();
 
+    m_iHp = 100.f;
     m_fSpeed = 10.f;
 }
 
@@ -45,7 +47,7 @@ int CMonster::Update()
 
 void CMonster::Late_Update()
 {
-
+    cout << m_iHp << endl;
 }
 
 void CMonster::Render(HDC hDC)

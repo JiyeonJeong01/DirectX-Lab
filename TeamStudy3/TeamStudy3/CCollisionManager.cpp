@@ -29,16 +29,18 @@ void CCollisionManager::Collision_Circle(list<CObject*> _Dst, list<CObject*> _Sr
 			if (Check_Circle(Dst, Src))
 			{
                 bool bCheck = false;
-                bCheck |= ::IsSameOwner(Dst, Src);
-                bCheck |= ::IsSameTeam(Dst, Src);
-                bCheck |= ::IsSameOwnerTeam(Dst, Src);
+                //bCheck |= ::IsSameOwner(Dst, Src);
+                //bCheck |= ::IsSameTeam(Dst, Src);
+                //bCheck |= ::IsSameOwnerTeam(Dst, Src);
 
                 if (bCheck) return;
+                if (Dst->IsDead() || Src->IsDead()) continue;
 
                 // Dst 가 총알기준
 				Dst->Set_Dead();
 
-			    Src->Set_Dead();
+                // 몬스터 체력감소
+                Src->TakeDamage(Dst->Get_Attack());
 			}
 		}
 	}
@@ -46,15 +48,21 @@ void CCollisionManager::Collision_Circle(list<CObject*> _Dst, list<CObject*> _Sr
 
 bool CCollisionManager::Check_Circle(CObject* _Dst, CObject* _Src)
 {
-	float	fWidth  = fabsf(_Dst->Get_Info()->vPos.x - _Src->Get_Info()->vPos.x);
-	float	fHeight = fabsf(_Dst->Get_Info()->vPos.y - _Src->Get_Info()->vPos.y);
+    const auto& d_Info = *_Dst->Get_Info();
+    const auto& s_Info = *_Src->Get_Info();
 
-	float	fDiagonal = sqrtf(fWidth * fWidth + fHeight * fHeight);
+    const float dx = d_Info.vPos.x - s_Info.vPos.x;
+    const float dy = d_Info.vPos.y - s_Info.vPos.y;
 
-	float	fRadius = (_Dst->Get_Info()->vSize.x + _Src->Get_Info()->vSize.y) * 0.5f;
-	
-	return fRadius >= fDiagonal;
+    const float dist2 = dx * dx + dy * dy;
+
+    const float ra = sqrtf(d_Info.vSize.x * d_Info.vSize.x + d_Info.vSize.y * d_Info.vSize.y);
+    const float rb = sqrtf(s_Info.vSize.x * s_Info.vSize.x + s_Info.vSize.y * s_Info.vSize.y);
+    const float rs = ra + rb;
+
+    return dist2 <= rs * rs;
 }
+
 
 void CCollisionManager::Collision_RectEx(list<CObject*> _Dst, list<CObject*> _Src)
 {
