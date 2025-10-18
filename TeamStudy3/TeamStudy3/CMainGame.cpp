@@ -21,7 +21,7 @@ void CMainGame::Initialize()
 {
     m_hDC = GetDC(g_hWnd);
 
-    CSceneManager::Get_Instance()->ChangeScene(SCENE04);
+    CSceneManager::Get_Instance()->ChangeScene(SCENE01);
     CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Back.bmp", L"Back");
 }
 
@@ -42,11 +42,14 @@ void CMainGame::Late_Update()
 
 void CMainGame::Render()
 {
-    HDC hBackDC = CBmpManager::Get_Instance()->Find_Img(L"Back");
-    
+    HDC hBackDC = m_hDC;
     CSceneManager::Get_Instance()->Render(hBackDC);
-    
-    BitBlt(m_hDC, 0, 0, WINCX, WINCY, hBackDC, 0, 0, SRCCOPY);
+
+    //HDC hBackDC = CBmpManager::Get_Instance()->Find_Img(L"Back");
+    //
+    //CSceneManager::Get_Instance()->Render(hBackDC);
+    //
+    //BitBlt(m_hDC, 0, 0, WINCX, WINCY, hBackDC, 0, 0, SRCCOPY);
 }
 
 void CMainGame::Release()
