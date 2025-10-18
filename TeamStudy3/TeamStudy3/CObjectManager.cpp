@@ -1,16 +1,21 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "CObjectManager.h"
+
+#include "CCollisionManager.h"
 #include "CObject.h"
 
 CObjectManager* CObjectManager::m_pInstance = nullptr;
 
 CObjectManager::CObjectManager()
 {
+
 }
+
 CObjectManager::~CObjectManager()
 {
 	Release();
 }
+
 CObject* CObjectManager::AddObject(OBJECT _eID, CObject* _pObject)
 {
 	if (_eID >= OBJ_END || _pObject == nullptr)
@@ -25,6 +30,7 @@ void CObjectManager::Initialize()
 {
 
 }
+
 int CObjectManager::Update()
 {
 	bool bIsDestroy(false);
@@ -43,20 +49,26 @@ int CObjectManager::Update()
 				++iter;
 		}
 	}
+
 	return 0;
 }
+
 void CObjectManager::Late_Update()
 {
 	for (auto& list : m_ObjectList)
 		for (auto& obj : list)
 			obj->Late_Update();
+
+    CCollisionManager::Collision_Circle(m_ObjectList[BULLET], m_ObjectList[MONSTER]);
 }
+
 void CObjectManager::Render(HDC hdc)
 {
 	for (auto& list : m_ObjectList)
 		for (auto& obj : list)
 			obj->Render(hdc);
 }
+
 void CObjectManager::Release()
 {
 	for (int i = 0; i < OBJ_END; ++i)

@@ -21,7 +21,7 @@ void CCollisionManager::Collision_Rect(list<CObject*> _Dst, list<CObject*> _Src)
 
 void CCollisionManager::Collision_Circle(list<CObject*> _Dst, list<CObject*> _Src)
 {
-	/*for (auto& Dst : _Dst)
+	for (auto& Dst : _Dst)
 	{
 		for (auto& Src : _Src)
 		{
@@ -31,21 +31,19 @@ void CCollisionManager::Collision_Circle(list<CObject*> _Dst, list<CObject*> _Sr
 				Src->Set_Dead();
 			}
 		}
-	}*/
+	}
 }
 
 bool CCollisionManager::Check_Circle(CObject* _Dst, CObject* _Src)
 {
-	//float	fWidth  = fabsf(_Dst->Get_Info()->fX - _Src->Get_Info()->fX);
-	//float	fHeight = fabsf(_Dst->Get_Info()->fY - _Src->Get_Info()->fY);
+	float	fWidth  = fabsf(_Dst->Get_Info()->vPos.x - _Src->Get_Info()->vPos.x);
+	float	fHeight = fabsf(_Dst->Get_Info()->vPos.y - _Src->Get_Info()->vPos.y);
 
-	//float	fDiagonal = sqrtf(fWidth * fWidth + fHeight * fHeight);
+	float	fDiagonal = sqrtf(fWidth * fWidth + fHeight * fHeight);
 
-	//float	fRadius = (_Dst->Get_Info()->fCX + _Src->Get_Info()->fCX) * 0.5f;
-	//
-	//return fRadius >= fDiagonal;
-
-    return false;
+	float	fRadius = (_Dst->Get_Info()->vSize.x + _Src->Get_Info()->vSize.y) * 0.5f;
+	
+	return fRadius >= fDiagonal;
 }
 
 void CCollisionManager::Collision_RectEx(list<CObject*> _Dst, list<CObject*> _Src)

@@ -1,11 +1,11 @@
-#pragma once
+﻿#pragma once
 
 #include "CScene.h"
 #include "CAbstractFactory.h"
 
 class CSceneManager
 {
-public:
+private:
 	CSceneManager();
 	CSceneManager(const CSceneManager& rhs) = delete;
 	CSceneManager& operator=(CSceneManager& rManager) = delete;

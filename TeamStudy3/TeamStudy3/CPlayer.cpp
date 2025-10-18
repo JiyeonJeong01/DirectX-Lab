@@ -44,7 +44,6 @@ int CPlayer::Update()
 
     m_tInfo.matWorld = matScale * matRotZ * matTrans;
 
-
     for (int i = 0; i < 4; ++i)
     {
         m_vPoint[i] = m_vOriginPoint[i];
@@ -55,11 +54,9 @@ int CPlayer::Update()
     // 포신
 
     m_vPosin = m_vOriginPosin;
-
     m_vPosin -= {400.f, 300.f, 0.f};
 
     D3DXVec3TransformCoord(&m_vPosin, &m_vPosin, &m_tInfo.matWorld);
-
 
     return OBJ_NOEVENT;
 }
