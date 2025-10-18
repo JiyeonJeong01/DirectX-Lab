@@ -4,7 +4,7 @@
 #include "CCollisionMgr04.h"
 #define EPSILON 0.03f
 
-CScene04::CScene04() : pPlayer(nullptr)
+CScene04::CScene04() : pPlayer(nullptr), pObstacle(nullptr)
 {
 }
 
@@ -23,13 +23,19 @@ void CScene04::Initialize()
         pPlayer->Initialize();
     }
 
+    if (pObstacle == nullptr)
+    {
+        pObstacle = new CObstacleFourth;
+        pObstacle->Initialize();
+    }
+
     for (int i = 0; i < 2; ++i)
     {
         vecBox.push_back(new CBoxFourth);
         vecBox[i]->Initialize();
     }
     vecBox[0]->SetAllPoint({ 175.f, 250.f, 0.f }, 30.f);
-    vecBox[1]->SetAllPoint({ 400.f, 425.f, 0.f }, 30.f);
+    vecBox[1]->SetAllPoint({ 400.f, 450.f, 0.f }, 30.f);
 
     for(int i = 0; i < 10; ++i)
     {
@@ -55,6 +61,7 @@ void CScene04::Initialize()
 int CScene04::Update()
 {
     pPlayer->Update();
+    pObstacle->Update();
 
     for (auto pBox : vecBox)
     {
@@ -66,6 +73,7 @@ int CScene04::Update()
 void CScene04::Late_Update()
 {
     D3DXVECTOR3* playerPoint = pPlayer->GetPoint();
+    D3DXVECTOR3* obstaclePoint = pObstacle->GetPoint();
     vector<D3DXVECTOR3*> pBoxPoint(vecBox.size(), 0);
     for (int i = 0; i < vecBox.size(); ++i)
         pBoxPoint[i] = vecBox[i]->GetPoint();
@@ -74,14 +82,14 @@ void CScene04::Late_Update()
     for (auto wall : vecWall)
         wallLines.push_back({ wall->GetStartPoint(), wall->GetEndPoint() });
 
-    for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < 4; ++i)
     {
         for (int s = 0; s < vecBox.size(); ++s)
         {
-            for (int j = 0; j < 3; ++j)
+            for (int j = 0; j < 4; ++j)
             {
-                if (CCollisionMgr04::CollisionLineToLine(playerPoint[i], playerPoint[i + 1],
-                    pBoxPoint[s][j], pBoxPoint[s][j + 1]))
+                if (CCollisionMgr04::CollisionLineToLine(playerPoint[i % 4], playerPoint[(i + 1) % 4],
+                    pBoxPoint[s][j % 4], pBoxPoint[s][(j + 1) % 4]))
                 {
                     float playerSpeed = pPlayer->GetSpeed();
                     D3DXVECTOR3 moveVec = { 0.f, 0.f, 0.f };
@@ -97,6 +105,10 @@ void CScene04::Late_Update()
                     else if (j == 2)
                     {
                         moveVec = { 0.f, -(playerSpeed + EPSILON), 0.f };
+                    }
+                    else if (j == 3)
+                    {
+                        moveVec = { playerSpeed + EPSILON, 0.f, 0.f };
                     }
 
                     bool willCollideWall = false;
@@ -120,10 +132,10 @@ void CScene04::Late_Update()
                                 }
                                 else if (j == 1)
                                 {
-                                    playerPoint[0] = { playerSpeed, 0.f, 0.f };
-                                    playerPoint[1] = { playerSpeed, 0.f, 0.f };
-                                    playerPoint[2] = { playerSpeed, 0.f, 0.f };
-                                    playerPoint[3] = { playerSpeed, 0.f, 0.f };
+                                    playerPoint[0] += { playerSpeed, 0.f, 0.f };
+                                    playerPoint[1] += { playerSpeed, 0.f, 0.f };
+                                    playerPoint[2] += { playerSpeed, 0.f, 0.f };
+                                    playerPoint[3] += { playerSpeed, 0.f, 0.f };
                                     pPlayer->SetPosX(pPlayer->GetPos().x + playerSpeed);
                                 }
                                 else if (j == 2)
@@ -133,6 +145,14 @@ void CScene04::Late_Update()
                                     playerPoint[2] -= {0.f, -playerSpeed, 0.f};
                                     playerPoint[3] -= {0.f, -playerSpeed, 0.f};
                                     pPlayer->SetPosY(pPlayer->GetPos().y + playerSpeed);
+                                }
+                                else if (j == 3)
+                                {
+                                    playerPoint[0] += { -playerSpeed, 0.f, 0.f };
+                                    playerPoint[1] += { -playerSpeed, 0.f, 0.f };
+                                    playerPoint[2] += { -playerSpeed, 0.f, 0.f };
+                                    playerPoint[3] += { -playerSpeed, 0.f, 0.f };
+                                    pPlayer->SetPosX(pPlayer->GetPos().x - playerSpeed);
                                 }
                                 break;
                             }
@@ -153,50 +173,21 @@ void CScene04::Late_Update()
                     vecBox[s]->SetPos(boxPos);
                 }
             }
-            if (CCollisionMgr04::CollisionLineToLine(playerPoint[i], playerPoint[i + 1],
-                pBoxPoint[s][3], pBoxPoint[s][0]))
+        }
+    }
+
+    for (int i = 0; i < 4; ++i)
+    {
+        for (int j = 0; j < 4; ++j)
+        {
+            if (CCollisionMgr04::CollisionLineToLine(playerPoint[i % 4], playerPoint[(i + 1) % 4], obstaclePoint[j % 4], obstaclePoint[(j + 1) % 4]))
             {
-                float playerSpeed = pPlayer->GetSpeed();
-                D3DXVECTOR3 moveVec = { playerSpeed + EPSILON, 0.f, 0.f };
-
-                bool willCollideWall = false;
-                for (auto& wall : wallLines)
+                if(!dynamic_cast<CPlayerFourth*>(pPlayer)->GetInvincible())
                 {
-                    for (int k = 0; k < 4; ++k)
-                    {
-                        D3DXVECTOR3 movedA = pBoxPoint[s][k] + moveVec;
-                        D3DXVECTOR3 movedB = pBoxPoint[s][(k + 1) % 4] + moveVec;
-
-                        if (CCollisionMgr04::CollisionLineToLine(movedA, movedB, wall.first, wall.second))
-                        {
-                            willCollideWall = true;
-                            playerPoint[0] = { -playerSpeed, 0.f, 0.f };
-                            playerPoint[1] = { -playerSpeed, 0.f, 0.f };
-                            playerPoint[2] = { -playerSpeed, 0.f, 0.f };
-                            playerPoint[3] = { -playerSpeed, 0.f, 0.f };
-                            pPlayer->SetPosX(pPlayer->GetPos().x - playerSpeed);
-                            break;
-                        }
-                    }
-                    if (willCollideWall)
-                    {
-                        break;
-                    }
+                    dynamic_cast<CPlayerFourth*>(pPlayer)->SetHpMinus(1);
+                    dynamic_cast<CPlayerFourth*>(pPlayer)->SetHit();
+                    break;
                 }
-
-                if (willCollideWall)
-                {
-                    return;
-                }
-
-                for (int k = 0; k < 4; ++k)
-                {
-                    pBoxPoint[s][k] += moveVec;
-                }
-
-                D3DXVECTOR3 boxPos = vecBox[s]->GetPos();
-                boxPos += moveVec;
-                vecBox[s]->SetPos(boxPos);
             }
         }
     }
@@ -207,6 +198,7 @@ void CScene04::Render(HDC _hDC)
     HDC	hGroundDC = CBmpManager::Get_Instance()->Find_Img(L"Ground");
     BitBlt(_hDC, 0, 0, 1920, 1280, hGroundDC, 0, 0, SRCCOPY);
     pPlayer->Render(_hDC);
+    pObstacle->Render(_hDC);
     for (auto pBox : vecBox)
     {
         pBox->Render(_hDC);
@@ -220,6 +212,7 @@ void CScene04::Render(HDC _hDC)
 void CScene04::Release()
 {
     Safe_Delete<CObjectFourth*>(pPlayer);
+    Safe_Delete<CObjectFourth*>(pObstacle);
     for_each(vecBox.begin(), vecBox.end()
         , [](CObjectFourth* _p) -> void {
             if (_p)

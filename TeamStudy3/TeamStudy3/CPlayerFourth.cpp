@@ -2,7 +2,7 @@
 #include "CPlayerFourth.h"
 #include "CCollisionMgr04.h"
 
-CPlayerFourth::CPlayerFourth() : isMove(true), preAngle(0.f), vecWall(nullptr)
+CPlayerFourth::CPlayerFourth() : isMove(true), preAngle(0.f), vecWall(nullptr), sHp(3), isInvincible(false), dwInvincibleTime(0)
 {
     ZeroMemory(&prePos, sizeof(D3DXVECTOR3));
 }
@@ -18,6 +18,7 @@ void CPlayerFourth::Initialize()
     m_tInfo.vDir = { 1.f, 0.f, 0.f };
     m_tInfo.vLook = { 0.f, -1.f, 0.f };
     m_fSpeed = 5.f;
+    
 
     m_vPoint[0] = { m_tInfo.vPos.x - 15.f, m_tInfo.vPos.y - 15.f, 0.f };
     m_vPoint[1] = { m_tInfo.vPos.x + 15.f, m_tInfo.vPos.y - 15.f, 0.f };
@@ -31,11 +32,22 @@ void CPlayerFourth::Initialize()
 
 int CPlayerFourth::Update()
 {
+    if (sHp <= 0)
+    {
+        return OBJ_DEAD;
+    }
+    if (isInvincible)
+    {
+        if (dwInvincibleTime + 2000 < GetTickCount64())
+        {
+            isInvincible = false;
+        }
+    }
+
     KeyInput();
 
     D3DXMATRIX matRotZ, matTrans;
 
-    //
     D3DXMATRIX matPreWorld = m_tInfo.matWorld;
     D3DXVECTOR3 prePoint[4];
 
@@ -109,6 +121,7 @@ int CPlayerFourth::Update()
 
 void CPlayerFourth::Render(HDC hDC)
 {
+    cout << "hp : " << sHp << endl;
     MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y, nullptr);
     for (int i = 0; i < 4; ++i)
     {

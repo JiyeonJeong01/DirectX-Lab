@@ -3,6 +3,7 @@
 #include "CPlayerFourth.h"
 #include "CBoxFourth.h"
 #include "CWallFourth.h"
+#include "CObstacleFourth.h"
 
 class CScene04 : public CScene
 {
@@ -10,6 +11,7 @@ private:
     CObjectFourth* pPlayer;
     vector<CObjectFourth*> vecBox;
     vector<CWallFourth*> vecWall;
+    CObjectFourth* pObstacle;
 public:
 	CScene04();
 	virtual ~CScene04();

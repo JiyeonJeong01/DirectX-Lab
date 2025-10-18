@@ -7,6 +7,11 @@ private:
     void KeyInput();
     vector<CWallFourth*>* vecWall;
     bool isMove;
+    bool isInvincible;
+    short sHp;
+
+    ULONGLONG dwInvincibleTime;
+
     float preAngle;
     Vec3 prePos;
 public:
@@ -19,6 +24,11 @@ public:
     void Render(HDC hDC) override;
     void Release() override;
 
+    const short GetHp() const { return sHp; }
+    const bool GetInvincible() const { return isInvincible; }
+
     void SetWallVector(vector<CWallFourth*>* vecWall) { this->vecWall = vecWall; }
+    void SetHpMinus(const short& sHp) { this->sHp -= sHp; }
+    void SetHit() { isInvincible = true; dwInvincibleTime = GetTickCount64(); }
 };
 
