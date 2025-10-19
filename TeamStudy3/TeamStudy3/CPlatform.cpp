@@ -12,9 +12,10 @@ CPlatform::~CPlatform()
 
 void CPlatform::Initialize()
 {
-    m_tInfo.vSize = { 50.f, 50.f, 0.f };
-    m_fSpeed = 0.f;
-    Update_Rect();
+    m_vPlatformPoint[0] = { m_tInfo.vPos.x - m_tInfo.vSize.x, m_tInfo.vPos.y - m_tInfo.vSize.y, 0.f };
+    m_vPlatformPoint[1] = { m_tInfo.vPos.x + m_tInfo.vSize.x, m_tInfo.vPos.y - m_tInfo.vSize.y, 0.f };
+    m_vPlatformPoint[2] = { m_tInfo.vPos.x + m_tInfo.vSize.x, m_tInfo.vPos.y + m_tInfo.vSize.y, 0.f };
+    m_vPlatformPoint[3] = { m_tInfo.vPos.x - m_tInfo.vSize.x, m_tInfo.vPos.y + m_tInfo.vSize.y, 0.f };
 }
 
 int CPlatform::Update()
@@ -29,13 +30,15 @@ void CPlatform::Late_Update()
 void CPlatform::Render(HDC hDC)
 {
 
-    int iScroll_fx = (int)CScrollManager::Get_Instance()->Get_ScrollX();
-    int iScroll_fy = (int)CScrollManager::Get_Instance()->Get_ScrollY();
-    //HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
-    //HGDIOBJ obj = SelectObject(hDC, brush);
-    //Rectangle(hDC, m_tRect.left + iScroll_fx, m_tRect.top + iScroll_fy, m_tRect.right + iScroll_fx, m_tRect.bottom + iScroll_fy);
-    //SelectObject(hDC, obj);
-    //DeleteObject(brush);
+    int iScrollX = (int)CScrollManager::Get_Instance()->Get_ScrollX();
+    int iScrollY = (int)CScrollManager::Get_Instance()->Get_ScrollY();
+
+    MoveToEx(hDC, (int)m_vPlatformPoint[0].x + iScrollX, (int)m_vPlatformPoint[0].y + iScrollY, nullptr);
+
+    for (int i = 0; i < 4; ++i)
+        LineTo(hDC, (int)m_vPlatformPoint[i].x + iScrollX, (int)m_vPlatformPoint[i].y + iScrollY);
+
+    LineTo(hDC, (int)m_vPlatformPoint[0].x + iScrollX, (int)m_vPlatformPoint[0].y + iScrollY);
 
 }
 
@@ -47,14 +50,22 @@ void CPlatform::On_Collision(CObject* _pColObj, Vec3 _vColSize)
 {
 }
 
-void CPlatform::Set_PlatformSize(float w, float h)
+void CPlatform::Set_PlatformPos(Vec3 _vPlatformPos)
 {
+    m_tInfo.vPos = { _vPlatformPos };
+    Set_PlatformPoint();
 }
 
-void CPlatform::Update_Rect()
+void CPlatform::Set_PlatformSize(Vec3 _vPlatformSize)
 {
-    //m_tRect.left = static_cast<LONG>(m_vPos.x - (m_vSize.x * 0.5f));
-    //m_tRect.top = static_cast<LONG>(m_vPos.y - (m_vSize.y * 0.5f));
-    //m_tRect.right = static_cast<LONG>(m_vPos.x + (m_vSize.x * 0.5f));
-    //m_tRect.bottom = static_cast<LONG>(m_vPos.y + (m_vSize.y * 0.5f));
+    m_tInfo.vSize = { _vPlatformSize };
+    Set_PlatformPoint();
+}
+
+void CPlatform::Set_PlatformPoint()
+{
+    m_vPlatformPoint[0] = { m_tInfo.vPos.x - m_tInfo.vSize.x, m_tInfo.vPos.y - m_tInfo.vSize.y, 0.f };
+    m_vPlatformPoint[1] = { m_tInfo.vPos.x + m_tInfo.vSize.x, m_tInfo.vPos.y - m_tInfo.vSize.y, 0.f };
+    m_vPlatformPoint[2] = { m_tInfo.vPos.x + m_tInfo.vSize.x, m_tInfo.vPos.y + m_tInfo.vSize.y, 0.f };
+    m_vPlatformPoint[3] = { m_tInfo.vPos.x - m_tInfo.vSize.x, m_tInfo.vPos.y + m_tInfo.vSize.y, 0.f };
 }
