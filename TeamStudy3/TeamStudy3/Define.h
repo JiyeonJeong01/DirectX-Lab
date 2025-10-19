@@ -48,6 +48,7 @@ enum SCENENUMBER {
     SCENE02,
     SCENE03,
     SCENE04,
+    SCENEOVER04,
     SCENE_END
 };
 
