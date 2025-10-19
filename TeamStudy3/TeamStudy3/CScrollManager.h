@@ -10,15 +10,10 @@ private:
 
 public:
 	void		Set_ScrollX(float _X) { m_fScrollX += _X; }
-    void		Set_ScrollY(float _Y)
-    {
-        m_fScrollY += _Y;
-	    m_fOffset = _Y;
-    }
+	void		Set_ScrollY(float _Y) { m_fScrollY += _Y; }
 
 	float		Get_ScrollX() { return m_fScrollX; }
 	float		Get_ScrollY() { return m_fScrollY; }
-	float		Get_Offset() { return m_fOffset; }
 
 	void		Scroll_Lock();
 
@@ -45,6 +40,5 @@ private:
 
 	float			m_fScrollX;
 	float			m_fScrollY;
-    float           m_fOffset;
 };
 
