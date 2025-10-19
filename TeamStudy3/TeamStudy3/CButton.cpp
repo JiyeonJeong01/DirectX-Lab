@@ -19,10 +19,7 @@ CButton::~CButton()
 
 void CButton::Initialize()
 {
-    //m_tInfo.fCX = 150.f;
-    //m_tInfo.fCY = 150.f;
-
-    m_tInfo.vSize = { 150.f, 150.f, 0.f };
+    m_tInfo.vSize = { 146.f, 151.f, 0.f };
     rct = {(long)m_tInfo.vPos.x - (long)m_tInfo.vSize.x / 2,
         (long)m_tInfo.vPos.y - (long)m_tInfo.vSize.y / 2,
     (long)m_tInfo.vPos.x + (long)m_tInfo.vSize.x / 2,
@@ -71,7 +68,7 @@ void CButton::Render(HDC hDC)
         (int)m_tInfo.vSize.x,
         (int)m_tInfo.vSize.y,
         hMemDC,
-        m_iDrawID * (int)m_tInfo.vSize.y,
+        m_iDrawID * (int)m_tInfo.vSize.x + (m_iDrawID * 2),
         0,
         (int)m_tInfo.vSize.x,
         (int)m_tInfo.vSize.y,
