@@ -186,6 +186,9 @@
     <ClInclude Include="CSceneOver04.h">
       <Filter>02.Scene</Filter>
     </ClInclude>
+    <ClInclude Include="CLogo.h">
+      <Filter>02.Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamStudy3.cpp">
@@ -282,6 +285,9 @@
       <Filter>01.Object\04. KimJun</Filter>
     </ClCompile>
     <ClCompile Include="CSceneOver04.cpp">
+      <Filter>02.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CLogo.cpp">
       <Filter>02.Scene</Filter>
     </ClCompile>
   </ItemGroup>

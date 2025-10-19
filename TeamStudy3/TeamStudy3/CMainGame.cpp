@@ -21,8 +21,9 @@ void CMainGame::Initialize()
 {
     m_hDC = GetDC(g_hWnd);
 
-    CSceneManager::Get_Instance()->ChangeScene(SCENE04);
+    CSceneManager::Get_Instance()->ChangeScene(LOGO);
     CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Back.bmp", L"Back");
+    CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/logo.bmp", L"Logo");
 }
 
 void CMainGame::Update()

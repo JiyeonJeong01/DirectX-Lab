@@ -147,6 +147,7 @@
     <ClInclude Include="CGoalFourth.h" />
     <ClInclude Include="CHelper.h" />
     <ClInclude Include="CKeyManager.h" />
+    <ClInclude Include="CLogo.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CMyBmp.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CGoalFourth.cpp" />
     <ClCompile Include="CKeyManager.cpp" />
+    <ClCompile Include="CLogo.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CMyBmp.cpp" />
