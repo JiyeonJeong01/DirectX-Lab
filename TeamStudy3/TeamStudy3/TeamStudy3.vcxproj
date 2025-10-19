@@ -175,10 +175,10 @@
     <ClInclude Include="CSceneManager.h" />
     <ClInclude Include="CSceneOver04.h" />
     <ClInclude Include="CScrollManager.h" />
+    <ClInclude Include="CStage01Goal.h" />
     <ClInclude Include="CStage01Player.h" />
     <ClInclude Include="CStage01Trap01.h" />
     <ClInclude Include="CStage01Trap02.h" />
-    <ClInclude Include="CStage01Trap03.h" />
     <ClInclude Include="CTimeManager.h" />
     <ClInclude Include="CWallFourth.h" />
     <ClInclude Include="CWeaponComponent.h" />
@@ -226,10 +226,10 @@
     <ClCompile Include="CSceneManager.cpp" />
     <ClCompile Include="CSceneOver04.cpp" />
     <ClCompile Include="CScrollManager.cpp" />
+    <ClCompile Include="CStage01Goal.cpp" />
     <ClCompile Include="CStage01Player.cpp" />
     <ClCompile Include="CStage01Trap01.cpp" />
     <ClCompile Include="CStage01Trap02.cpp" />
-    <ClCompile Include="CStage01Trap03.cpp" />
     <ClCompile Include="CTimeManager.cpp" />
     <ClCompile Include="CWallFourth.cpp" />
     <ClCompile Include="CWeaponComponent.cpp" />

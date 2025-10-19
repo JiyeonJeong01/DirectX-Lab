@@ -38,7 +38,7 @@ void CScrollManager::Stage01_Scroll_Lock()
     if (WINCX - 1440.f > m_fScrollX)
         m_fScrollX = WINCX - 1440.f;
 
-    if (WINCY - 3223.f > m_fScrollY)
-        m_fScrollY = WINCY - 3223.f;
+    if (WINCY - 3023.f > m_fScrollY)
+        m_fScrollY = WINCY - 3023.f;
 
 }

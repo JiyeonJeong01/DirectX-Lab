@@ -228,8 +228,8 @@
     <ClInclude Include="CStage01Trap02.h">
       <Filter>01.Object\05. Etc</Filter>
     </ClInclude>
-    <ClInclude Include="CStage01Trap03.h">
-      <Filter>01.Object\05. Etc</Filter>
+    <ClInclude Include="CStage01Goal.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -365,8 +365,8 @@
     <ClCompile Include="CStage01Trap02.cpp">
       <Filter>01.Object\05. Etc</Filter>
     </ClCompile>
-    <ClCompile Include="CStage01Trap03.cpp">
-      <Filter>01.Object\05. Etc</Filter>
+    <ClCompile Include="CStage01Goal.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

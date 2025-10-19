@@ -1,5 +1,8 @@
-#pragma once
+﻿#pragma once
 #include "CScene.h"
+#include <mmsystem.h>
+#include <math.h>
+#pragma comment(lib, "winmm.lib")
 
 class CScene01 : public CScene
 {
@@ -13,4 +16,7 @@ public:
 	void		Render(HDC _hDC)override;
 	void		Release()		override;
 
+private:
+    float   m_fTime;
+    bool    m_bSoundPlayed;
 };

@@ -6,7 +6,7 @@
 #include "CPlatform.h"
 #include "CStage01Trap01.h"
 #include "CStage01Trap02.h"
-#include "CStage01Trap03.h"
+#include "CStage01Goal.h"
 
 
 CObjectManager* CObjectManager::m_pInstance = nullptr;
@@ -65,8 +65,9 @@ void CObjectManager::Late_Update()
 			obj->Late_Update();
 
     CCollisionManager::Collision_Circle(m_ObjectList[BULLET], m_ObjectList[MONSTER]);
-    CCollisionManager::Stage01_Collision_Rect(m_ObjectList[PLAYER], m_ObjectList[BLOCK]);
-    CCollisionManager::Stage01_Collision_Rect(m_ObjectList[PLAYER], m_ObjectList[TRAP]);
+    CCollisionManager::Stage01_Collision_Platform(m_ObjectList[PLAYER], m_ObjectList[BLOCK]);
+    CCollisionManager::Stage01_Collision_Trap(m_ObjectList[PLAYER], m_ObjectList[TRAP]);
+    CCollisionManager::Stage01_Collision_Goal(m_ObjectList[PLAYER], m_ObjectList[GOAL]);
     CCollisionManager::Collision_Circle(m_ObjectList[ITEM], m_ObjectList[PLAYER]);
 }
 
@@ -98,23 +99,26 @@ void CObjectManager::Add_Platform(Vec3 _vPos, Vec3 _vSize)
     AddObject(BLOCK, pPlatform);
 }
 
-void CObjectManager::Add_Trap1(Vec3 _vPos)
+void CObjectManager::Add_Trap1(float y, float xA, float xB, float speed)
 {
-    CObject* pTrap01 = CAbstractFactory<CStage01Trap01>::Create(_vPos);
-
-    AddObject(TRAP, pTrap01);
+    auto* trap01 = static_cast<CStage01Trap01*>(
+        CAbstractFactory<CStage01Trap01>::Create({ xA, y, 0.f })
+        );
+    trap01->Setup_Patrol(y, xA, xB, speed);
+    AddObject(TRAP, trap01);
 }
 
-//void CObjectManager::Add_Trap2(Vec3 _vPos)
-//{
-//    CObject* pTrap02 = CAbstractFactory<CStage01Trap02>::Create(_vPos);
-//
-//    AddObject(TRAP, pTrap02);
-//}
-//
-//void CObjectManager::Add_Trap3(Vec3 _vPos)
-//{
-//    CObject* pTrap03 = CAbstractFactory<CStage01Trap03>::Create(_vPos);
-//
-//    AddObject(TRAP, pTrap03);
-//}
+void CObjectManager::Add_Trap2(float x, float yA, float yB, float speed)
+{
+    auto* trap02 = static_cast<CStage01Trap02*>(
+        CAbstractFactory<CStage01Trap02>::Create({ x, yA, 0.f })
+        );
+    trap02->Setup_Patrol(x, yA, yB, speed);
+    AddObject(TRAP, trap02);
+}
+
+void CObjectManager::Add_Goal(Vec3 _vPos)
+{
+    CObject* pGoal = CAbstractFactory<CStage01Goal>::Create(_vPos);
+    AddObject(GOAL, pGoal);
+}

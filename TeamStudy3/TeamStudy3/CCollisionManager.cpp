@@ -1,6 +1,17 @@
 ﻿#include "pch.h"
 #include "CCollisionManager.h"
 #include "CHelper.h"
+#include "CStage01Trap01.h"
+#include "CStage01Trap02.h"
+#include "CStage01Player.h"
+#include "CStage01Goal.h"
+
+static inline bool IsTrap(CObject* o) {
+    return dynamic_cast<CStage01Trap01*>(o) != nullptr
+        || dynamic_cast<CStage01Trap02*>(o) != nullptr;
+}
+
+
 
 void CCollisionManager::Collision_Rect(list<CObject*> _Dst, list<CObject*> _Src)
 {
@@ -143,7 +154,7 @@ bool CCollisionManager::Stage01_Check_Rect(CObject* _Dst, CObject* _Src, float* 
     return false;
 }
 
-void CCollisionManager::Stage01_Collision_Rect(list<CObject*> _Dst, list<CObject*> _Src)
+void CCollisionManager::Stage01_Collision_Platform(list<CObject*> _Dst, list<CObject*> _Src)
 {
     for (auto& Dst : _Dst)
     {
@@ -151,18 +162,18 @@ void CCollisionManager::Stage01_Collision_Rect(list<CObject*> _Dst, list<CObject
         for (auto& Src : _Src)
         {
             if (!Src) continue;
-
+    
             float pX = 0.f, pY = 0.f;
             if (!Stage01_Check_Rect(Dst, Src, &pX, &pY))
                 continue;
-
+    
             INFO* pA = const_cast<INFO*>(Dst->Get_Info());
             const INFO* pB = Src->Get_Info();
-
+    
             if (pX < pY) {
                 if (pA->vPos.x < pB->vPos.x) pA->vPos.x -= pX;
                 else                         pA->vPos.x += pX;
-
+    
                 Dst->On_Collision(Src, { pX, 0.f, 0.f });
             }
             else {
@@ -174,6 +185,46 @@ void CCollisionManager::Stage01_Collision_Rect(list<CObject*> _Dst, list<CObject
                 }
                 Dst->On_Collision(Src, { 0.f, pY, 0.f });
             }
+        }
+    }
+}
+
+void CCollisionManager::Stage01_Collision_Trap(list<CObject*> _Dst, list<CObject*> _Src)
+{
+    for (CObject* Dst : _Dst)
+    {
+        if (!Dst) continue;
+        for (CObject* Src : _Src)
+        {
+            if (!Src || Src == Dst) continue;
+
+            float pX = 0.f, pY = 0.f;
+            if (!Stage01_Check_Rect(Dst, Src, &pX, &pY))
+                continue;
+
+            Vec3 pen = { 0.f, 0.f, 0.f };
+            Dst->On_Collision(Src, pen);
+            Src->On_Collision(Dst, pen);
+        }
+    }
+}
+
+void CCollisionManager::Stage01_Collision_Goal(list<CObject*> _Dst, list<CObject*> _Src)
+{
+    for (CObject* Dst : _Dst)
+    {
+        if (!Dst) continue;
+        for (CObject* Src : _Src)
+        {
+            if (!Src || Src == Dst) continue;
+
+            float pX = 0.f, pY = 0.f;
+            if (!Stage01_Check_Rect(Dst, Src, &pX, &pY))
+                continue;
+
+            Vec3 pen = { 0.f, 0.f, 0.f };
+            Dst->On_Collision(Src, pen);
+            Src->On_Collision(Dst, pen);
         }
     }
 }
