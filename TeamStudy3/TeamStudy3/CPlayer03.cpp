@@ -6,9 +6,12 @@
 #include "CComponent.h"
 #include "CKeyManager.h"
 #include "CObjectManager.h"
+#include "CHelper.h"
+#include "CWeaponComponent.h"
 
 CPlayer03::CPlayer03()
 {
+    m_Weapon = CreateComponent<CWeaponComponent>(this);
 
 }
 
@@ -20,9 +23,10 @@ CPlayer03::~CPlayer03()
 void CPlayer03::Initialize()
 {
     for (auto component : m_Components)
-    {
         component->BeginPlay();
-    }
+
+    m_Weapon->Equip_Weapon(EWeaponType::Base);
+
 
     m_tInfo.vPos = { 400.f, 300.f, 0.f };
     m_tInfo.vLook = { 0.f, -1.f, 0.f };
@@ -42,6 +46,23 @@ void CPlayer03::Initialize()
 
     m_vOriginPosin = m_vPosin;
 
+    m_Weapon->FOnFire.Add([this](EWeaponType _Type)
+        {
+            switch (_Type)
+            {
+                // 이거 그냥 Bullet 클래스 하나로 다 처리하는거로 변경하기
+            case EWeaponType::Base:
+                CObjectManager::Get_Instance()->AddObject(
+                    BULLET, CAbstractFactory<CBullet_Base>::Create(m_vPosin));
+                break;
+
+            case EWeaponType::Rifle:
+                CObjectManager::Get_Instance()->AddObject(
+                    BULLET, CAbstractFactory<CBullet_Base>::Create(m_vPosin));
+                break;
+
+            }
+        });
 }
 
 int CPlayer03::Update()
@@ -50,9 +71,9 @@ int CPlayer03::Update()
         return OBJ_DEAD;
 
     for (auto component : m_Components)
-    {
         component->TickComponent();
-    }
+
+    cout << ::CurWeaponType(m_Weapon) << endl;
 
     Key_Input();
 
@@ -77,8 +98,6 @@ int CPlayer03::Update()
     m_vPosin -= Vec3(400.f, 300.f, 0.f);
 
     D3DXVec3TransformCoord(&m_vPosin, &m_vPosin, &m_tInfo.matWorld);
-
-    Fire();
 
     return OBJ_NOEVENT;
 }
@@ -108,9 +127,7 @@ void CPlayer03::Render(HDC hDC)
 
     LineTo(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y);
 
-
     // 포신 그리기
-
     MoveToEx(hDC, (int)m_tInfo.vPos.x, (int)m_tInfo.vPos.y, nullptr);
     LineTo(hDC, (int)m_vPosin.x, (int)m_vPosin.y);
 }
@@ -127,6 +144,28 @@ void CPlayer03::AddComponent(CComponent* _Component)
     m_Components.push_back(_Component);
 }
 
+void CPlayer03::OnComponentBeginOverlap(CObject* _Dst)
+{
+    CPlayer::OnComponentBeginOverlap(_Dst);
+
+    if (!_Dst) return;
+
+    //TakeDamage(_Dst->Get_Attack());
+}
+
+void CPlayer03::MoveToBounds()
+{
+    const float minX = 0.f + m_tInfo.vSize.x;
+    const float maxX = WINCX - m_tInfo.vSize.x;
+    const float minY = 0.f + m_tInfo.vSize.y;
+    const float maxY = WINCY - m_tInfo.vSize.y;
+
+    if (m_tInfo.vPos.x < minX) m_tInfo.vPos.x = minX;
+    if (m_tInfo.vPos.x > maxX) m_tInfo.vPos.x = maxX;
+    if (m_tInfo.vPos.y < minY) m_tInfo.vPos.y = minY;
+    if (m_tInfo.vPos.y > maxY) m_tInfo.vPos.y = maxY;
+}
+
 void CPlayer03::Key_Input()
 {
     Vec3 movdDir = { 0.f,0.f,0.f };
@@ -136,6 +175,7 @@ void CPlayer03::Key_Input()
         movdDir = { -1.f, 0.f, 0.f };
         D3DXVec3TransformNormal(&m_tInfo.vDir, &movdDir, &m_tInfo.matWorld);
         m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
+
         //m_fAngle -= D3DXToRadian(3.f);
     }
 
@@ -144,6 +184,7 @@ void CPlayer03::Key_Input()
         movdDir = { 1.f, 0.f, 0.f };
         D3DXVec3TransformNormal(&m_tInfo.vDir, &movdDir, &m_tInfo.matWorld);
         m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
+
         //m_fAngle += D3DXToRadian(3.f);
     }
 
@@ -162,12 +203,5 @@ void CPlayer03::Key_Input()
         m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
     }
 
-}
-
-void CPlayer03::Fire()
-{
-    if (TIME->GetTick(m_FireHandler, m_FireInterval))
-    {
-        CObjectManager::Get_Instance()->AddObject(BULLET, CAbstractFactory<CBullet_Base>::Create(m_vPosin));
-    }
+    MoveToBounds();
 }
