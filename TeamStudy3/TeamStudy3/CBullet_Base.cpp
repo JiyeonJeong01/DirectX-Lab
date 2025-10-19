@@ -32,7 +32,8 @@ int CBullet_Base::Update()
 
 void CBullet_Base::Late_Update()
 {
-
+    if (CheckToBounds())
+        m_bDead = true;
 }
 
 void CBullet_Base::Render(HDC _hDC)
@@ -47,4 +48,28 @@ void CBullet_Base::Render(HDC _hDC)
 void CBullet_Base::Release()
 {
 
+}
+
+void CBullet_Base::OnComponentBeginOverlap(CObject* _Dst)
+{
+    CObject::OnComponentBeginOverlap(_Dst);
+
+    Set_Dead();
+}
+
+
+bool CBullet_Base::CheckToBounds()
+{
+   const float minX = 0.f + m_tInfo.vSize.x;
+   const float maxX = WINCX - m_tInfo.vSize.x;
+   const float minY = 0.f + m_tInfo.vSize.y;
+   const float maxY = WINCY - m_tInfo.vSize.y;
+
+   bool bCheck = false;
+   bCheck |= m_tInfo.vPos.x < minX;
+   bCheck |= m_tInfo.vPos.y < minY;
+   bCheck |= m_tInfo.vPos.x > maxX;
+   bCheck |= m_tInfo.vPos.y > maxX;
+
+   return bCheck;
 }
