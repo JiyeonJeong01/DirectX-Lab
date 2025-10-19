@@ -70,11 +70,6 @@
     <Filter Include="01.Object\05. Etc">
       <UniqueIdentifier>{1fc27635-cc67-435c-99f4-057f9aa27064}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Object\99. Weapon">
-      <UniqueIdentifier>{135baca6-8751-454e-b316-ad3386d87949}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Object\98. Item">
-      <UniqueIdentifier>{c5b9b44d-3a0f-4fd9-9d80-1a1f122ca22d}</UniqueIdentifier>
     <Filter Include="01.Object\06. Oribiter">
       <UniqueIdentifier>{becd1ee6-bf61-45d5-a674-2110a590b739}</UniqueIdentifier>
     </Filter>
@@ -185,23 +180,11 @@
     <ClInclude Include="CWallFourth.h">
       <Filter>01.Object\04. KimJun</Filter>
     </ClInclude>
-    <ClInclude Include="CDelegate.h">
-      <Filter>98. Degisn</Filter>
+    <ClInclude Include="CPlayer02.h">
+      <Filter>01.Object\00. Player</Filter>
     </ClInclude>
-    <ClInclude Include="CFire.h">
-      <Filter>01.Object\02. Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="CMonster03_Base.h">
-      <Filter>01.Object\01. Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="CWeaponComponent.h">
-      <Filter>97. Components</Filter>
-    </ClInclude>
-    <ClInclude Include="CItem.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CItem_Rifle.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="COribiters.h">
+      <Filter>01.Object\06. Oribiter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -292,23 +275,11 @@
     <ClCompile Include="CWallFourth.cpp">
       <Filter>01.Object\04. KimJun</Filter>
     </ClCompile>
-    <ClCompile Include="CDelegate.cpp">
-      <Filter>98. Degisn</Filter>
+    <ClCompile Include="CPlayer02.cpp">
+      <Filter>01.Object\00. Player</Filter>
     </ClCompile>
-    <ClCompile Include="CFire.cpp">
-      <Filter>01.Object\02. Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="CMonster03_Base.cpp">
-      <Filter>01.Object\01. Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="CWeaponComponent.cpp">
-      <Filter>97. Components</Filter>
-    </ClCompile>
-    <ClCompile Include="CItem.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CItem_Rifle.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="COribiters.cpp">
+      <Filter>01.Object\06. Oribiter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
