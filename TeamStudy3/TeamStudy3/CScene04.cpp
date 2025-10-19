@@ -5,7 +5,7 @@
 #include "CSceneManager.h"
 #define EPSILON 0.03f
 
-CScene04::CScene04() : pPlayer(nullptr), pObstacle(nullptr), sScore(0)
+CScene04::CScene04() : pPlayer(nullptr), pObstacle(nullptr), sScore(0), time(0), timer(0)
 {
     pGoal[0] = nullptr;
     pGoal[1] = nullptr;
@@ -69,6 +69,7 @@ void CScene04::Initialize()
     vecWall[9]->SetPoint({ 300.f, 350.f, 0.f }, { 300.f, 500.f, 0.f });
 
     dynamic_cast<CPlayerFourth*>(pPlayer)->SetWallVector(&vecWall);
+    timer = GetTickCount64();
 }
 
 int CScene04::Update()
@@ -77,6 +78,11 @@ int CScene04::Update()
     {
         CSceneManager::Get_Instance()->ChangeScene(LOGO);
         return 0;
+    }
+    if (timer + 1000 < GetTickCount64())
+    {
+        time++;
+        timer = GetTickCount64();
     }
 
     pPlayer->Update();
@@ -273,6 +279,20 @@ void CScene04::Render(HDC _hDC)
     {
         pWall->Render(_hDC);
     }
+
+    int playerHp = dynamic_cast<CPlayerFourth*>(pPlayer)->GetHp();
+
+    //SetTextColor(_hDC, RGB(255, 0, 0));
+
+    SetBkMode(_hDC, TRANSPARENT);
+
+    wchar_t szText[64];
+    wchar_t szTime[64];
+    wsprintf(szText, L"HP : %d", playerHp);
+    wsprintf(szTime, L"Time : %d", time);
+
+    TextOut(_hDC, 50, 50, szText, lstrlen(szText));
+    TextOut(_hDC, 50, 70, szTime, lstrlen(szTime));
 }
 
 void CScene04::Release()
