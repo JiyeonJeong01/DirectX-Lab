@@ -105,4 +105,12 @@ struct tagFinder
     const TCHAR* m_pTag;
 };
 
+typedef struct tagFrame
+{
+    int		iStart;
+    int		iEnd;
+    int		iMotion;
+    DWORD	dwSpeed;
+    DWORD	dwTime;
 
+}FRAME;

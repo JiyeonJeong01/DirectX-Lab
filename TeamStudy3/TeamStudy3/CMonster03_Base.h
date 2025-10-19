@@ -18,7 +18,11 @@ public:
     virtual void OnComponentBeginOverlap(CObject* _Dst) override;
 
 private:
+    void Motion_Change();
+
+private:
     Vec3 m_vPoint[4];
+    const TCHAR* m_FrameKey;
 
 };
 
