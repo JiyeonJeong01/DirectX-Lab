@@ -70,6 +70,9 @@
     <Filter Include="01.Object\05. Etc">
       <UniqueIdentifier>{1fc27635-cc67-435c-99f4-057f9aa27064}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Object\06. Oribiter">
+      <UniqueIdentifier>{becd1ee6-bf61-45d5-a674-2110a590b739}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -177,6 +180,12 @@
     <ClInclude Include="CWallFourth.h">
       <Filter>01.Object\04. KimJun</Filter>
     </ClInclude>
+    <ClInclude Include="CPlayer02.h">
+      <Filter>01.Object\00. Player</Filter>
+    </ClInclude>
+    <ClInclude Include="COribiters.h">
+      <Filter>01.Object\06. Oribiter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamStudy3.cpp">
@@ -265,6 +274,12 @@
     </ClCompile>
     <ClCompile Include="CWallFourth.cpp">
       <Filter>01.Object\04. KimJun</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer02.cpp">
+      <Filter>01.Object\00. Player</Filter>
+    </ClCompile>
+    <ClCompile Include="COribiters.cpp">
+      <Filter>01.Object\06. Oribiter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
