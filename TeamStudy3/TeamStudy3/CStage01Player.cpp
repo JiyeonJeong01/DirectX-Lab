@@ -2,6 +2,7 @@
 #include "CStage01Player.h"
 #include "CScrollManager.h"
 #include "CKeyManager.h"
+#include "CBmpManager.h"
 
 CStage01Player::CStage01Player()
 {
@@ -14,8 +15,26 @@ CStage01Player::~CStage01Player()
 
 void CStage01Player::Initialize()
 {
-    m_tInfo.vSize = { 25.f, 25.f, 0.f };
-    m_tInfo.vPos = { 200.f , 300.f, 0.f };
+    m_tInfo.vSize = { 20.f, 32.f, 0.f };
+    m_tInfo.vPos = { 720.f , 2800.f, 0.f };
+
+    CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Stage01/Stage01_Player_Left.bmp", L"Stage01_Player_Left");
+    CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Stage01/Stage01_Player_Right.bmp", L"Stage01_Player_Right");
+    CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Stage01/Stage01_Player_Crouch_Left.bmp", L"Stage01_Player_Crouch_Left");
+    CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Stage01/Stage01_Player_Crouch_Right.bmp", L"Stage01_Player_Crouch_Right");
+
+    //m_pFrameKey = L"Stage01_Player_Left";
+
+    m_eCurState = IDLE;
+    m_ePreState = PA_END;
+
+    m_tFrame.iStart = 0;
+    m_tFrame.iEnd = 0;
+    m_tFrame.iMotion = 1;
+    m_tFrame.ullSpeed = 200;
+    m_tFrame.ullTime = GetTickCount64();
+
+    m_bPrevFaceRight = m_bFaceRight;
 
     Set_Point();
 
@@ -50,12 +69,41 @@ int CStage01Player::Update()
 
 void CStage01Player::Late_Update()
 {
+    if (m_bFaceRight == true)
+    {
+        if (m_bFaceRight == false)
+        {
+
+        }
+    }
 }
 
 void CStage01Player::Render(HDC hDC)
 {
     int iScrollX = (int)CScrollManager::Get_Instance()->Get_ScrollX();
     int iScrollY = (int)CScrollManager::Get_Instance()->Get_ScrollY();
+
+    HDC	hMemDC = CBmpManager::Get_Instance()->Find_Img(m_pFrameKey);
+
+    const int srcW = 40;
+    const int srcH = 64;
+
+    const int dstW = (int)m_tInfo.vSize.x;
+    const int dstH = (int)m_tInfo.vSize.y;
+
+    const int srcX = m_tFrame.iStart * srcW;
+    const int srcY = m_tFrame.iMotion * srcH;
+
+    GdiTransparentBlt(hDC,
+        (m_tInfo.vSize.x) + iScrollX,
+        (m_tInfo.vSize.y) + iScrollY,
+        dstW, dstH,
+        hMemDC,
+        srcX, srcY,
+        srcW, srcH,
+        RGB(255, 0, 255));
+
+
 
     MoveToEx(hDC, (int)m_Point[0].x + iScrollX, (int)m_Point[0].y + iScrollY, nullptr);
 

@@ -53,6 +53,16 @@ enum SCENENUMBER {
     SCENE_END
 };
 
+typedef struct tagFrame
+{
+    int		iStart;
+    int		iEnd;
+    int		iMotion;
+    ULONGLONG	ullSpeed;
+    ULONGLONG	ullTime;
+
+}FRAME;
+
 template<typename T>
 void	Safe_Delete(T& P)
 {

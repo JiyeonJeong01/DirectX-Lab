@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "CMainGame.h"
 #include "CObject.h"
 #include "CSceneManager.h"
@@ -21,7 +21,7 @@ void CMainGame::Initialize()
 {
     m_hDC = GetDC(g_hWnd);
 
-    CSceneManager::Get_Instance()->ChangeScene(SCENE03);
+    CSceneManager::Get_Instance()->ChangeScene(SCENE01);
     CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Back.bmp", L"Back");
 }
 
