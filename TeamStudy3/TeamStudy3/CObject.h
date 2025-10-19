@@ -37,6 +37,17 @@ public:
 public:
     virtual void AddComponent(CComponent* _Component) {}
 
+public:
+    virtual RECT Get_CollisionRect() const {
+        RECT rc = {
+            LONG(m_tInfo.vPos.x - m_tInfo.vSize.x),
+            LONG(m_tInfo.vPos.y - m_tInfo.vSize.y),
+            LONG(m_tInfo.vPos.x + m_tInfo.vSize.x),
+            LONG(m_tInfo.vPos.y + m_tInfo.vSize.y)
+        };
+        return rc;
+    }
+
 protected:
     INFO            m_tInfo;
 

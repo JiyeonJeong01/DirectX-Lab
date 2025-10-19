@@ -18,6 +18,8 @@ public:
 	void	 Render(HDC hdc);
 	void	 Release();
 
+    void    Add_Platform(Vec3 _vPos, Vec3 _vSize);
+
 public:
 	list<CObject*>* Get_MonsterList() { return  &m_ObjectList[MONSTER]; }
 	list<CObject*>* Get_Player() { return &m_ObjectList[PLAYER]; }
