@@ -144,12 +144,17 @@
     <ClInclude Include="CCollisionManager.h" />
     <ClInclude Include="CCollisionMgr04.h" />
     <ClInclude Include="CComponent.h" />
+    <ClInclude Include="CDelegate.h" />
+    <ClInclude Include="CFire.h" />
     <ClInclude Include="CGoalFourth.h" />
     <ClInclude Include="CHelper.h" />
+    <ClInclude Include="CItem.h" />
+    <ClInclude Include="CItem_Rifle.h" />
     <ClInclude Include="CKeyManager.h" />
     <ClInclude Include="CLogo.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CMonster.h" />
+    <ClInclude Include="CMonster03_Base.h" />
     <ClInclude Include="CMyBmp.h" />
     <ClInclude Include="CObject.h" />
     <ClInclude Include="CObjectFourth.h" />
@@ -172,6 +177,7 @@
     <ClInclude Include="CStage01Player.h" />
     <ClInclude Include="CTimeManager.h" />
     <ClInclude Include="CWallFourth.h" />
+    <ClInclude Include="CWeaponComponent.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
@@ -186,11 +192,16 @@
     <ClCompile Include="CCollisionManager.cpp" />
     <ClCompile Include="CCollisionMgr04.cpp" />
     <ClCompile Include="CComponent.cpp" />
+    <ClCompile Include="CDelegate.cpp" />
+    <ClCompile Include="CFire.cpp" />
     <ClCompile Include="CGoalFourth.cpp" />
+    <ClCompile Include="CItem.cpp" />
+    <ClCompile Include="CItem_Rifle.cpp" />
     <ClCompile Include="CKeyManager.cpp" />
     <ClCompile Include="CLogo.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CMonster.cpp" />
+    <ClCompile Include="CMonster03_Base.cpp" />
     <ClCompile Include="CMyBmp.cpp" />
     <ClCompile Include="CObject.cpp" />
     <ClCompile Include="CObjectFourth.cpp" />
@@ -213,6 +224,7 @@
     <ClCompile Include="CStage01Player.cpp" />
     <ClCompile Include="CTimeManager.cpp" />
     <ClCompile Include="CWallFourth.cpp" />
+    <ClCompile Include="CWeaponComponent.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

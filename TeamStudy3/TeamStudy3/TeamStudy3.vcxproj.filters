@@ -52,9 +52,6 @@
     <Filter Include="99.Manager\05. Scroll">
       <UniqueIdentifier>{58576875-96d1-4844-8465-5a3c7df78b30}</UniqueIdentifier>
     </Filter>
-    <Filter Include="98. Degisn">
-      <UniqueIdentifier>{b204644f-34c7-49e0-8c42-abbb1775d60b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01.Object\02. Bullet">
       <UniqueIdentifier>{1bbd273b-4c3b-4ebc-8a2e-3e277521bca6}</UniqueIdentifier>
     </Filter>
@@ -72,6 +69,12 @@
     </Filter>
     <Filter Include="01.Object\06. Oribiter">
       <UniqueIdentifier>{becd1ee6-bf61-45d5-a674-2110a590b739}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. Design">
+      <UniqueIdentifier>{b204644f-34c7-49e0-8c42-abbb1775d60b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\98. Item">
+      <UniqueIdentifier>{306665be-887b-4cb2-8e85-7dafd5f22bbb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -142,7 +145,7 @@
       <Filter>99.Manager\04. Bmp\00. MyBmp</Filter>
     </ClInclude>
     <ClInclude Include="CAbstractFactory.h">
-      <Filter>98. Degisn</Filter>
+      <Filter>98. Design</Filter>
     </ClInclude>
     <ClInclude Include="CHelper.h">
       <Filter>헤더 파일</Filter>
@@ -191,9 +194,27 @@
     </ClInclude>
     <ClInclude Include="CLogo.h">
       <Filter>02.Scene</Filter>
+	  </ClInclude>
+    <ClInclude Include="CWeaponComponent.h">
+      <Filter>97. Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CDelegate.h">
+      <Filter>98. Design</Filter>
+    </ClInclude>
+    <ClInclude Include="CFire.h">
+      <Filter>01.Object\02. Bullet</Filter>
     </ClInclude>
     <ClInclude Include="CGoalFourth.h">
       <Filter>01.Object\04. KimJun</Filter>
+    </ClInclude>
+    <ClInclude Include="CItem_Rifle.h">
+      <Filter>01.Object\98. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CItem.h">
+      <Filter>01.Object\98. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonster03_Base.h">
+      <Filter>01.Object\01. Monster</Filter>
     </ClInclude>
     <ClInclude Include="CObstacleFourth.h">
       <Filter>01.Object\04. KimJun</Filter>
@@ -298,9 +319,27 @@
     </ClCompile>
     <ClCompile Include="CLogo.cpp">
       <Filter>02.Scene</Filter>
+	  </ClCompile>
+    <ClCompile Include="CWeaponComponent.cpp">
+      <Filter>97. Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CDelegate.cpp">
+      <Filter>98. Design</Filter>
+    </ClCompile>
+    <ClCompile Include="CFire.cpp">
+      <Filter>01.Object\02. Bullet</Filter>
     </ClCompile>
     <ClCompile Include="CGoalFourth.cpp">
       <Filter>01.Object\04. KimJun</Filter>
+    </ClCompile>
+    <ClCompile Include="CItem_Rifle.cpp">
+      <Filter>01.Object\98. Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CItem.cpp">
+      <Filter>01.Object\98. Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonster03_Base.cpp">
+      <Filter>01.Object\01. Monster</Filter>
     </ClCompile>
     <ClCompile Include="CObstacleFourth.cpp">
       <Filter>01.Object\04. KimJun</Filter>

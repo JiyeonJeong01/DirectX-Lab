@@ -1,12 +1,12 @@
 ﻿#pragma once
 
-#include "CObject.h"
+#include "CItem.h"
 
-class CBullet_Base : public CObject
+class CItem_Rifle : public CItem
 {
 public:
-    CBullet_Base();
-    ~CBullet_Base() override;
+    CItem_Rifle();
+    ~CItem_Rifle() override;
 
 public:
     void Initialize() override;
@@ -15,13 +15,14 @@ public:
     void Render(HDC _hDC) override;
     void Release() override;
 
-    void OnComponentBeginOverlap(CObject* _Dst) override;
+    void OnComponentBeginOverlap(CObject* _HitObject) override;
+    void Use_Item(CObject* _HitObject) override;
 
 public:
-    bool CheckToBounds();
-    
+
 
 private:
+
 
 };
 
