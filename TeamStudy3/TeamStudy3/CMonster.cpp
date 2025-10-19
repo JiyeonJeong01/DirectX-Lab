@@ -14,7 +14,7 @@ CMonster::~CMonster()
 
 void CMonster::Initialize()
 {
-    m_tInfo.vPos = { 400.f, 100.f, 0.f };
+    //m_tInfo.vPos = { 400.f, 100.f, 0.f };
     m_tInfo.vDir = { 0.f, 0.f, 0.f };
     m_tInfo.vSize = { 50.f, 50.f, 0.f };
 

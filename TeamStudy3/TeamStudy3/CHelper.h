@@ -34,6 +34,25 @@ static bool IsSameOwnerTeam(CObject* Dst, CObject* Src)
     return Dst->Get_Owner()->Get_TeamID() == Src->Get_Owner()->Get_TeamID();
 }
 
+static void DrawRect(HDC hDC, const Vec3 pts[4], COLORREF color = RGB(0, 255, 255))
+{
+    HPEN hPen = CreatePen(PS_SOLID, 1, color);
+    HBRUSH hBrush = (HBRUSH)GetStockObject(HOLLOW_BRUSH);
+
+    HPEN   hOldPen = (HPEN)SelectObject(hDC, hPen);
+    HBRUSH hOldBrush = (HBRUSH)SelectObject(hDC, hBrush);
+
+    MoveToEx(hDC, (int)pts[0].x, (int)pts[0].y, nullptr);
+    LineTo(hDC, (int)pts[1].x, (int)pts[1].y);
+    LineTo(hDC, (int)pts[2].x, (int)pts[2].y);
+    LineTo(hDC, (int)pts[3].x, (int)pts[3].y);
+    LineTo(hDC, (int)pts[0].x, (int)pts[0].y);
+
+    SelectObject(hDC, hOldBrush);
+    SelectObject(hDC, hOldPen);
+    DeleteObject(hPen);
+}
+
 template<typename T>
 static T* CreateComponent(CObject* _Owner)
 {

@@ -2,6 +2,7 @@
 #include "CPlayer03.h"
 
 #include "CAbstractFactory.h"
+#include "CBmpManager.h"
 #include "CBullet_Base.h"
 #include "CComponent.h"
 #include "CKeyManager.h"
@@ -30,7 +31,7 @@ void CPlayer03::Initialize()
 
     m_tInfo.vPos = { 400.f, 300.f, 0.f };
     m_tInfo.vLook = { 0.f, -1.f, 0.f };
-    m_tInfo.vSize = { 25.f, 25.f, 0.f};
+    m_tInfo.vSize = { 30.f, 80.f, 0.f};
 
     m_fSpeed = 5.f;
 
@@ -43,8 +44,20 @@ void CPlayer03::Initialize()
         m_vOriginPoint[i] = m_vPoint[i];
 
     m_vPosin = { m_tInfo.vPos.x, m_tInfo.vPos.y - m_PosinLength, 0.f };
-
     m_vOriginPosin = m_vPosin;
+
+    // 스프라이트
+    {
+        CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Player/Player03.bmp", L"Player03");
+
+        m_FrameKey = L"Player03";
+        m_tFrame.iStart = 0;
+        m_tFrame.iEnd = 4;
+        m_tFrame.iMotion = 0;
+        m_tFrame.dwSpeed = 200;
+        m_tFrame.dwTime = GetTickCount64();
+    }
+
 
     m_Weapon->FOnFire.Add([this](EWeaponType _Type)
         {
@@ -76,6 +89,7 @@ int CPlayer03::Update()
     cout << ::CurWeaponType(m_Weapon) << endl;
 
     Key_Input();
+	__super::Move_Frame();
 
     D3DXMATRIX	 matScale, matRotZ, matTrans;
 
@@ -95,7 +109,7 @@ int CPlayer03::Update()
 
     // 포신
     m_vPosin = m_vOriginPosin;
-    m_vPosin -= Vec3(400.f, 300.f, 0.f);
+    m_vPosin -= Vec3(380.f, 340.f, 0.f);
 
     D3DXVec3TransformCoord(&m_vPosin, &m_vPosin, &m_tInfo.matWorld);
 
@@ -109,27 +123,38 @@ void CPlayer03::Late_Update()
 
 void CPlayer03::Render(HDC hDC)
 {
-    MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y, nullptr);
+	Vec3 center = { 0.f, 0.f, 0.f };
+	D3DXVec3TransformCoord(&center, &center, &m_tInfo.matWorld);
 
-    for (int i = 0; i < 4; ++i)
-    {
-        LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
+	const int destW = (int)(m_tInfo.vSize.x * 2.f);
+	const int destH = (int)(m_tInfo.vSize.y * 2.f);
 
-        if (i > 3)
-            continue;
+	const int destX = (int)(center.x - m_tInfo.vSize.x);
+	const int destY = (int)(center.y - m_tInfo.vSize.y);
 
-        Ellipse(hDC,
-            int(m_vPoint[i].x - 5.f),
-            int(m_vPoint[i].y - 5.f),
-            int(m_vPoint[i].x + 5.f),
-            int(m_vPoint[i].y + 5.f));
-    }
+	HDC hMemDC = CBmpManager::Get_Instance()->Find_Img(m_FrameKey);
+	if (!hMemDC) return;
 
-    LineTo(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y);
+	HBITMAP hbmp = (HBITMAP)GetCurrentObject(hMemDC, OBJ_BITMAP);
+	BITMAP bm{}; GetObject(hbmp, sizeof(bm), &bm);
 
-    // 포신 그리기
-    MoveToEx(hDC, (int)m_tInfo.vPos.x, (int)m_tInfo.vPos.y, nullptr);
-    LineTo(hDC, (int)m_vPosin.x, (int)m_vPosin.y);
+	const int cols = m_tFrame.iEnd + 1;
+	const int rows = 1;
+
+	const int frameW = bm.bmWidth / cols;
+	const int frameH = bm.bmHeight / rows;
+
+	const int srcX = m_tFrame.iStart * frameW;
+	const int srcY = m_tFrame.iMotion * frameH;
+
+	SetStretchBltMode(hDC, HALFTONE);
+	GdiTransparentBlt(hDC,
+		destX, destY, destW, destH,
+		hMemDC,
+		srcX, srcY, frameW, frameH,
+		RGB(255, 255, 255));
+
+	//::DrawRect(hDC, m_vPoint, RGB(0, 255, 0));
 }
 
 void CPlayer03::Release()

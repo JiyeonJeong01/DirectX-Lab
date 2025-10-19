@@ -51,6 +51,8 @@ public:
         return rc;
     }
 
+    void Move_Frame();
+
 protected:
     INFO            m_tInfo;
 
@@ -66,5 +68,8 @@ protected:
     int             m_TeamID;
 
     std::vector<CComponent*> m_Components;
+
+    FRAME	    	m_tFrame;
+    const TCHAR*    m_FrameKey;
 
 };

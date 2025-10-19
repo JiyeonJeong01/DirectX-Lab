@@ -19,6 +19,8 @@ public:
     void Render(HDC hDC) override;
     void Release() override;
 
+    
+
 private:
     CObject* m_pPlayer;
 };
