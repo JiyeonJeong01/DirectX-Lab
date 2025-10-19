@@ -2,6 +2,22 @@
 
 #include "CObject.h"
 #include "CPlayer03.h"
+#include "CWeaponComponent.h"
+
+static const char* ToString(EWeaponType _Type)
+{
+    switch (_Type)
+    {
+    case EWeaponType::Base:  return "Base";
+    case EWeaponType::Rifle: return "Rifle";
+    default:                 return "Unknown";
+    }
+}
+
+static const char* CurWeaponType(CWeaponComponent* weapon)
+{
+    return (weapon) ? ToString(weapon->Get_WeaponType()) : "null-weapon";
+}
 
 static bool IsSameTeam(CObject* Dst, CObject* Src)
 {
