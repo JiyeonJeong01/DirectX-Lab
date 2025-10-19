@@ -13,11 +13,6 @@ CObject::~CObject()
 
 }
 
-void CObject::OnComponentBeginOverlap(CObject* _Dst)
-{
-    // 자식에서 처리 ex) TakeDamage, UseItem
-}
-
 void CObject::TakeDamage(int _iAttack)
 {
     int currentHP = Get_Hp(); 
@@ -26,20 +21,4 @@ void CObject::TakeDamage(int _iAttack)
 
     if (Get_Hp() <= 0)
         Set_Dead();
-}
-
-bool CObject::CheckToBounds()
-{
-    const float minX = 0.f + m_tInfo.vSize.x;
-    const float maxX = WINCX - m_tInfo.vSize.x;
-    const float minY = 0.f + m_tInfo.vSize.y;
-    const float maxY = WINCY - m_tInfo.vSize.y;
-
-    bool bCheck = false;
-    bCheck |= m_tInfo.vPos.x < minX;
-    bCheck |= m_tInfo.vPos.y < minY;
-    bCheck |= m_tInfo.vPos.x > maxX;
-    bCheck |= m_tInfo.vPos.y > maxY;
-
-    return bCheck;
 }

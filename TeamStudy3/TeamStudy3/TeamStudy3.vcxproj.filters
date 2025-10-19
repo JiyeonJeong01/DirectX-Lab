@@ -73,8 +73,10 @@
     <Filter Include="01.Object\99. Weapon">
       <UniqueIdentifier>{135baca6-8751-454e-b316-ad3386d87949}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Object\06. Item">
+    <Filter Include="01.Object\98. Item">
       <UniqueIdentifier>{c5b9b44d-3a0f-4fd9-9d80-1a1f122ca22d}</UniqueIdentifier>
+    <Filter Include="01.Object\06. Oribiter">
+      <UniqueIdentifier>{becd1ee6-bf61-45d5-a674-2110a590b739}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

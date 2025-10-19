@@ -16,7 +16,6 @@ void CMonster::Initialize()
 {
     m_tInfo.vPos = { 400.f, 100.f, 0.f };
     m_tInfo.vDir = { 0.f, 0.f, 0.f };
-    m_tInfo.vSize = { 50.f, 50.f, 0.f };
 
     m_pPlayer = CObjectManager::Get_Instance()->Get_Player()->front();
 
@@ -48,16 +47,16 @@ int CMonster::Update()
 
 void CMonster::Late_Update()
 {
-
+    cout << m_iHp << endl;
 }
 
 void CMonster::Render(HDC hDC)
 {
     Ellipse(hDC,
-        int(m_tInfo.vPos.x - m_tInfo.vSize.x),
-        int(m_tInfo.vPos.y - m_tInfo.vSize.y),
-        int(m_tInfo.vPos.x + m_tInfo.vSize.x),
-        int(m_tInfo.vPos.y + m_tInfo.vSize.y));
+        int(m_tInfo.vPos.x - 50.f),
+        int(m_tInfo.vPos.y - 50.f),
+        int(m_tInfo.vPos.x + 50.f),
+        int(m_tInfo.vPos.y + 50.f));
 }
 
 void CMonster::Release()

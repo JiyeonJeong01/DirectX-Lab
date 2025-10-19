@@ -38,7 +38,6 @@ enum OBJECT
     PLAYER,
     MONSTER,
     BULLET,
-    ITEM,
     MOUSE,
     BLOCK,
     OBJ_END

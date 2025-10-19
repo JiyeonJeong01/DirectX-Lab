@@ -17,7 +17,6 @@ public:
 	virtual void		Release()			PURE;
 
     virtual void		On_Collision(CObject* _pColObj, Vec3 _vColSize) {}
-    virtual void        OnComponentBeginOverlap(CObject* _Dst);
 
 public:
     const INFO* Get_Info() const { return &m_tInfo; }
@@ -27,15 +26,13 @@ public:
     void     Set_Owner(CObject* _Owner) { m_Owner = _Owner; }
     void     Set_Hp(int _Hp) { m_iHp = _Hp; }
 
-    CObject*    Get_Owner()  { return m_Owner; }
-    int         Get_TeamID() { return m_TeamID; }
-    int         Get_Hp()     { return m_iHp; }
-    int         Get_Attack() { return m_iAttack; }
-    const Vec3& Get_Pos() { return m_tInfo.vPos; }
-    bool        IsDead()     { return m_bDead; }
+    CObject* Get_Owner()  { return m_Owner; }
+    int      Get_TeamID() { return m_TeamID; }
+    int      Get_Hp()     { return m_iHp; }
+    int      Get_Attack() { return m_iAttack; }
+    bool     IsDead()     { return m_bDead; }
      
-    void             TakeDamage(int _iAttack);
-    virtual bool     CheckToBounds();
+    void     TakeDamage(int _iAttack);
 
 public:
     virtual void AddComponent(CComponent* _Component) {}
