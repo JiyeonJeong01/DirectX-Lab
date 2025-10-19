@@ -44,12 +44,19 @@ int CObstacleFourth::Update()
 
 void CObstacleFourth::Render(HDC hDC)
 {
+    HPEN hRedPen = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
+
+    HPEN hOldPen = (HPEN)SelectObject(hDC, hRedPen);
+
     MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y, nullptr);
     for (int i = 0; i < 4; ++i)
     {
         LineTo(hDC, (int)m_vPoint[i].x, (int)m_vPoint[i].y);
     }
     LineTo(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y);
+
+    SelectObject(hDC, hOldPen);
+    DeleteObject(hRedPen);
 }
 
 void CObstacleFourth::Release()

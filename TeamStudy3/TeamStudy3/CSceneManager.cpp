@@ -4,7 +4,7 @@
 #include "CScene02.h"
 #include "CScene03.h"
 #include "CScene04.h"
-#include "CSceneOver.h"
+#include "CSceneOver04.h"
 
 CSceneManager* CSceneManager::m_pInstance = nullptr;
 
@@ -43,7 +43,6 @@ void CSceneManager::Update()
 			case SCENE03:
 				CSceneManager::Get_Instance()->ChangeScene(SCENE04);
 				break;
-
 			case SCENE04:
 				CSceneManager::Get_Instance()->ChangeScene(SCENE_END);
 			}
@@ -103,9 +102,9 @@ int CSceneManager::ChangeScene(SCENENUMBER _eSceneNumber)
 		newScene = new CScene04;
 		m_SceneNumber = SCENE04;
 		break;
-    case SCENEOVER:
-        newScene = new CSceneOver;
-        m_SceneNumber = SCENE04;
+    case SCENEOVER04:
+        newScene = new CSceneOver04;
+        m_SceneNumber = SCENEOVER04;
         break;
 	case SCENE_END:
 		m_SceneNumber = SCENE_END;

@@ -183,7 +183,7 @@
     <ClInclude Include="CGoalFourth.h">
       <Filter>01.Object\04. KimJun</Filter>
     </ClInclude>
-    <ClInclude Include="CSceneOver.h">
+    <ClInclude Include="CSceneOver04.h">
       <Filter>02.Scene</Filter>
     </ClInclude>
   </ItemGroup>
@@ -281,7 +281,7 @@
     <ClCompile Include="CGoalFourth.cpp">
       <Filter>01.Object\04. KimJun</Filter>
     </ClCompile>
-    <ClCompile Include="CSceneOver.cpp">
+    <ClCompile Include="CSceneOver04.cpp">
       <Filter>02.Scene</Filter>
     </ClCompile>
   </ItemGroup>

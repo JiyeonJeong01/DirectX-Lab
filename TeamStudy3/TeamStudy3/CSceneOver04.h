@@ -1,17 +1,18 @@
 ﻿#pragma once
 #include "CScene.h"
 #include <mmsystem.h>
+#include <math.h>
 #pragma comment(lib, "winmm.lib")
 
-class CSceneOver : public CScene
+class CSceneOver04 : public CScene
 {
 private:
     float m_fTime;
     HFONT m_hFont;
     bool m_bSoundPlayed;
 public:
-    CSceneOver();
-    virtual ~CSceneOver();
+    CSceneOver04();
+    virtual ~CSceneOver04();
 public:
     void		Initialize()	override;
     int			Update()		override;
