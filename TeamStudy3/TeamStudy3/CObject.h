@@ -17,6 +17,7 @@ public:
 	virtual void		Release()			PURE;
 
     virtual void		On_Collision(CObject* _pColObj, Vec3 _vColSize) {}
+    virtual void        OnComponentBeginOverlap(CObject* _Dst);
 
 public:
     const INFO* Get_Info() const { return &m_tInfo; }
@@ -26,16 +27,31 @@ public:
     void     Set_Owner(CObject* _Owner) { m_Owner = _Owner; }
     void     Set_Hp(int _Hp) { m_iHp = _Hp; }
 
-    CObject* Get_Owner()  { return m_Owner; }
-    int      Get_TeamID() { return m_TeamID; }
-    int      Get_Hp()     { return m_iHp; }
-    int      Get_Attack() { return m_iAttack; }
-    bool     IsDead()     { return m_bDead; }
+    CObject*    Get_Owner()  { return m_Owner; }
+    int         Get_TeamID() { return m_TeamID; }
+    int         Get_Hp()     { return m_iHp; }
+    int         Get_Attack() { return m_iAttack; }
+    const Vec3& Get_Pos() { return m_tInfo.vPos; }
+    bool        IsDead()     { return m_bDead; }
      
-    void     TakeDamage(int _iAttack);
+    void             TakeDamage(int _iAttack);
+    virtual bool     CheckToBounds();
 
 public:
     virtual void AddComponent(CComponent* _Component) {}
+
+public:
+    virtual RECT Get_CollisionRect() const {
+        RECT rc = {
+            LONG(m_tInfo.vPos.x - m_tInfo.vSize.x),
+            LONG(m_tInfo.vPos.y - m_tInfo.vSize.y),
+            LONG(m_tInfo.vPos.x + m_tInfo.vSize.x),
+            LONG(m_tInfo.vPos.y + m_tInfo.vSize.y)
+        };
+        return rc;
+    }
+
+    void Move_Frame();
 
 protected:
     INFO            m_tInfo;
@@ -53,4 +69,5 @@ protected:
 
     std::vector<CComponent*> m_Components;
 
+    FRAME	    	m_tFrame;
 };

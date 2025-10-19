@@ -38,6 +38,7 @@ enum OBJECT
     PLAYER,
     MONSTER,
     BULLET,
+    ITEM,
     MOUSE,
     BLOCK,
     OBJ_END
@@ -48,6 +49,7 @@ enum SCENENUMBER {
     SCENE02,
     SCENE03,
     SCENE04,
+    SCENEOVER04,
     SCENE_END
 };
 
@@ -103,4 +105,12 @@ struct tagFinder
     const TCHAR* m_pTag;
 };
 
+typedef struct tagFrame
+{
+    int		iStart;
+    int		iEnd;
+    int		iMotion;
+    DWORD	dwSpeed;
+    DWORD	dwTime;
 
+}FRAME;

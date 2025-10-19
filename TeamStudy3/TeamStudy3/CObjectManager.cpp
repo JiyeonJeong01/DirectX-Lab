@@ -1,8 +1,9 @@
 ﻿#include "pch.h"
 #include "CObjectManager.h"
-
+#include "CAbstractFactory.h"
 #include "CCollisionManager.h"
 #include "CObject.h"
+#include "CPlatform.h"
 
 CObjectManager* CObjectManager::m_pInstance = nullptr;
 
@@ -60,6 +61,8 @@ void CObjectManager::Late_Update()
 			obj->Late_Update();
 
     CCollisionManager::Collision_Circle(m_ObjectList[BULLET], m_ObjectList[MONSTER]);
+    CCollisionManager::Stage01_Collision_Rect(m_ObjectList[PLAYER], m_ObjectList[BLOCK]);
+    CCollisionManager::Collision_Circle(m_ObjectList[ITEM], m_ObjectList[PLAYER]);
 }
 
 void CObjectManager::Render(HDC hdc)
@@ -81,4 +84,11 @@ void CObjectManager::Release()
 				}
 			});
 
+}
+
+void CObjectManager::Add_Platform(Vec3 _vPos, Vec3 _vSize)
+{
+    CObject* pPlatform = CAbstractFactory<CPlatform>::Create(_vPos);
+    static_cast<CPlatform*>(pPlatform)->Set_PlatformSize(_vSize);
+    AddObject(BLOCK, pPlatform);
 }

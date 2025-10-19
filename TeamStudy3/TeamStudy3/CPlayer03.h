@@ -1,7 +1,10 @@
 ﻿#pragma once
+
 #include "CPlayer.h"
-class CPlayer03 :
-    public CPlayer
+
+class CWeaponComponent;
+
+class CPlayer03 : public CPlayer
 {
 public:
     CPlayer03();
@@ -16,10 +19,16 @@ public:
 
     virtual void AddComponent(CComponent* _Component) override;
     const std::vector<CComponent*>& GetAllComponents() const { return m_Components; }
+
+    virtual void OnComponentBeginOverlap(CObject* _Dst) override;
+
+    void MoveToBounds();
+
 public:
     void Key_Input();
-    void Fire();
 
+private:
+    CWeaponComponent* m_Weapon;
 
 private:
     Vec3		m_vPoint[4];
