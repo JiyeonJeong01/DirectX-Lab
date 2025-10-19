@@ -13,6 +13,7 @@ public:
     void Render(HDC hDC) override;
     void Release() override;
 
+    const bool GetClicked(int iButton, int& iNum) const;
     void SetFrameKey(const TCHAR* m_pFrameKey) {
         this->m_pFrameKey = m_pFrameKey;
     }
@@ -21,4 +22,5 @@ private:
     int		m_iDrawID;
     const TCHAR* m_pFrameKey;
     RECT rct;
+    bool isClicked[4];
 };

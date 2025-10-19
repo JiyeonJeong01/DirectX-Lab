@@ -7,6 +7,7 @@
 CButton::CButton(float fX, float fY, int ID) : m_iDrawID(0), m_pFrameKey(nullptr)
 {
     ZeroMemory(&rct, sizeof(RECT));
+    ZeroMemory(&isClicked, sizeof(isClicked));
     m_tInfo.vPos.x = fX;
     m_tInfo.vPos.y = fY;
     m_iDrawID = ID;
@@ -44,15 +45,27 @@ void CButton::Late_Update()
         if (GetAsyncKeyState(VK_LBUTTON))
         {
             if (!lstrcmp(L"Stage1", m_pFrameKey))
-                CSceneManager::Get_Instance()->ChangeScene(SCENE01);
+            {
+                //CSceneManager::Get_Instance()->ChangeScene(SCENE01);
+                isClicked[0] = true;
+            }
 
             else if (!lstrcmp(L"Stage2", m_pFrameKey))
-                CSceneManager::Get_Instance()->ChangeScene(SCENE02);
+            {
+                //CSceneManager::Get_Instance()->ChangeScene(SCENE02);
+                isClicked[1] = true;
+            }
 
             else if (!lstrcmp(L"Stage3", m_pFrameKey))
-                CSceneManager::Get_Instance()->ChangeScene(SCENE03);
+            {
+                //CSceneManager::Get_Instance()->ChangeScene(SCENE03);
+                isClicked[2] = true;
+            }
             else if (!lstrcmp(L"Stage4", m_pFrameKey))
-                CSceneManager::Get_Instance()->ChangeScene(SCENE04);
+            {
+                //CSceneManager::Get_Instance()->ChangeScene(SCENE04);
+                isClicked[3] = true;
+            }
             return;
         }
     }
@@ -77,4 +90,14 @@ void CButton::Render(HDC hDC)
 
 void CButton::Release()
 {
+}
+
+const bool CButton::GetClicked(int iButton,int& iNum) const
+{
+    if (isClicked[iButton])
+    {
+        iNum = iButton;
+        return true;
+    }
+    return false;
 }

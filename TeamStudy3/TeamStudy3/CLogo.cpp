@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "CLogo.h"
 #include "CBmpManager.h"
+#include "CSceneManager.h"
 #include "CButton.h"
 
 
@@ -43,9 +44,36 @@ int CLogo::Update()
 
 void CLogo::Late_Update()
 {
+    int iNum = 0;
     for(int i = 0; i < 4; ++i)
     {
         pButton[i]->Late_Update();
+    }
+    for (int i = 0; i < 4; ++i)
+    {
+        if (dynamic_cast<CButton*>(pButton[i])->GetClicked(i, iNum))
+        {
+            if (iNum == 0)
+            {
+                CSceneManager::Get_Instance()->ChangeScene(SCENE01);
+                break;
+            }
+            else if (iNum == 1)
+            {
+                CSceneManager::Get_Instance()->ChangeScene(SCENE02);
+                break;
+            }
+            else if (iNum == 2)
+            {
+                CSceneManager::Get_Instance()->ChangeScene(SCENE03);
+                break;
+            }
+            else if (iNum == 3)
+            {
+                CSceneManager::Get_Instance()->ChangeScene(SCENE04);
+                break;
+            }
+        }
     }
 }
 
