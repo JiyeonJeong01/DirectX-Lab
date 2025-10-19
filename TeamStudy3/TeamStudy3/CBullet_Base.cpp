@@ -50,6 +50,13 @@ void CBullet_Base::Release()
 
 }
 
+void CBullet_Base::OnComponentBeginOverlap(CObject* _Dst)
+{
+    CObject::OnComponentBeginOverlap(_Dst);
+
+    Set_Dead();
+}
+
 
 bool CBullet_Base::CheckToBounds()
 {

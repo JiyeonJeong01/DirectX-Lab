@@ -49,6 +49,8 @@ void CItem_Rifle::OnComponentBeginOverlap(CObject* _HitObject)
     CItem::OnComponentBeginOverlap(_HitObject);
 
     Use_Item(_HitObject);
+
+    Set_Dead();
 }
 
 void CItem_Rifle::Use_Item(CObject* _HitObject)

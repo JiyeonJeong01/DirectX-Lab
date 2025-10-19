@@ -15,6 +15,8 @@ public:
     void Render(HDC _hDC) override;
     void Release() override;
 
+    void OnComponentBeginOverlap(CObject* _Dst) override;
+
 public:
     bool CheckToBounds();
     

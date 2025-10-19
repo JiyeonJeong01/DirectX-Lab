@@ -36,8 +36,7 @@ void CCollisionManager::Collision_Circle(list<CObject*> _Dst, list<CObject*> _Sr
                 if (bCheck) return;
                 if (Dst->IsDead() || Src->IsDead()) continue;
 
-                // Dst 총알
-				Dst->Set_Dead();
+				// Dst->Set_Dead();
 
                 //Src->TakeDamage(Dst->Get_Attack());
                 Src->OnComponentBeginOverlap(Dst);
