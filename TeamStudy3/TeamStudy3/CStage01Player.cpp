@@ -23,16 +23,16 @@ void CStage01Player::Initialize()
     CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Stage01/Stage01_Player_Crouch_Left.bmp", L"Stage01_Player_Crouch_Left");
     CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Stage01/Stage01_Player_Crouch_Right.bmp", L"Stage01_Player_Crouch_Right");
 
-    //m_pFrameKey = L"Stage01_Player_Left";
+    m_FrameKey = L"Stage01_Player_Left";
 
     m_eCurState = IDLE;
     m_ePreState = PA_END;
 
     m_tFrame.iStart = 0;
-    m_tFrame.iEnd = 0;
-    m_tFrame.iMotion = 1;
-    m_tFrame.ullSpeed = 200;
-    m_tFrame.ullTime = GetTickCount64();
+    m_tFrame.iEnd = 3;
+    m_tFrame.iMotion = 0;
+    m_tFrame.dwSpeed = 200;
+    m_tFrame.dwTime = GetTickCount64();
 
     m_bPrevFaceRight = m_bFaceRight;
 
@@ -83,34 +83,57 @@ void CStage01Player::Render(HDC hDC)
     int iScrollX = (int)CScrollManager::Get_Instance()->Get_ScrollX();
     int iScrollY = (int)CScrollManager::Get_Instance()->Get_ScrollY();
 
-    HDC	hMemDC = CBmpManager::Get_Instance()->Find_Img(m_pFrameKey);
-
-    const int srcW = 40;
-    const int srcH = 64;
-
-    const int dstW = (int)m_tInfo.vSize.x;
-    const int dstH = (int)m_tInfo.vSize.y;
-
-    const int srcX = m_tFrame.iStart * srcW;
-    const int srcY = m_tFrame.iMotion * srcH;
-
-    GdiTransparentBlt(hDC,
-        (m_tInfo.vSize.x) + iScrollX,
-        (m_tInfo.vSize.y) + iScrollY,
-        dstW, dstH,
-        hMemDC,
-        srcX, srcY,
-        srcW, srcH,
-        RGB(255, 0, 255));
-
-
-
-    MoveToEx(hDC, (int)m_Point[0].x + iScrollX, (int)m_Point[0].y + iScrollY, nullptr);
-
+    POINT points[4];
     for (int i = 0; i < 4; ++i)
-        LineTo(hDC, (int)m_Point[i].x + iScrollX, (int)m_Point[i].y + iScrollY);
+    {
+        points[i].x = (int)m_Point[i].x + iScrollX;
+        points[i].y = (int)m_Point[i].y + iScrollY;
+    }
 
-    LineTo(hDC, (int)m_Point[0].x + iScrollX, (int)m_Point[0].y + iScrollY);
+    HBRUSH hBrush = CreateSolidBrush(RGB(255, 0, 255));
+    HBRUSH hOldBrush = (HBRUSH)SelectObject(hDC, hBrush);
+    Polygon(hDC, points, 4);
+    SelectObject(hDC, hOldBrush);
+    DeleteObject(hBrush);
+
+
+
+    //const int destW = (int)(m_tInfo.vSize.x * 2.f);
+    //const int destH = (int)(m_tInfo.vSize.y * 2.f);
+    //
+    //const int destX = (int)(m_tInfo.vPos.x - m_tInfo.vSize.x);
+    //const int destY = (int)(m_tInfo.vPos.y - m_tInfo.vSize.y);
+    //
+    //HDC hMemDC = CBmpManager::Get_Instance()->Find_Img(m_FrameKey);
+    //if (!hMemDC) return;
+    //
+    //HBITMAP hbmp = (HBITMAP)GetCurrentObject(hMemDC, OBJ_BITMAP);
+    //BITMAP bm{}; GetObject(hbmp, sizeof(bm), &bm);
+    //
+    //const int cols = m_tFrame.iEnd + 1;
+    //const int rows = 1;
+    //
+    //const int frameW = bm.bmWidth / cols;
+    //const int frameH = bm.bmHeight / rows;
+    //
+    //const int srcX = m_tFrame.iStart * frameW;
+    //const int srcY = m_tFrame.iMotion * frameH;
+    //
+    //SetStretchBltMode(hDC, HALFTONE);
+    //GdiTransparentBlt(hDC,
+    //    destX, destY, 40.f, 64.f,
+    //    hMemDC,
+    //    srcX, srcY, frameW, frameH,
+    //    RGB(255, 0, 255));
+    //
+    //
+    //
+    //MoveToEx(hDC, (int)m_Point[0].x + iScrollX, (int)m_Point[0].y + iScrollY, nullptr);
+    //
+    //for (int i = 0; i < 4; ++i)
+    //    LineTo(hDC, (int)m_Point[i].x + iScrollX, (int)m_Point[i].y + iScrollY);
+    //
+    //LineTo(hDC, (int)m_Point[0].x + iScrollX, (int)m_Point[0].y + iScrollY);
 }
 
 void CStage01Player::Release()
@@ -135,7 +158,7 @@ void CStage01Player::Key_Input()
 {
     if (m_bGrounded && CKeyManager::Get_Instance()->Key_Down(VK_SPACE))
     {
-        m_fGravity = -20.0f;
+        m_fGravity = -15.0f;
         m_bGrounded = false;
     }
 

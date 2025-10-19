@@ -19,6 +19,9 @@ public:
 	void	 Release();
 
     void    Add_Platform(Vec3 _vPos, Vec3 _vSize);
+    void    Add_Trap1(Vec3 _vPos);
+    //void    Add_Trap2(Vec3 _vPos);
+    //void    Add_Trap3(Vec3 _vPos);
 
 public:
 	list<CObject*>* Get_MonsterList() { return  &m_ObjectList[MONSTER]; }

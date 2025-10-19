@@ -222,6 +222,15 @@
     <ClInclude Include="CMonster03_Ghoul.h">
       <Filter>01.Object\01. Monster</Filter>
     </ClInclude>
+    <ClInclude Include="CStage01Trap01.h">
+      <Filter>01.Object\05. Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage01Trap02.h">
+      <Filter>01.Object\05. Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage01Trap03.h">
+      <Filter>01.Object\05. Etc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamStudy3.cpp">
@@ -349,6 +358,15 @@
     </ClCompile>
     <ClCompile Include="CMonster03_Ghoul.cpp">
       <Filter>01.Object\01. Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage01Trap01.cpp">
+      <Filter>01.Object\05. Etc</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage01Trap02.cpp">
+      <Filter>01.Object\05. Etc</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage01Trap03.cpp">
+      <Filter>01.Object\05. Etc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

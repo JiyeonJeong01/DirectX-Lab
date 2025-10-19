@@ -41,6 +41,7 @@ enum OBJECT
     ITEM,
     MOUSE,
     BLOCK,
+    TRAP,
     OBJ_END
 };
 
@@ -52,16 +53,6 @@ enum SCENENUMBER {
     SCENEOVER04,
     SCENE_END
 };
-
-typedef struct tagFrame
-{
-    int		iStart;
-    int		iEnd;
-    int		iMotion;
-    ULONGLONG	ullSpeed;
-    ULONGLONG	ullTime;
-
-}FRAME;
 
 template<typename T>
 void	Safe_Delete(T& P)

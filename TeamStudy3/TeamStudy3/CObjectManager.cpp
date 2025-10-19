@@ -4,6 +4,10 @@
 #include "CCollisionManager.h"
 #include "CObject.h"
 #include "CPlatform.h"
+#include "CStage01Trap01.h"
+#include "CStage01Trap02.h"
+#include "CStage01Trap03.h"
+
 
 CObjectManager* CObjectManager::m_pInstance = nullptr;
 
@@ -62,6 +66,7 @@ void CObjectManager::Late_Update()
 
     CCollisionManager::Collision_Circle(m_ObjectList[BULLET], m_ObjectList[MONSTER]);
     CCollisionManager::Stage01_Collision_Rect(m_ObjectList[PLAYER], m_ObjectList[BLOCK]);
+    CCollisionManager::Stage01_Collision_Rect(m_ObjectList[PLAYER], m_ObjectList[TRAP]);
     CCollisionManager::Collision_Circle(m_ObjectList[ITEM], m_ObjectList[PLAYER]);
 }
 
@@ -92,3 +97,24 @@ void CObjectManager::Add_Platform(Vec3 _vPos, Vec3 _vSize)
     static_cast<CPlatform*>(pPlatform)->Set_PlatformSize(_vSize);
     AddObject(BLOCK, pPlatform);
 }
+
+void CObjectManager::Add_Trap1(Vec3 _vPos)
+{
+    CObject* pTrap01 = CAbstractFactory<CStage01Trap01>::Create(_vPos);
+
+    AddObject(TRAP, pTrap01);
+}
+
+//void CObjectManager::Add_Trap2(Vec3 _vPos)
+//{
+//    CObject* pTrap02 = CAbstractFactory<CStage01Trap02>::Create(_vPos);
+//
+//    AddObject(TRAP, pTrap02);
+//}
+//
+//void CObjectManager::Add_Trap3(Vec3 _vPos)
+//{
+//    CObject* pTrap03 = CAbstractFactory<CStage01Trap03>::Create(_vPos);
+//
+//    AddObject(TRAP, pTrap03);
+//}

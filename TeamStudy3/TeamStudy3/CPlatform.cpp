@@ -33,12 +33,30 @@ void CPlatform::Render(HDC hDC)
     int iScrollX = (int)CScrollManager::Get_Instance()->Get_ScrollX();
     int iScrollY = (int)CScrollManager::Get_Instance()->Get_ScrollY();
 
-    MoveToEx(hDC, (int)m_vPlatformPoint[0].x + iScrollX, (int)m_vPlatformPoint[0].y + iScrollY, nullptr);
-
+    POINT points[4];
     for (int i = 0; i < 4; ++i)
-        LineTo(hDC, (int)m_vPlatformPoint[i].x + iScrollX, (int)m_vPlatformPoint[i].y + iScrollY);
+    {
+        points[i].x = (int)m_vPlatformPoint[i].x + iScrollX;
+        points[i].y = (int)m_vPlatformPoint[i].y + iScrollY;
+    }
 
-    LineTo(hDC, (int)m_vPlatformPoint[0].x + iScrollX, (int)m_vPlatformPoint[0].y + iScrollY);
+    // 흰색 브러시 생성 및 선택
+    HBRUSH hOldBrush = (HBRUSH)SelectObject(hDC, GetStockObject(WHITE_BRUSH));
+    HPEN   hOldPen = (HPEN)SelectObject(hDC, GetStockObject(BLACK_PEN));
+
+    // 내부를 흰색으로 채운 사각형(폴리곤) 그리기
+    Polygon(hDC, points, 4);
+
+    // 이전 브러시/펜 복원
+    SelectObject(hDC, hOldBrush);
+    SelectObject(hDC, hOldPen);
+
+    //MoveToEx(hDC, (int)m_vPlatformPoint[0].x + iScrollX, (int)m_vPlatformPoint[0].y + iScrollY, nullptr);
+    //
+    //for (int i = 0; i < 4; ++i)
+    //    LineTo(hDC, (int)m_vPlatformPoint[i].x + iScrollX, (int)m_vPlatformPoint[i].y + iScrollY);
+    //
+    //LineTo(hDC, (int)m_vPlatformPoint[0].x + iScrollX, (int)m_vPlatformPoint[0].y + iScrollY);
 
 }
 
