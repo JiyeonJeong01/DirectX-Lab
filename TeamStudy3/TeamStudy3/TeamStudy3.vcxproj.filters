@@ -186,6 +186,15 @@
     <ClInclude Include="COribiters.h">
       <Filter>01.Object\06. Oribiter</Filter>
     </ClInclude>
+    <ClInclude Include="CGoalFourth.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CObstacleFourth.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneOver04.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamStudy3.cpp">
@@ -280,6 +289,15 @@
     </ClCompile>
     <ClCompile Include="COribiters.cpp">
       <Filter>01.Object\06. Oribiter</Filter>
+    </ClCompile>
+    <ClCompile Include="CGoalFourth.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CObstacleFourth.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneOver04.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
