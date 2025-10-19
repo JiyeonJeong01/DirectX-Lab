@@ -5,6 +5,7 @@
 #include "CBmpManager.h"
 #include "CItem_Rifle.h"
 #include "CObjectManager.h"
+#include "CPlayer03.h"
 
 CMonster03_Golem::CMonster03_Golem()
 {
@@ -21,22 +22,25 @@ void CMonster03_Golem::Initialize()
     CMonster03_Base::Initialize();
 
     m_tInfo.vSize = { 48.f, 64.f, 0.f };
-    m_fSpeed = 100.f;
+    m_fSpeed = 50.f;
 
     m_iHp = 15.f;
 
-    CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Monster/GolemWalk.bmp", L"Golem_Walk");
-    CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Monster/GolemDeath.bmp", L"Golem_Dead");
+    // 스프라이트
+    {
+        CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Monster/GolemWalk.bmp", L"Golem_Walk");
+        CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Monster/GolemDeath.bmp", L"Golem_Dead");
 
-    m_FrameKey = L"Golem_Walk";
+        m_FrameKey = L"Golem_Walk";
 
-    m_PrevState = m_MonsterState;
+        m_PrevState = m_MonsterState;
 
-    m_tFrame.iStart = 0;
-    m_tFrame.iEnd = 5;
-    m_tFrame.iMotion = 0;
-    m_tFrame.dwSpeed = 200;
-    m_tFrame.dwTime = GetTickCount64();
+        m_tFrame.iStart = 0;
+        m_tFrame.iEnd = 5;
+        m_tFrame.iMotion = 0;
+        m_tFrame.dwSpeed = 200;
+        m_tFrame.dwTime = GetTickCount64();
+    }
 }
 
 int CMonster03_Golem::Update()
@@ -48,6 +52,8 @@ int CMonster03_Golem::Update()
         m_DeadTimer = 0.f;
 
         Motion_Change();
+
+        dynamic_cast<CPlayer03*>(CObjectManager::Get_Instance()->Get_Player()->front())->Add_Score(3);
     }
 
     if (m_MonsterState == EMonsterState::Dead)
@@ -59,22 +65,20 @@ int CMonster03_Golem::Update()
         {
             if (!m_bDropped)
             {
-                CObjectManager::Get_Instance()->AddObject(
-                    ITEM, CAbstractFactory<CItem_Rifle>::Create(m_tInfo.vPos));
-
                 m_bDropped = true;
             }
             return OBJ_DEAD;
         }
     }
 
-    CMonster::Update();
+    CMonster03_Base::Update();
     __super::Move_Frame();
 
     m_tInfo.vPos.y += m_fSpeed * DELTA;
 
     D3DXMATRIX S, R, T;
-    D3DXMatrixScaling(&S, 1.f, 1.f, 1.f);
+    const float scale = m_MonsterSpawn.CurrentScale;
+    D3DXMatrixScaling(&S, scale, scale, 0.f);
     D3DXMatrixRotationZ(&R, 0.f);
     D3DXMatrixTranslation(&T, m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
 
@@ -100,8 +104,9 @@ void CMonster03_Golem::Render(HDC hDC)
     Vec3 center = { 0.f, 0.f, 0.f };
     D3DXVec3TransformCoord(&center, &center, &m_tInfo.matWorld);
 
-    const int destW = (int)(m_tInfo.vSize.x * 2.f);
-    const int destH = (int)(m_tInfo.vSize.y * 2.f);
+    const float scale = m_MonsterSpawn.CurrentScale;
+    const int destW = (int)(m_tInfo.vSize.x * 2.f * scale);
+    const int destH = (int)(m_tInfo.vSize.y * 2.f * scale);
 
     const int destX = (int)(center.x - m_tInfo.vSize.x);
     const int destY = (int)(center.y - m_tInfo.vSize.y);

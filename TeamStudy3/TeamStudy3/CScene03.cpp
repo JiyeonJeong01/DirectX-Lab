@@ -6,6 +6,7 @@
 #include "CBmpManager.h"
 #include "CMonster.h"
 #include "CMonster03_Base.h"
+#include "CMonster03_DrumTong.h"
 #include "CMonster03_Ghoul.h"
 #include "CMonster03_Golem.h"
 #include "CPlayer.h"
@@ -24,17 +25,47 @@ CScene03::~CScene03()
 
 void CScene03::Initialize()
 {
-    CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Stage03.bmp", L"Stage03");
-
+    CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Stage03_3DBack.bmp", L"Stage03");
     CObjectManager::Get_Instance()->AddObject(PLAYER, CAbstractFactory<CPlayer03>::Create());
 
     m_SpawnCooltime = m_MinCooltime + (float)rand() / RAND_MAX * (m_MaxCooltime - m_MinCooltime);
+
+    m_Player = dynamic_cast<CPlayer03*>(CObjectManager::Get_Instance()->Get_Player()->front());
+
+    // Font
+    {
+        m_ScoreFont = CreateFontW(
+            -24, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE,
+            HANGUL_CHARSET, OUT_OUTLINE_PRECIS, CLIP_DEFAULT_PRECIS,
+            ANTIALIASED_QUALITY, VARIABLE_PITCH | FF_DONTCARE,
+            L"Malgun Gothic");
+
+        m_ScorePos = { 20, 20 };
+        m_ScoreColor = RGB(255, 255, 0);
+
+        m_TimerFont = CreateFontW(
+            -36, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE,
+            HANGUL_CHARSET, OUT_OUTLINE_PRECIS, CLIP_DEFAULT_PRECIS,
+            ANTIALIASED_QUALITY, VARIABLE_PITCH | FF_DONTCARE,
+            L"Malgun Gothic");
+
+        m_TimerPos = { 320, 20 };
+    }
 }
 
 int CScene03::Update()
 {
-
     m_SpawnTime += DELTA;
+    m_SceneTimer += DELTA;
+
+    if (m_SceneTimer >= 60.f)
+    {
+        m_SceneTimer = 0.f;
+
+        // TODO : 게임 클리어 띄우고 메인 메뉴로 나가기
+    }
+
+    m_Score = m_Player->Get_Score();
 
     if (m_SpawnTime >= m_SpawnCooltime)
     {
@@ -45,7 +76,6 @@ int CScene03::Update()
     }
 
     CObjectManager::Get_Instance()->Update();
-    CScrollManager::Get_Instance()->Set_ScrollY(2.2f);
 
 
     return OBJ_NOEVENT;
@@ -58,22 +88,67 @@ void CScene03::Late_Update()
 
 void CScene03::Render(HDC _hDC)
 {
-    const int iScrollY = (int)CScrollManager::Get_Instance()->Get_ScrollY();
-
     HDC hGroundDC = CBmpManager::Get_Instance()->Find_Img(L"Stage03");
+    if (!hGroundDC) return;
 
-    const int width = 768;
-    const int height = 545;
+    const int width = 1024;
+    const int height = 1536;
 
-    int ratio = iScrollY % height;
+    const int destX = (int)m_vMapPos.x - 100; 
+    const int destY = (int)m_vMapPos.y;
 
-    if (ratio > 0)
-        ratio -= height;
+    int iScrollY = CScrollManager::Get_Instance()->Get_ScrollY();
 
-    BitBlt(_hDC, 0, ratio,     width, height, hGroundDC, 0, 0, SRCCOPY);
-    BitBlt(_hDC, 0, ratio + height, width, height, hGroundDC, 0, 0, SRCCOPY);
+    GdiTransparentBlt(_hDC,
+        destX, destY, width, height,    
+        hGroundDC,
+        0, 0, width, height,
+        RGB(255, 255, 255));
 
     CObjectManager::Get_Instance()->Render(_hDC);
+
+    // 점수 출력 
+    {
+        if (m_ScoreFont)
+        {
+            wchar_t buf[64];
+            swprintf_s(buf, L"SCORE : %d", m_Score);
+
+            HGDIOBJ oldFont = SelectObject(_hDC, m_ScoreFont);
+            int oldBk = SetBkMode(_hDC, TRANSPARENT);
+
+            SetTextColor(_hDC, RGB(0, 0, 0));
+            TextOutW(_hDC, m_ScorePos.x + 1, m_ScorePos.y + 1, buf, (int)wcslen(buf));
+
+            SetTextColor(_hDC, m_ScoreColor);
+            TextOutW(_hDC, m_ScorePos.x, m_ScorePos.y, buf, (int)wcslen(buf));
+
+            SetBkMode(_hDC, oldBk);
+            SelectObject(_hDC, oldFont);
+        }
+    }
+
+    // 타이머 출력
+    {
+        if (m_TimerFont)
+        {
+            wchar_t buf[64];
+            swprintf_s(buf, L"Timer : %d", (int)m_SceneTimer);
+
+            HGDIOBJ oldFont = SelectObject(_hDC, m_TimerFont);
+            int oldBk = SetBkMode(_hDC, TRANSPARENT);
+
+            SetTextColor(_hDC, RGB(0, 0, 0));
+            TextOutW(_hDC, m_TimerPos.x + 1, m_TimerPos.y + 1, buf, (int)wcslen(buf));
+
+            SetTextColor(_hDC, m_TimerColor);
+            TextOutW(_hDC, m_TimerPos.x, m_TimerPos.y, buf, (int)wcslen(buf));
+
+            SetBkMode(_hDC, oldBk);
+            SelectObject(_hDC, oldFont);
+        }
+    }
+
 }
 
 void CScene03::Release()
@@ -88,5 +163,6 @@ void CScene03::SpawnMonster()
 
     CObjectManager::Get_Instance()->AddObject(
         //MONSTER, CAbstractFactory<CMonster03_Ghoul>::CreatePos(Vec3(x, y, 0.f)));
-        MONSTER, CAbstractFactory<CMonster03_Golem>::CreatePos(Vec3(x, y, 0.f)));
+        //MONSTER, CAbstractFactory<CMonster03_Golem>::CreatePos(Vec3(x, y, 0.f)));
+        MONSTER, CAbstractFactory<CMonster03_DrumTong>::CreatePos(Vec3(x, y, 0.f)));
 }

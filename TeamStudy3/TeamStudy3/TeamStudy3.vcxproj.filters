@@ -222,6 +222,9 @@
     <ClInclude Include="CMonster03_Ghoul.h">
       <Filter>01.Object\01. Monster</Filter>
     </ClInclude>
+    <ClInclude Include="CMonster03_DrumTong.h">
+      <Filter>01.Object\01. Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamStudy3.cpp">
@@ -348,6 +351,9 @@
       <Filter>01.Object\01. Monster</Filter>
     </ClCompile>
     <ClCompile Include="CMonster03_Ghoul.cpp">
+      <Filter>01.Object\01. Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonster03_DrumTong.cpp">
       <Filter>01.Object\01. Monster</Filter>
     </ClCompile>
   </ItemGroup>

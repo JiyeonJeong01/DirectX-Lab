@@ -24,7 +24,12 @@ public:
 
     void MoveToBounds();
 
-public:
+    void Set_Score(float _value) { m_Score = _value; }
+    int  Get_Score() { return m_Score; }
+
+    int Add_Score(float _value) { return m_Score += _value; }
+
+private:
     void Key_Input();
 
 private:
@@ -40,5 +45,7 @@ private:
     float       m_FireHandler = 0.f;
     float       m_FireInterval = 0.5f;
     float       m_PosinLength = 50.f;
+
+    int         m_Score = 0;
 };
 

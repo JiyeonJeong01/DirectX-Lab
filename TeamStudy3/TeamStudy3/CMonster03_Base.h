@@ -7,6 +7,15 @@ enum class EMonsterState
     Walk, Dead, End
 };
 
+struct FMonsterSpawn
+{
+    float SpawnScaleTime = 0.f;
+    float SpawnScaleDuration = 1.f;
+    float StartScale = 0.3f;
+    float TargetScale = 1.0f;
+    float CurrentScale = 1.0f;
+};
+
 class CMonster03_Base : public CMonster
 {
 public:
@@ -31,6 +40,9 @@ protected:
 
     bool  m_bDropped = false; 
     float m_DeadTimer = 0.f;  
-    float m_DeadDuration = 1.0f; 
+    float m_DeadDuration = 1.0f;
+
+    FMonsterSpawn m_MonsterSpawn;
+
 };
 

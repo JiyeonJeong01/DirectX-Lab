@@ -33,7 +33,7 @@ void CPlayer03::Initialize()
     m_tInfo.vLook = { 0.f, -1.f, 0.f };
     m_tInfo.vSize = { 30.f, 80.f, 0.f};
 
-    m_fSpeed = 5.f;
+    m_fSpeed = 250.f;
 
     m_vPoint[0] = { m_tInfo.vPos.x - m_tInfo.vSize.x, m_tInfo.vPos.y - m_tInfo.vSize.y, 0.f };
     m_vPoint[1] = { m_tInfo.vPos.x + m_tInfo.vSize.x, m_tInfo.vPos.y - m_tInfo.vSize.y, 0.f };
@@ -86,7 +86,8 @@ int CPlayer03::Update()
     for (auto component : m_Components)
         component->TickComponent();
 
-    cout << ::CurWeaponType(m_Weapon) << endl;
+    //cout << ::CurWeaponType(m_Weapon) << endl;
+    cout << "현재 스코어 : " << m_Score << endl;
 
     Key_Input();
 	__super::Move_Frame();
@@ -199,7 +200,7 @@ void CPlayer03::Key_Input()
     {
         movdDir = { -1.f, 0.f, 0.f };
         D3DXVec3TransformNormal(&m_tInfo.vDir, &movdDir, &m_tInfo.matWorld);
-        m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
+        m_tInfo.vPos += m_tInfo.vDir * m_fSpeed * DELTA;
 
         //m_fAngle -= D3DXToRadian(3.f);
     }
@@ -208,7 +209,7 @@ void CPlayer03::Key_Input()
     {
         movdDir = { 1.f, 0.f, 0.f };
         D3DXVec3TransformNormal(&m_tInfo.vDir, &movdDir, &m_tInfo.matWorld);
-        m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
+        m_tInfo.vPos += m_tInfo.vDir * m_fSpeed * DELTA;
 
         //m_fAngle += D3DXToRadian(3.f);
     }
@@ -217,7 +218,7 @@ void CPlayer03::Key_Input()
     {
         movdDir = { 0.f, -1.f, 0.f };
         D3DXVec3TransformNormal(&m_tInfo.vDir, &movdDir, &m_tInfo.matWorld);
-        m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
+        m_tInfo.vPos += m_tInfo.vDir * m_fSpeed * DELTA;
 
     }
 
@@ -225,7 +226,7 @@ void CPlayer03::Key_Input()
     {
         movdDir = { 0.f, 1.f, 0.f };
         D3DXVec3TransformNormal(&m_tInfo.vDir, &movdDir, &m_tInfo.matWorld);
-        m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
+        m_tInfo.vPos += m_tInfo.vDir * m_fSpeed * DELTA;
     }
 
     MoveToBounds();

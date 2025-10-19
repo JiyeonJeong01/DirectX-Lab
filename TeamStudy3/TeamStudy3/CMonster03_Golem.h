@@ -19,5 +19,6 @@ public:
     virtual void Motion_Change();
 
 private:
+    float m_Timer = 0.f;
 };
 

@@ -5,6 +5,7 @@
 #include "CBmpManager.h"
 #include "CItem_Rifle.h"
 #include "CObjectManager.h"
+#include "CPlayer03.h"
 
 CMonster03_Ghoul::CMonster03_Ghoul()
 {
@@ -47,6 +48,8 @@ int CMonster03_Ghoul::Update()
         m_DeadTimer = 0.f;
 
         Motion_Change();
+
+        dynamic_cast<CPlayer03*>(CObjectManager::Get_Instance()->Get_Player()->front())->Add_Score(1);
     }
 
     if (m_MonsterState == EMonsterState::Dead)
@@ -58,9 +61,6 @@ int CMonster03_Ghoul::Update()
         {
             if (!m_bDropped)
             {
-                CObjectManager::Get_Instance()->AddObject(
-                    ITEM, CAbstractFactory<CItem_Rifle>::Create(m_tInfo.vPos));
-
                 m_bDropped = true;
             }
             return OBJ_DEAD;

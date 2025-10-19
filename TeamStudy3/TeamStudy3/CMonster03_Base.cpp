@@ -20,13 +20,32 @@ void CMonster03_Base::Initialize()
 {
     CMonster::Initialize();
 
-    
+    // 소환 시 크기 조절
+    {
+        m_MonsterSpawn.SpawnScaleTime = 0.f;
+        m_MonsterSpawn.SpawnScaleDuration = 1.f;
+        m_MonsterSpawn.StartScale = 0.3f;
+        m_MonsterSpawn.TargetScale = 1.0f;
+        m_MonsterSpawn.CurrentScale = m_MonsterSpawn.StartScale;
+    }
 }
 
 int CMonster03_Base::Update()
 {
     CMonster::Update();
-        
+
+    // 점점 커지게
+    if (m_MonsterState != EMonsterState::Dead)
+    {
+        m_MonsterSpawn.SpawnScaleTime += DELTA * 0.5f;
+
+        float time = m_MonsterSpawn.SpawnScaleTime / m_MonsterSpawn.SpawnScaleDuration;
+        if (time > 1.f) time = 1.f;
+
+        m_MonsterSpawn.CurrentScale =
+            m_MonsterSpawn.StartScale + (m_MonsterSpawn.TargetScale - m_MonsterSpawn.StartScale) * time;
+    }
+
     return OBJ_NOEVENT;
 }
 
