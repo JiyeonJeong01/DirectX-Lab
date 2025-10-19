@@ -4,6 +4,8 @@
 #include "CAbstractFactory.h"
 #include "CBmpManager.h"
 #include "CHelper.h"
+#include "CItem_Orb.h"
+#include "CItem_Player.h"
 #include "CItem_Rifle.h"
 #include "CObjectManager.h"
 #include "CPlayer03.h"
@@ -23,11 +25,16 @@ void CMonster03_DrumTong::Initialize()
     CMonster03_Base::Initialize();
 
     m_tInfo.vSize = { 48.f, 64.f, 0.f };
-    m_fSpeed = 50.f;
+    //m_fSpeed = 50.f;
+    m_fSpeed = 5.f;
 
-    m_iHp = 15.f;
+    m_iHp = 150.f;
 
     m_DeadDuration = 0.1f;
+
+    m_MonsterSpawn.SpawnScaleDuration = 5.5f;
+    m_MonsterSpawn.StartScale = 0.6f;
+    m_MonsterSpawn.TargetScale = 1.5f;
 
     // 스프라이트
     {
@@ -63,8 +70,7 @@ int CMonster03_DrumTong::Update()
         {
             if (!m_bDropped)
             {
-                CObjectManager::Get_Instance()->AddObject(
-                    ITEM, CAbstractFactory<CItem_Rifle>::Create(m_tInfo.vPos));
+                SpawnItem();
 
                 m_bDropped = true;
             }
@@ -74,6 +80,8 @@ int CMonster03_DrumTong::Update()
     }
 
     CMonster03_Base::Update();
+
+    cout << "드럼통 현재 체력 : " << m_iHp << endl;
 
     m_tInfo.vPos.y += m_fSpeed * DELTA;
 
@@ -145,5 +153,11 @@ void CMonster03_DrumTong::OnComponentBeginOverlap(CObject* _Dst)
 
     if (!_Dst) return;
 
-    TakeDamage(_Dst->Get_Attack());
+}
+
+void CMonster03_DrumTong::SpawnItem()
+{
+    CObjectManager::Get_Instance()->AddObject(
+        ITEM, CAbstractFactory<CItem_Orb>::Create(m_tInfo.vPos));
+        //ITEM, CAbstractFactory<CItem_Player>::Create(m_tInfo.vPos));
 }

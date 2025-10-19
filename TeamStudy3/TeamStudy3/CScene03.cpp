@@ -11,6 +11,7 @@
 #include "CMonster03_Golem.h"
 #include "CPlayer.h"
 #include "CPlayer03.h"
+#include "CSceneManager.h"
 #include "CScrollManager.h"
 
 CScene03::CScene03()
@@ -51,10 +52,22 @@ void CScene03::Initialize()
 
         m_TimerPos = { 320, 20 };
     }
+
+    // Test
+    SpawnMonster();
+    SpawnMonster();
 }
 
 int CScene03::Update()
 {
+    if (m_SceneTimer >= 30.f)
+    {
+        // 바로 넘기지 말고, Clear 텍스트 보여주고, 넘기기
+        CSceneManager::Get_Instance()->ChangeScene(LOGO);
+
+        return 0;
+    }
+
     m_SpawnTime += DELTA;
     m_SceneTimer += DELTA;
 
@@ -69,7 +82,7 @@ int CScene03::Update()
 
     if (m_SpawnTime >= m_SpawnCooltime)
     {
-        SpawnMonster();
+        //SpawnMonster();
 
         m_SpawnTime = 0.0f;
         m_SpawnCooltime = m_MinCooltime + (float)rand() / RAND_MAX * (m_MaxCooltime - m_MinCooltime);

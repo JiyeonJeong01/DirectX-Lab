@@ -4,11 +4,11 @@
 
 class CWeaponComponent;
 
-class CPlayer03 : public CPlayer
+class CPlayer_Item : public CPlayer
 {
 public:
-    CPlayer03();
-    ~CPlayer03() override;
+    CPlayer_Item();
+    ~CPlayer_Item() override;
 
 public:
     void Initialize() override;
@@ -22,31 +22,12 @@ public:
 
     virtual void OnComponentBeginOverlap(CObject* _Dst) override;
 
-    void MoveToBounds();
-
-    void Set_Score(float _value) { m_Score = _value; }
-    int  Get_Score() { return m_Score; }
-
-    int Add_Score(float _value) { return m_Score += _value; }
-
     void SpawnBullet(const Vec3& pos);
-
-    int GetTestNumber() { return m_TestNumber; }
-    void SetTestNumber(int value) { m_TestNumber = value; }
-
-    bool IsOrbFirst() { return m_OrbFirst; }
-    void SetOrbFirst(bool flag) { m_OrbFirst = flag; }
-
-private:
-    void Key_Input();
 
 private:
     CWeaponComponent* m_Weapon;
 
 private:
-    Vec3		m_vPoint[4];
-    Vec3		m_vOriginPoint[4];
-
     Vec3		m_vPosin;
     Vec3		m_vOriginPosin;
 
@@ -55,8 +36,8 @@ private:
     float       m_PosinLength = 50.f;
 
     int         m_Score = 0;
-    int         m_TestNumber = 0;
 
-    bool        m_OrbFirst = false;
+    Vec3 m_PosinLocal = { 0.f, -60.f, 0.f };
+    Vec3 m_OffsetPos;
 };
 

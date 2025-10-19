@@ -16,6 +16,8 @@ public:
 
     virtual void OnComponentBeginOverlap(CObject* _Dst) override;
 
+    void SpawnItem();
+
 private:
     float m_Timer = 0.f;
 

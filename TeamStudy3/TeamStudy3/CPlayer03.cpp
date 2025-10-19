@@ -28,7 +28,6 @@ void CPlayer03::Initialize()
 
     m_Weapon->Equip_Weapon(EWeaponType::Base);
 
-
     m_tInfo.vPos = { 400.f, 300.f, 0.f };
     m_tInfo.vLook = { 0.f, -1.f, 0.f };
     m_tInfo.vSize = { 30.f, 80.f, 0.f};
@@ -58,22 +57,24 @@ void CPlayer03::Initialize()
         m_tFrame.dwTime = GetTickCount64();
     }
 
-
     m_Weapon->FOnFire.Add([this](EWeaponType _Type)
         {
             switch (_Type)
             {
-                // 이거 그냥 Bullet 클래스 하나로 다 처리하는거로 변경하기
             case EWeaponType::Base:
-                CObjectManager::Get_Instance()->AddObject(
-                    BULLET, CAbstractFactory<CBullet_Base>::Create(m_vPosin));
+                SpawnBullet(m_vPosin);
                 break;
 
             case EWeaponType::Rifle:
-                CObjectManager::Get_Instance()->AddObject(
-                    BULLET, CAbstractFactory<CBullet_Base>::Create(m_vPosin));
+                SpawnBullet(Vec3(m_vPosin.x - 20, m_vPosin.y, m_vPosin.z));
+                SpawnBullet(Vec3(m_vPosin.x + 20, m_vPosin.y, m_vPosin.z));
                 break;
 
+            case EWeaponType::Rifle2:
+                SpawnBullet(Vec3(m_vPosin.x - 30, m_vPosin.y, m_vPosin.z));
+                SpawnBullet(Vec3(m_vPosin.x + 0, m_vPosin.y, m_vPosin.z));
+                SpawnBullet(Vec3(m_vPosin.x + 30, m_vPosin.y, m_vPosin.z));
+                break;
             }
         });
 }
@@ -87,7 +88,6 @@ int CPlayer03::Update()
         component->TickComponent();
 
     //cout << ::CurWeaponType(m_Weapon) << endl;
-    cout << "현재 스코어 : " << m_Score << endl;
 
     Key_Input();
 	__super::Move_Frame();
@@ -190,6 +190,12 @@ void CPlayer03::MoveToBounds()
     if (m_tInfo.vPos.x > maxX) m_tInfo.vPos.x = maxX;
     if (m_tInfo.vPos.y < minY) m_tInfo.vPos.y = minY;
     if (m_tInfo.vPos.y > maxY) m_tInfo.vPos.y = maxY;
+}
+
+void CPlayer03::SpawnBullet(const Vec3& pos)
+{
+    CObjectManager::Get_Instance()->AddObject(
+        BULLET, CAbstractFactory<CBullet_Base>::Create(pos));
 }
 
 void CPlayer03::Key_Input()

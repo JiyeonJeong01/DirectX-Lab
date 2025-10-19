@@ -151,7 +151,6 @@ void CMonster03_Golem::OnComponentBeginOverlap(CObject* _Dst)
 
     if (!_Dst) return;
 
-    TakeDamage(_Dst->Get_Attack());
 }
 
 void CMonster03_Golem::Motion_Change()

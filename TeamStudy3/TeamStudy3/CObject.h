@@ -22,19 +22,28 @@ public:
 public:
     const INFO* Get_Info() const { return &m_tInfo; }
     void	 Set_Pos(const Vec3& _vPos) { m_tInfo.vPos = _vPos; }
+    void	 Set_Dir(const Vec3& _vDir)
+    {
+        m_tInfo.vDir = _vDir;
+
+        D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
+    }
 
     void     Set_Dead() { m_bDead = true; }
     void     Set_Owner(CObject* _Owner) { m_Owner = _Owner; }
     void     Set_Hp(int _Hp) { m_iHp = _Hp; }
+    void     Set_Target(CObject* _Target) { m_pTarget = _Target; }
 
     CObject*    Get_Owner()  { return m_Owner; }
     int         Get_TeamID() { return m_TeamID; }
     int         Get_Hp()     { return m_iHp; }
     int         Get_Attack() { return m_iAttack; }
     const Vec3& Get_Pos() { return m_tInfo.vPos; }
+    CObject* Get_Target() { return m_pTarget; }
+
     bool        IsDead()     { return m_bDead; }
      
-    void             TakeDamage(int _iAttack);
+    void             TakeDamage(CObject* other, int _iAttack);
     virtual bool     CheckToBounds();
 
 public:

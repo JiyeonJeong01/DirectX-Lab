@@ -225,6 +225,24 @@
     <ClInclude Include="CMonster03_DrumTong.h">
       <Filter>01.Object\01. Monster</Filter>
     </ClInclude>
+    <ClInclude Include="CButton.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CLogo.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CItem_Player.h">
+      <Filter>01.Object\98. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer_Item.h">
+      <Filter>01.Object\00. Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CItem_Orb.h">
+      <Filter>01.Object\98. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="COrb03.h">
+      <Filter>01.Object\98. Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamStudy3.cpp">
@@ -355,6 +373,24 @@
     </ClCompile>
     <ClCompile Include="CMonster03_DrumTong.cpp">
       <Filter>01.Object\01. Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CButton.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CLogo.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CItem_Player.cpp">
+      <Filter>01.Object\98. Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer_Item.cpp">
+      <Filter>01.Object\00. Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CItem_Orb.cpp">
+      <Filter>01.Object\98. Item</Filter>
+    </ClCompile>
+    <ClCompile Include="COrb03.cpp">
+      <Filter>01.Object\98. Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

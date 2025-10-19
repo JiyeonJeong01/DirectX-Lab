@@ -34,6 +34,12 @@ static bool IsSameOwnerTeam(CObject* Dst, CObject* Src)
     return Dst->Get_Owner()->Get_TeamID() == Src->Get_Owner()->Get_TeamID();
 }
 
+static  Vec3 RotateZ_Deg(const Vec3& v, float deg)
+{
+    const float radian = D3DXToRadian(deg);
+    return Vec3(v.x * cosf(radian) - v.y * sinf(radian), v.x * sinf(radian) + v.y * cosf(radian), v.z);
+}
+
 static void DrawRect(HDC hDC, const Vec3 pts[4], COLORREF color = RGB(0, 255, 255))
 {
     HPEN hPen = CreatePen(PS_SOLID, 1, color);

@@ -19,17 +19,19 @@ public:
 
     void  SetInterval(float sec) { m_Interval = sec; m_Acc = 0.f; }
     float GetInterval() const { return m_Interval; }
-
+    void SetAnglesDeg(const vector<float>& angle) { m_AnglesDeg = angle; }
+    const vector<float>& GetAnglesDeg() const { return m_AnglesDeg; }
 
 public:
-    CDelegate<> FOnShoot;
+    CDelegate<float> FOnShoot;
 
 private:
-    void DoShoot() { FOnShoot.Broadcast(); }
+    void DoShoot();
 
 private:
-    float m_Interval = 0.2f;
+    float m_Interval = 0.5f;
     float m_Acc = 0.f;
     bool  m_Firing = true;
+    vector<float> m_AnglesDeg; 
 
 };

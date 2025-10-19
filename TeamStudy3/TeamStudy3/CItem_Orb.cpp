@@ -1,36 +1,39 @@
 ﻿#include "pch.h"
-#include "CItem_Rifle.h"
+#include "CItem_Orb.h"
 
+#include "CAbstractFactory.h"
 #include "CBmpManager.h"
 #include "CHelper.h"
+#include "CObjectManager.h"
+#include "COrb03.h"
 
-CItem_Rifle::CItem_Rifle()
+CItem_Orb::CItem_Orb()
 {
 }
 
-CItem_Rifle::~CItem_Rifle()
+CItem_Orb::~CItem_Orb()
 {
 }
 
-void CItem_Rifle::Initialize()
+void CItem_Orb::Initialize()
 {
     CItem::Initialize();
 
     m_tInfo.vSize = { 42.6f, 64.f, 0.f };
 
-    CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Object/China_Rifle.bmp", L"Item_Rifle");
+    CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Object/Player03_Orb.bmp", L"Item_Orb");
 
-    m_FrameKey = L"Item_Rifle";
+    m_FrameKey = L"Item_Orb";
 
     m_tFrame.iStart = 0;
-    m_tFrame.iEnd = 2;
+    m_tFrame.iEnd = 3;
     m_tFrame.iMotion = 0;
     m_tFrame.dwSpeed = 200;
     m_tFrame.dwTime = GetTickCount64();
 
 }
 
-int CItem_Rifle::Update()
+int CItem_Orb::Update()
 {
     if (m_bDead)
         return OBJ_DEAD;
@@ -43,12 +46,12 @@ int CItem_Rifle::Update()
     return OBJ_NOEVENT;
 }
 
-void CItem_Rifle::Late_Update()
+void CItem_Orb::Late_Update()
 {
     CItem::Late_Update();
 }
 
-void CItem_Rifle::Render(HDC _hDC)
+void CItem_Orb::Render(HDC _hDC)
 {
     //CItem::Render(_hDC);
     Vec3 center = { 0.f, 0.f, 0.f };
@@ -68,7 +71,7 @@ void CItem_Rifle::Render(HDC _hDC)
     BITMAP bm{};
     GetObject(hbmp, sizeof(bm), &bm);
 
-    const int cols = 3;   // 가로 프레임 수
+    const int cols = m_tFrame.iEnd + 1;   // 가로 프레임 수
     const int rows = 1;   // 세로 프레임 수
 
     const int frameW = bm.bmWidth / cols;
@@ -90,12 +93,12 @@ void CItem_Rifle::Render(HDC _hDC)
 
 }
 
-void CItem_Rifle::Release()
+void CItem_Orb::Release()
 {
     CItem::Release();
 }
 
-void CItem_Rifle::OnComponentBeginOverlap(CObject* _HitObject)
+void CItem_Orb::OnComponentBeginOverlap(CObject* _HitObject)
 {
     CItem::OnComponentBeginOverlap(_HitObject);
 
@@ -104,24 +107,31 @@ void CItem_Rifle::OnComponentBeginOverlap(CObject* _HitObject)
     Set_Dead();
 }
 
-void CItem_Rifle::Use_Item(CObject* _HitObject)
+void CItem_Orb::Use_Item(CObject* _HitObject)
 {
     CItem::Use_Item(_HitObject);
 
     if (!_HitObject) return;
 
-    auto* weapon = ::GetComponent<CWeaponComponent>(_HitObject);
+    auto player = dynamic_cast<CPlayer03*>(CObjectManager::Get_Instance()->Get_Player()->front());
+    if (player->IsOrbFirst()) return;
 
-    EWeaponType prevWeaponType = weapon->Get_WeaponType();
-    EWeaponType weaponType;
+    Vec3  center = player->Get_Pos();
+    float radius = 100.f;
 
-    switch (prevWeaponType)
-    {
-    case EWeaponType::Base:  weaponType = EWeaponType::Rifle; break;
-    case EWeaponType::Rifle: weaponType = EWeaponType::Rifle2; break;
-    case EWeaponType::Rifle2: weaponType = EWeaponType::Rifle2; break;
-    }
+    auto spawnAtAngle = [&](float deg) {
+        float radian = D3DXToRadian(deg);
+        Vec3 offset(radius * cosf(radian), radius * sinf(radian), 0.f);
+        Vec3 pos = center + offset;
 
-    weapon->Equip_Weapon(weaponType);
+        auto orb = static_cast<COrb03*>(CAbstractFactory<COrb03>::CreateTarget(pos, player));
+        CObjectManager::Get_Instance()->AddObject(BULLET, orb);
+        };
+
+    spawnAtAngle(45.f);
+    spawnAtAngle(135.f);
+    spawnAtAngle(225.f);
+    spawnAtAngle(315.f);
+
+    player->SetOrbFirst(true);
 }
-

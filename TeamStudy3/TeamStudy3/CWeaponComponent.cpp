@@ -19,10 +19,12 @@ void CWeaponComponent::BeginPlay()
     m_Fire = new CFire();
     m_WeaponType = EWeaponType::Base;
 
-    m_Fire->FOnShoot.Add([this]()
-        {
-            FOnFire.Broadcast(m_WeaponType);
-        });
+	m_Fire->FOnShoot.Add([this](float angleDeg)
+		{
+			m_ShotAngleDeg = angleDeg;
+
+			FOnFire.Broadcast(m_WeaponType);
+		});
 
     
 }
@@ -65,7 +67,7 @@ FWeaponPreset CWeaponComponent::Preset_Base()
    FWeaponPreset preset;
 
    preset.type = EWeaponType::Base;
-   preset.fireInterval = 0.35f;
+   preset.fireInterval = 0.5f;
 
    return preset;
 }
@@ -75,7 +77,26 @@ FWeaponPreset CWeaponComponent::Preset_Rifle()
     FWeaponPreset preset;
 
     preset.type = EWeaponType::Rifle;
-    preset.fireInterval = 0.08f;
+    preset.fireInterval = 0.1f;
+
+    return preset;
+}
+
+FWeaponPreset CWeaponComponent::Preset_Rifle2()
+{
+    FWeaponPreset preset;
+
+    preset.type = EWeaponType::Rifle2;
+    preset.fireInterval = 0.1f;
+
+	preset.multiAnglesDeg.clear();
+	const int count = 3;
+	const float step = 0.f;
+	const int half = count / 2;
+
+	// -45 ~ 0 ~ 45
+	for (int i = -half; i <= half; ++i)
+		preset.multiAnglesDeg.push_back(i * step);
 
     return preset;
 }
@@ -89,21 +110,17 @@ void CWeaponComponent::ChangeWeaponType(EWeaponType _Type)
 
     switch (_Type)
     {
-    case EWeaponType::Base:
-        m_Preset = Preset_Base();
-        break;
-
-    case EWeaponType::Rifle:
-        m_Preset = Preset_Rifle();
-        break;
+    case EWeaponType::Base: m_Preset = Preset_Base();     break;
+    case EWeaponType::Rifle: m_Preset = Preset_Rifle();   break; 
+	case EWeaponType::Rifle2: m_Preset = Preset_Rifle2(); break;
     }
 
-    if (m_Fire)
-    {
-        m_Fire->SetInterval(m_Preset.fireInterval);
+	if (m_Fire)
+	{
+		m_Fire->SetInterval(m_Preset.fireInterval);
+		m_Fire->SetAnglesDeg(m_Preset.multiAnglesDeg); 
+	}
 
-    }
-
-    if (FOnWeaponChanged.IsBound())
-        FOnWeaponChanged.Broadcast(prev, m_WeaponType);
+	if (FOnWeaponChanged.IsBound())
+		FOnWeaponChanged.Broadcast(prev, m_WeaponType);
 }

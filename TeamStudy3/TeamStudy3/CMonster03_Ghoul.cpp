@@ -145,7 +145,6 @@ void CMonster03_Ghoul::OnComponentBeginOverlap(CObject* _Dst)
 
     if (!_Dst) return;
 
-    TakeDamage(_Dst->Get_Attack());
 }
 
 void CMonster03_Ghoul::Motion_Change()

@@ -18,7 +18,6 @@ extern HWND g_hWnd;
 using Vec2 = D3DXVECTOR2;
 using Vec3 = D3DXVECTOR3;
 
-
 typedef struct tagInfo
 {
     Vec3		vPos;
