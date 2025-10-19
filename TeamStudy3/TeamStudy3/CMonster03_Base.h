@@ -2,6 +2,11 @@
 
 #include "CMonster.h"
 
+enum class EMonsterState
+{
+    Walk, Dead, End
+};
+
 class CMonster03_Base : public CMonster
 {
 public:
@@ -16,13 +21,16 @@ public:
     void Release() override;
 
     virtual void OnComponentBeginOverlap(CObject* _Dst) override;
+    bool CheckToBounds() override;
+    
+    virtual void Motion_Change();
 
-private:
-    void Motion_Change();
+protected:
+    EMonsterState m_MonsterState = EMonsterState::Walk;
+    EMonsterState m_PrevState = EMonsterState::Walk;
 
-private:
-    Vec3 m_vPoint[4];
-    const TCHAR* m_FrameKey;
-
+    bool  m_bDropped = false; 
+    float m_DeadTimer = 0.f;  
+    float m_DeadDuration = 1.0f; 
 };
 

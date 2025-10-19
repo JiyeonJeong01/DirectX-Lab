@@ -20,7 +20,6 @@ public:
 public:
     bool CheckToBounds();
     
-
 private:
 
 };

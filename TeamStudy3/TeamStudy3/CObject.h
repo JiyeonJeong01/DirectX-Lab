@@ -70,4 +70,6 @@ protected:
     std::vector<CComponent*> m_Components;
 
     FRAME	    	m_tFrame;
+    const TCHAR*    m_FrameKey;
+
 };

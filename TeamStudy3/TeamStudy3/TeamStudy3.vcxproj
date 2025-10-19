@@ -154,6 +154,8 @@
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CMonster03_Base.h" />
+    <ClInclude Include="CMonster03_Ghoul.h" />
+    <ClInclude Include="CMonster03_Golem.h" />
     <ClInclude Include="CMyBmp.h" />
     <ClInclude Include="CObject.h" />
     <ClInclude Include="CObjectFourth.h" />
@@ -200,6 +202,8 @@
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CMonster03_Base.cpp" />
+    <ClCompile Include="CMonster03_Ghoul.cpp" />
+    <ClCompile Include="CMonster03_Golem.cpp" />
     <ClCompile Include="CMyBmp.cpp" />
     <ClCompile Include="CObject.cpp" />
     <ClCompile Include="CObjectFourth.cpp" />

@@ -24,4 +24,11 @@ private:
     int        m_SpawnMaxX = 700;
     int        m_SpawnMinY = 50;
     int        m_SpawnMaxY = 100;
+
+    float m_SpawnTime = 0.f;
+    float m_SpawnCooltime = 0.f;
+
+    const float m_MinCooltime = 0.1f; 
+    const float m_MaxCooltime = 0.3f; 
+
 };

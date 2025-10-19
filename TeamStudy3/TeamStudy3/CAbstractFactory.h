@@ -22,4 +22,13 @@ public:
 
         return pObject;
     }
+
+    static CObject* CreatePos(const Vec3& _Pos)
+    {
+        CObject* pObject = new T;
+        pObject->Set_Pos(_Pos);
+        pObject->Initialize();
+
+        return pObject;
+    }
 };

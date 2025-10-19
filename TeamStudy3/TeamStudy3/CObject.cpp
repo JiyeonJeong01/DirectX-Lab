@@ -51,7 +51,10 @@ void CObject::Move_Frame()
         ++m_tFrame.iStart;
 
         if (m_tFrame.iStart > m_tFrame.iEnd)
+        {
             m_tFrame.iStart = 0;
+            
+        }
 
         m_tFrame.dwTime = GetTickCount64();
     }
