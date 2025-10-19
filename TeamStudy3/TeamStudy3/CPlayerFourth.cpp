@@ -2,7 +2,7 @@
 #include "CPlayerFourth.h"
 #include "CCollisionMgr04.h"
 
-CPlayerFourth::CPlayerFourth() : isMove(true), preAngle(0.f), vecWall(nullptr), sHp(70), isInvincible(false), dwInvincibleTime(0)
+CPlayerFourth::CPlayerFourth() : isMove(true), preAngle(0.f), vecWall(nullptr), sHp(1), isInvincible(false), dwInvincibleTime(0), isDead(false)
 {
     ZeroMemory(&prePos, sizeof(D3DXVECTOR3));
 }
@@ -34,6 +34,7 @@ int CPlayerFourth::Update()
 {
     if (sHp <= 0)
     {
+        isDead = true;
         return OBJ_DEAD;
     }
     if (isInvincible)

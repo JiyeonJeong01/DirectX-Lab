@@ -2,6 +2,7 @@
 #include "CScene04.h"
 #include "CBmpManager.h"
 #include "CCollisionMgr04.h"
+#include "CSceneManager.h"
 #define EPSILON 0.03f
 
 CScene04::CScene04() : pPlayer(nullptr), pObstacle(nullptr), sScore(0)
@@ -72,6 +73,12 @@ void CScene04::Initialize()
 
 int CScene04::Update()
 {
+    if (dynamic_cast<CPlayerFourth*>(pPlayer)->GetDead())
+    {
+        CSceneManager::Get_Instance()->ChangeScene(SCENEOVER);
+        return 0;
+    }
+
     pPlayer->Update();
     pObstacle->Update();
 

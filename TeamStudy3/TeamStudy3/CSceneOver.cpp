@@ -1,0 +1,86 @@
+﻿#include "pch.h"
+#include "CSceneOver.h"
+#include "CSceneManager.h"
+#include "CBmpManager.h"
+#include <math.h>
+
+CSceneOver::CSceneOver() : m_fTime(0.f), m_hFont(NULL), m_bSoundPlayed(false)
+{
+}
+
+CSceneOver::~CSceneOver()
+{
+    Release();
+}
+
+void CSceneOver::Initialize()
+{
+
+}
+
+int CSceneOver::Update()
+{
+    if (!m_bSoundPlayed)
+    {
+        PlaySound(L"../../Music/GameOver.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+        m_bSoundPlayed = true;
+    }
+    if (GetAsyncKeyState(VK_RETURN))
+    {
+        PlaySound(NULL, 0, 0);
+        CSceneManager::Get_Instance()->ChangeScene(SCENE04);
+    }
+    m_fTime += 0.05f;
+
+    return OBJ_NOEVENT;
+}
+
+void CSceneOver::Late_Update()
+{
+}
+
+void CSceneOver::Render(HDC _hDC)
+{
+    HDC hGroundDC = CBmpManager::Get_Instance()->Find_Img(L"Ground");
+    BitBlt(_hDC, 0, 0, 800, 600, hGroundDC, 0, 0, SRCCOPY);
+
+    SetBkMode(_hDC, TRANSPARENT);
+    SetTextColor(_hDC, RGB(255, 0, 0));
+
+    //m_fTime += 0.05f;
+    float scale = 1.0f + 0.4f * sinf(m_fTime);
+    int baseSize = 80;
+    int fontSize = (int)(baseSize * scale);
+
+    if (m_hFont)
+        DeleteObject(m_hFont);
+
+    m_hFont = CreateFontW(
+        -fontSize, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE,
+        HANGUL_CHARSET, OUT_OUTLINE_PRECIS, CLIP_DEFAULT_PRECIS,
+        ANTIALIASED_QUALITY, VARIABLE_PITCH, L"맑은 고딕");
+
+    SelectObject(_hDC, m_hFont);
+
+    LPCWSTR text = L"Game Over";
+
+    SIZE textSize;
+    GetTextExtentPoint32W(_hDC, text, lstrlenW(text), &textSize);
+
+    int centerX = 400; // 800 / 2
+    int centerY = 300; // 600 / 2
+    int textX = centerX - (textSize.cx / 2);
+    int textY = centerY - (textSize.cy / 2);
+
+    TextOutW(_hDC, textX, textY, text, lstrlenW(text));
+}
+
+void CSceneOver::Release()
+{
+    PlaySound(NULL, 0, 0);
+    if (m_hFont)
+    {
+        DeleteObject(m_hFont);
+        m_hFont = NULL;
+    }
+}

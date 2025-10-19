@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "CTimeManager.h"
 
@@ -48,6 +48,7 @@ enum SCENENUMBER {
     SCENE02,
     SCENE03,
     SCENE04,
+    SCENEOVER,
     SCENE_END
 };
 

@@ -8,6 +8,7 @@ private:
     vector<CWallFourth*>* vecWall;
     bool isMove;
     bool isInvincible;
+    bool isDead;
     short sHp;
 
     ULONGLONG dwInvincibleTime;
@@ -26,6 +27,7 @@ public:
 
     const short GetHp() const { return sHp; }
     const bool GetInvincible() const { return isInvincible; }
+    const bool GetDead() const { return isDead; }
 
     void SetWallVector(vector<CWallFourth*>* vecWall) { this->vecWall = vecWall; }
     void SetHpMinus(const short& sHp) { this->sHp -= sHp; }
