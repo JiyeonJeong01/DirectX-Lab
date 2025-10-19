@@ -141,6 +141,7 @@
     <ClInclude Include="CBmpManager.h" />
     <ClInclude Include="CBoxFourth.h" />
     <ClInclude Include="CBullet_Base.h" />
+    <ClInclude Include="CButton.h" />
     <ClInclude Include="CCollisionManager.h" />
     <ClInclude Include="CCollisionMgr04.h" />
     <ClInclude Include="CComponent.h" />
@@ -151,6 +152,7 @@
     <ClInclude Include="CItem.h" />
     <ClInclude Include="CItem_Rifle.h" />
     <ClInclude Include="CKeyManager.h" />
+    <ClInclude Include="CLogo.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CMonster03_Base.h" />
@@ -191,6 +193,7 @@
     <ClCompile Include="CBmpManager.cpp" />
     <ClCompile Include="CBoxFourth.cpp" />
     <ClCompile Include="CBullet_Base.cpp" />
+    <ClCompile Include="CButton.cpp" />
     <ClCompile Include="CCollisionManager.cpp" />
     <ClCompile Include="CCollisionMgr04.cpp" />
     <ClCompile Include="CComponent.cpp" />
@@ -200,6 +203,7 @@
     <ClCompile Include="CItem.cpp" />
     <ClCompile Include="CItem_Rifle.cpp" />
     <ClCompile Include="CKeyManager.cpp" />
+    <ClCompile Include="CLogo.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CMonster03_Base.cpp" />

@@ -5,6 +5,7 @@
 #include "CScene03.h"
 #include "CScene04.h"
 #include "CSceneOver04.h"
+#include "CLogo.h"
 
 CSceneManager* CSceneManager::m_pInstance = nullptr;
 
@@ -105,6 +106,10 @@ int CSceneManager::ChangeScene(SCENENUMBER _eSceneNumber)
     case SCENEOVER04:
         newScene = new CSceneOver04;
         m_SceneNumber = SCENEOVER04;
+        break;
+    case LOGO:
+        newScene = new CLogo;
+        m_SceneNumber = LOGO;
         break;
 	case SCENE_END:
 		m_SceneNumber = SCENE_END;
