@@ -1,10 +1,9 @@
 ﻿#pragma once
 #include "CStage02Item.h"
-class CStage02PowerUpItem :   public CStage02Item
+class CStage02AddItem : public CStage02Item
 {
-public :
+public:
     void Render(HDC hDC) override;
-public :
+public:
     void Apply_ItemEffect(CObject* pObject) override;
 };
-

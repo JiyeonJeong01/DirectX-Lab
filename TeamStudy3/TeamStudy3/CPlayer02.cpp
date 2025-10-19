@@ -52,19 +52,15 @@ void CPlayer02::Initialize()
     }
 
     iOrbitCurLv = 0;
-    iOrbitTotalCnt = 1;
+
+    int iOrbitStartCnt = 1;
 
     // 무기 생성
     float fAngleStep = 360.f / (float)iOrbitTotalCnt;
-    for (int i = 0; i < iOrbitTotalCnt; ++i)
+    for (int i = 0; i < iOrbitStartCnt; ++i)
     {
         COribiters* pOrbiter = static_cast<COribiters*>(CAbstractFactory<COribiters>::Create());
-        pOrbiter->Set_Center(this);
-        pOrbiter->Set_StartAngle(i * fAngleStep);
-        pOrbiter->Set_PowerLevel(iOrbitCurLv);
-        CObjectManager::Get_Instance()->AddObject(
-            BULLET, pOrbiter
-        );
+        Add_Orbiter(pOrbiter);
     }
 }
 
@@ -206,13 +202,16 @@ void CPlayer02::Add_Orbiter(COribiters* pOribiter)
     iOrbitTotalCnt = m_OrbiterList.size();
 
     pOribiter->Set_Center(this);
+    pOribiter->Set_PowerLevel(iOrbitCurLv);
+
     CObjectManager::Get_Instance()->AddObject(  BULLET, pOribiter  );
 
     float fAngleStep = 360.f / (float)iOrbitTotalCnt;
     int iIdx = 0;
     for (COribiters* pOrbit : m_OrbiterList)
     {
-        pOrbit->Set_StartAngle(iIdx++ * fAngleStep);
+        pOrbit->Set_StartAngle(iIdx * fAngleStep);
+        pOrbit->Set_RotationAngle(iIdx++ * fAngleStep);
     }
 }
 
@@ -241,4 +240,6 @@ void CPlayer02::Set_OrbiterLv(int iLv)
     {
         pOrbit->Set_PowerLevel(iLv);
     }
+
+    iOrbitCurLv = iLv;
 }

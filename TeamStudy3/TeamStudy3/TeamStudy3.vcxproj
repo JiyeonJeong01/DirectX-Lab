@@ -142,6 +142,7 @@
     <ClInclude Include="CBoxFourth.h" />
     <ClInclude Include="CBullet_Base.h" />
     <ClInclude Include="CCollisionManager.h" />
+    <ClInclude Include="CCollisionMgr02.h" />
     <ClInclude Include="CCollisionMgr04.h" />
     <ClInclude Include="CComponent.h" />
     <ClInclude Include="CDelegate.h" />
@@ -155,6 +156,7 @@
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CMonster03_Base.h" />
     <ClInclude Include="CMyBmp.h" />
+    <ClInclude Include="CObejct02.h" />
     <ClInclude Include="CObject.h" />
     <ClInclude Include="CObjectFourth.h" />
     <ClInclude Include="CObjectManager.h" />
@@ -174,7 +176,9 @@
     <ClInclude Include="CSceneOver04.h" />
     <ClInclude Include="CScrollManager.h" />
     <ClInclude Include="CStage01Player.h" />
+    <ClInclude Include="CStage02AddItem.h" />
     <ClInclude Include="CStage02Item.h" />
+    <ClInclude Include="CStage02PowerUpItem.h" />
     <ClInclude Include="CTimeManager.h" />
     <ClInclude Include="CWallFourth.h" />
     <ClInclude Include="CWeaponComponent.h" />
@@ -190,6 +194,7 @@
     <ClCompile Include="CBoxFourth.cpp" />
     <ClCompile Include="CBullet_Base.cpp" />
     <ClCompile Include="CCollisionManager.cpp" />
+    <ClCompile Include="CCollisionMgr02.cpp" />
     <ClCompile Include="CCollisionMgr04.cpp" />
     <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CDelegate.cpp" />
@@ -202,6 +207,7 @@
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CMonster03_Base.cpp" />
     <ClCompile Include="CMyBmp.cpp" />
+    <ClCompile Include="CObejct02.cpp" />
     <ClCompile Include="CObject.cpp" />
     <ClCompile Include="CObjectFourth.cpp" />
     <ClCompile Include="CObjectManager.cpp" />
@@ -221,7 +227,9 @@
     <ClCompile Include="CSceneOver04.cpp" />
     <ClCompile Include="CScrollManager.cpp" />
     <ClCompile Include="CStage01Player.cpp" />
+    <ClCompile Include="CStage02AddItem.cpp" />
     <ClCompile Include="CStage02Item.cpp" />
+    <ClCompile Include="CStage02PowerUpItem.cpp" />
     <ClCompile Include="CTimeManager.cpp" />
     <ClCompile Include="CWallFourth.cpp" />
     <ClCompile Include="CWeaponComponent.cpp" />

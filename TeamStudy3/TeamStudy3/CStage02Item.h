@@ -1,5 +1,8 @@
 ﻿#pragma once
 #include "CObject.h"
+
+class CPlayer02;
+
 class CStage02Item :    public CObject
 {
 public :
@@ -14,8 +17,13 @@ public :
     void Release() override;
 
 public :
-    virtual void On_Collision(CObject* pObject);
-    virtual void Apply_ItemEffect(CObject* pObject);
+    virtual void Detect_Player();
+    virtual void Apply_ItemEffect(CObject* pObject) {};
 
+public :
+    void Set_Player(CPlayer02* pPlayer) { this->pPlayer = pPlayer; }
+
+private:
+    CPlayer02* pPlayer;
 };
 

@@ -29,9 +29,11 @@ public :
     float Get_DistToCenter() { return fDistToCenter; }
 
     void Set_PowerLevel(int iLv);
-    int Get_PowerLevel() { return iPowerLevel; }
+    int Get_PowerLevel();
+
 
     void Set_StartAngle(float fAngle) { m_fAngle = D3DXToRadian(fAngle); }
+    void Set_RotationAngle(float fAngle) { fOrbitAngle = fAngle; }
 
 private:
     CObject* pCenter;

@@ -22,13 +22,15 @@ public:
     void Handle_Input();
     void Apply_InputToPlayer();
     void Transform_LocalToWorld();
-    void Fire();
 
 public :
     void Add_Orbiter(COribiters* pOribiter);
     void Remove_Orbiter(COribiters* pOribiter);
-    void Set_OrbiterLv(int iLv);
 
+    void Set_OrbiterLv(int iLv);
+    int Get_OrbiterLv() { return iOrbitCurLv; }
+
+    Vec3* Get_Vertices() { return m_vPoint; }
 
 public :
     list<COribiters*>* Get_OrbiterList() { return &m_OrbiterList;  }

@@ -51,12 +51,13 @@ void COribiters::Late_Update()
 
 void COribiters::Render(HDC _hDC)
 {
+#pragma region 초승달 만들기
     HRGN hDrawRgn = CreateEllipticRgn(
         m_vDrawCenter.x - m_tInfo.vSize.x * 0.5f,
         m_vDrawCenter.y - m_tInfo.vSize.y * 0.5f,
         m_vDrawCenter.x + m_tInfo.vSize.x * 0.5f,
         m_vDrawCenter.y + m_tInfo.vSize.y * 0.5f
-        );
+    );
 
     HRGN hEraseRgn = CreateEllipticRgn(
         m_vEraseCenter.x - m_tInfo.vSize.x * 0.5f,
@@ -66,8 +67,10 @@ void COribiters::Render(HDC _hDC)
     );
     HRGN hCrescent = CreateRectRgn(0, 0, 0, 0);
     CombineRgn(hCrescent, hDrawRgn, hEraseRgn, RGN_DIFF);
+#pragma endregion
 
 
+#pragma region 색 지정하기
     HBRUSH hFillColor = NULL;
 
     switch (iPowerLevel)
@@ -97,7 +100,13 @@ void COribiters::Render(HDC _hDC)
         hFillColor = CreateSolidBrush(RGB(128, 0, 255)); // 기본: 흰색
         break;
     }
+
     FillRgn(_hDC, hCrescent, hFillColor);
+#pragma endregion
+
+
+
+    DeleteObject(hFillColor);
 
     DeleteObject(hDrawRgn);
     DeleteObject(hEraseRgn);
@@ -166,4 +175,8 @@ void COribiters::Orbit_Center()
 void COribiters::Set_PowerLevel(int iLv)
 {
     iPowerLevel = iLv;
+}
+
+int COribiters::Get_PowerLevel() {
+    return iPowerLevel;
 }
