@@ -166,6 +166,7 @@
     <ClInclude Include="CSceneManager.h" />
     <ClInclude Include="CScrollManager.h" />
     <ClInclude Include="CStage01Player.h" />
+    <ClInclude Include="CStage02Item.h" />
     <ClInclude Include="CTimeManager.h" />
     <ClInclude Include="CWallFourth.h" />
     <ClInclude Include="Define.h" />
@@ -203,6 +204,7 @@
     <ClCompile Include="CSceneManager.cpp" />
     <ClCompile Include="CScrollManager.cpp" />
     <ClCompile Include="CStage01Player.cpp" />
+    <ClCompile Include="CStage02Item.cpp" />
     <ClCompile Include="CTimeManager.cpp" />
     <ClCompile Include="CWallFourth.cpp" />
     <ClCompile Include="pch.cpp">

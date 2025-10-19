@@ -67,7 +67,37 @@ void COribiters::Render(HDC _hDC)
     HRGN hCrescent = CreateRectRgn(0, 0, 0, 0);
     CombineRgn(hCrescent, hDrawRgn, hEraseRgn, RGN_DIFF);
 
-    FillRgn(_hDC, hCrescent, (HBRUSH)GetStockObject(BLACK_BRUSH));
+
+    HBRUSH hFillColor = NULL;
+
+    switch (iPowerLevel)
+    {
+    case 0:
+        hFillColor = CreateSolidBrush(RGB(255, 0, 0)); // 빨강
+        break;
+    case 1:
+        hFillColor = CreateSolidBrush(RGB(255, 128, 0)); // 주황
+        break;
+    case 2:
+        hFillColor = CreateSolidBrush(RGB(255, 255, 0)); // 노랑
+        break;
+    case 3:
+        hFillColor = CreateSolidBrush(RGB(0, 255, 0)); // 초록
+        break;
+    case 4:
+        hFillColor = CreateSolidBrush(RGB(0, 0, 255)); // 파랑
+        break;
+    case 5:
+        hFillColor = CreateSolidBrush(RGB(0, 0, 128)); // 남색
+        break;
+    case 6:
+        hFillColor = CreateSolidBrush(RGB(128, 0, 255)); // 보라
+        break;
+    default:
+        hFillColor = CreateSolidBrush(RGB(128, 0, 255)); // 기본: 흰색
+        break;
+    }
+    FillRgn(_hDC, hCrescent, hFillColor);
 
     DeleteObject(hDrawRgn);
     DeleteObject(hEraseRgn);
@@ -127,9 +157,13 @@ void COribiters::Orbit_Center()
 
     m_tInfo.vPos = m_tInfo.vDir * fDistToCenter;
 
-    // m_fAngle += D3DXToRadian(1.5f);
-    m_fAngle += D3DXToRadian(0);
+    m_fAngle += D3DXToRadian(1.5f);
 
     // 자전
     fOrbitAngle += D3DXToRadian(3.f);
+}
+
+void COribiters::Set_PowerLevel(int iLv)
+{
+    iPowerLevel = iLv;
 }

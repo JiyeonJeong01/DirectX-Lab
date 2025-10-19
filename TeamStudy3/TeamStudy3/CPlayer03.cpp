@@ -6,6 +6,7 @@
 #include "CComponent.h"
 #include "CKeyManager.h"
 #include "CObjectManager.h"
+#include "CPlayer02.h"
 
 CPlayer03::CPlayer03()
 {
@@ -171,3 +172,4 @@ void CPlayer03::Fire()
         CObjectManager::Get_Instance()->AddObject(BULLET, CAbstractFactory<CBullet_Base>::Create(m_vPosin));
     }
 }
+

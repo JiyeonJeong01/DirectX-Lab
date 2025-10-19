@@ -1,5 +1,8 @@
 ﻿#pragma once
 #include "CPlayer.h"
+
+class COribiters;
+
 class CPlayer02 :  public CPlayer
 {
 public:
@@ -22,6 +25,15 @@ public:
     void Fire();
 
 public :
+    void Add_Orbiter(COribiters* pOribiter);
+    void Remove_Orbiter(COribiters* pOribiter);
+    void Set_OrbiterLv(int iLv);
+
+
+public :
+    list<COribiters*>* Get_OrbiterList() { return &m_OrbiterList;  }
+
+public :
     const D3DXMATRIX& Get_WorldMatrix() { return m_tInfo.matWorld; }
 
 private:
@@ -36,8 +48,11 @@ private:
     float       m_FireInterval = 0.5f;
     float       m_PosinLength = 50.f;
 
+    // 회전체
+    list <COribiters*> m_OrbiterList;
+
     int iOrbitTotalCnt;
-    int iOrbitCurCnt;
+    int iOrbitCurLv;
 
     // 클라이언트 입력
     float fVerticalInput;

@@ -18,8 +18,7 @@ CPlayer02::CPlayer02()
     bTransProgress = false;
     bTransDone = false;
 
-    iOrbitTotalCnt = 10;
-    iOrbitCurCnt = iOrbitTotalCnt;
+
 }
 
 CPlayer02::~CPlayer02()
@@ -52,6 +51,9 @@ void CPlayer02::Initialize()
         m_vOriginPoint[i] = m_vPoint[i];
     }
 
+    iOrbitCurLv = 0;
+    iOrbitTotalCnt = 1;
+
     // 무기 생성
     float fAngleStep = 360.f / (float)iOrbitTotalCnt;
     for (int i = 0; i < iOrbitTotalCnt; ++i)
@@ -59,11 +61,11 @@ void CPlayer02::Initialize()
         COribiters* pOrbiter = static_cast<COribiters*>(CAbstractFactory<COribiters>::Create());
         pOrbiter->Set_Center(this);
         pOrbiter->Set_StartAngle(i * fAngleStep);
+        pOrbiter->Set_PowerLevel(iOrbitCurLv);
         CObjectManager::Get_Instance()->AddObject(
             BULLET, pOrbiter
         );
     }
-
 }
 
 int CPlayer02::Update()
@@ -81,16 +83,10 @@ int CPlayer02::Update()
 void CPlayer02::Late_Update()
 {
 
-
-
 }
 
 void CPlayer02::Render(HDC hDC)
 {
-
-
-
-
     MoveToEx(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y, nullptr);
 
     for (int i = 0; i < 4; ++i)
@@ -199,5 +195,50 @@ void CPlayer02::Transform_LocalToWorld()
         m_vPoint[i] -= m_vStartPos;
 
         D3DXVec3TransformCoord(&m_vPoint[i], &m_vPoint[i], &m_tInfo.matWorld);
+    }
+}
+
+void CPlayer02::Add_Orbiter(COribiters* pOribiter)
+{
+    if (pOribiter == nullptr) return;
+
+    m_OrbiterList.push_back(pOribiter);
+    iOrbitTotalCnt = m_OrbiterList.size();
+
+    pOribiter->Set_Center(this);
+    CObjectManager::Get_Instance()->AddObject(  BULLET, pOribiter  );
+
+    float fAngleStep = 360.f / (float)iOrbitTotalCnt;
+    int iIdx = 0;
+    for (COribiters* pOrbit : m_OrbiterList)
+    {
+        pOrbit->Set_StartAngle(iIdx++ * fAngleStep);
+    }
+}
+
+void CPlayer02::Remove_Orbiter(COribiters* pOrbiter)
+{
+    list<COribiters*>::iterator it = find_if(m_OrbiterList.begin(), m_OrbiterList.end(), [&](COribiters* pTarget)-> bool
+        {
+            return pTarget == pOrbiter;
+        });
+
+    m_OrbiterList.erase(it); // 삭제
+
+    iOrbitTotalCnt = m_OrbiterList.size();
+
+    float fAngleStep = 360.f / (float)iOrbitTotalCnt;
+    int iIdx = 0;
+    for (COribiters* pOrbit : m_OrbiterList)
+    {
+        pOrbit->Set_StartAngle(iIdx++ * fAngleStep);
+    }
+}
+
+void CPlayer02::Set_OrbiterLv(int iLv)
+{
+    for (COribiters* pOrbit : m_OrbiterList)
+    {
+        pOrbit->Set_PowerLevel(iLv);
     }
 }

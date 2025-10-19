@@ -28,7 +28,7 @@ public :
     void Set_DistToCenter(float fDist) { fDistToCenter = fDist; }
     float Get_DistToCenter() { return fDistToCenter; }
 
-    void Set_PowerLevel(int iLv) { iPowerLevel = iLv; }
+    void Set_PowerLevel(int iLv);
     int Get_PowerLevel() { return iPowerLevel; }
 
     void Set_StartAngle(float fAngle) { m_fAngle = D3DXToRadian(fAngle); }
@@ -40,6 +40,7 @@ private:
     float fDistToCenter;
 
     int iPowerLevel;
+    HBRUSH hFillColor;
 
 private:
     Vec3 m_vStartPos;
