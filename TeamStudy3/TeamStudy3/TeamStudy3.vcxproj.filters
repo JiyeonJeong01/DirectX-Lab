@@ -194,7 +194,7 @@
     </ClInclude>
     <ClInclude Include="CLogo.h">
       <Filter>02.Scene</Filter>
-	  </ClInclude>
+    </ClInclude>
     <ClInclude Include="CWeaponComponent.h">
       <Filter>97. Components</Filter>
     </ClInclude>
@@ -218,6 +218,9 @@
     </ClInclude>
     <ClInclude Include="CObstacleFourth.h">
       <Filter>01.Object\04. KimJun</Filter>
+    </ClInclude>
+    <ClInclude Include="CButton.h">
+      <Filter>01.Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -319,7 +322,7 @@
     </ClCompile>
     <ClCompile Include="CLogo.cpp">
       <Filter>02.Scene</Filter>
-	  </ClCompile>
+    </ClCompile>
     <ClCompile Include="CWeaponComponent.cpp">
       <Filter>97. Components</Filter>
     </ClCompile>
@@ -343,6 +346,9 @@
     </ClCompile>
     <ClCompile Include="CObstacleFourth.cpp">
       <Filter>01.Object\04. KimJun</Filter>
+    </ClCompile>
+    <ClCompile Include="CButton.cpp">
+      <Filter>01.Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

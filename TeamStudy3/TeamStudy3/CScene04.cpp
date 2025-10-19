@@ -75,7 +75,7 @@ int CScene04::Update()
 {
     if (dynamic_cast<CPlayerFourth*>(pPlayer)->GetDead())
     {
-        CSceneManager::Get_Instance()->ChangeScene(SCENEOVER04);
+        CSceneManager::Get_Instance()->ChangeScene(LOGO);
         return 0;
     }
 
