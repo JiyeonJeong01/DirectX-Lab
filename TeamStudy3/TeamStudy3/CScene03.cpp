@@ -26,9 +26,18 @@ void CScene03::Initialize()
 
     CObjectManager::Get_Instance()->AddObject(PLAYER, CAbstractFactory<CPlayer03>::Create());
 
-    CObjectManager::Get_Instance()->AddObject(MONSTER, CAbstractFactory<CMonster03_Base>::Create());
-    CObjectManager::Get_Instance()->AddObject(MONSTER, CAbstractFactory<CMonster03_Base>::Create(Vec3(200.f, 100.f, 0.f)));
-    //CObjectManager::Get_Instance()->AddObject(MONSTER, CAbstractFactory<CMonster03_Base>::Create());
+    SpawnMonster();
+    SpawnMonster();
+    SpawnMonster();
+    SpawnMonster();
+    SpawnMonster();
+    SpawnMonster();
+    SpawnMonster();
+    SpawnMonster();
+    SpawnMonster();
+    SpawnMonster();
+    SpawnMonster();
+    SpawnMonster();
 
 }
 
@@ -69,4 +78,13 @@ void CScene03::Render(HDC _hDC)
 void CScene03::Release()
 {
 
+}
+
+void CScene03::SpawnMonster()
+{
+    const float x = static_cast<float>(m_SpawnMinX + (rand() % (m_SpawnMaxX - m_SpawnMinX + 1)));
+    const float y = static_cast<float>(m_SpawnMinY + (rand() % (m_SpawnMaxY - m_SpawnMinY + 1)));
+
+    CObjectManager::Get_Instance()->AddObject(
+        MONSTER, CAbstractFactory<CMonster03_Base>::Create(Vec3(x, y, 0.f)));
 }

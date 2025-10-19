@@ -14,6 +14,14 @@ public:
 	void		Render(HDC _hDC)override;
 	void		Release()		override;
 
+public:
+    void SpawnMonster();
+
 private:
-    int         m_Score = 0;
+    int        m_Score = 0;
+
+    int        m_SpawnMinX = 100;
+    int        m_SpawnMaxX = 700;
+    int        m_SpawnMinY = 50;
+    int        m_SpawnMaxY = 100;
 };

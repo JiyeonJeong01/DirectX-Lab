@@ -51,6 +51,8 @@ public:
         return rc;
     }
 
+    void Move_Frame();
+
 protected:
     INFO            m_tInfo;
 
@@ -67,4 +69,5 @@ protected:
 
     std::vector<CComponent*> m_Components;
 
+    FRAME	    	m_tFrame;
 };
