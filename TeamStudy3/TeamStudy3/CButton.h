@@ -3,7 +3,7 @@
 class CButton : public CObject
 {
 public:
-    CButton();
+    CButton(float fX, float fY, int ID);
     virtual ~CButton();
 
 public:
@@ -13,6 +13,12 @@ public:
     void Render(HDC hDC) override;
     void Release() override;
 
+    void SetFrameKey(const TCHAR* m_pFrameKey) {
+        this->m_pFrameKey = m_pFrameKey;
+    }
+
 private:
     int		m_iDrawID;
+    const TCHAR* m_pFrameKey;
+    RECT rct;
 };

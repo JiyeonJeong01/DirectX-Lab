@@ -3,6 +3,8 @@
 
 class CLogo : public CScene
 {
+private:
+    CObject* pButton[4];
 public:
     CLogo();
     virtual ~CLogo();

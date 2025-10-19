@@ -4,8 +4,12 @@
 #include "CKeyManager.h"
 #include "CSceneManager.h"
 
-CButton::CButton() : m_iDrawID(0)
+CButton::CButton(float fX, float fY, int ID) : m_iDrawID(0), m_pFrameKey(nullptr)
 {
+    ZeroMemory(&rct, sizeof(RECT));
+    m_tInfo.vPos.x = fX;
+    m_tInfo.vPos.y = fY;
+    m_iDrawID = ID;
 }
 
 CButton::~CButton()
@@ -15,14 +19,18 @@ CButton::~CButton()
 
 void CButton::Initialize()
 {
-    m_tInfo.fCX = 150.f;
-    m_tInfo.fCY = 150.f;
+    //m_tInfo.fCX = 150.f;
+    //m_tInfo.fCY = 150.f;
+
+    m_tInfo.vSize = { 150.f, 150.f, 0.f };
+    rct = {(long)m_tInfo.vPos.x - (long)m_tInfo.vSize.x / 2,
+        (long)m_tInfo.vPos.y - (long)m_tInfo.vSize.y / 2,
+    (long)m_tInfo.vPos.x + (long)m_tInfo.vSize.x / 2,
+    (long)m_tInfo.vPos.y + (long)m_tInfo.vSize.y / 2 };
 }
 
 int CButton::Update()
 {
-    __super::Update_Rect();
-
     return OBJ_NOEVENT;
 }
 
@@ -34,45 +42,40 @@ void CButton::Late_Update()
 
     ScreenToClient(g_hWnd, &ptMouse);
 
-    if (PtInRect(&m_tRect, ptMouse))
+    if (PtInRect(&rct, ptMouse))
     {
-        if (CKeyManager::Get_Instance()->Key_Down(VK_LBUTTON))
+        if (GetAsyncKeyState(VK_LBUTTON))
         {
-            if (!lstrcmp(L"Start", m_pFrameKey))
-                CSceneManager::Get_Instance()->ChangeScene(SC_STAGE);
+            if (!lstrcmp(L"Stage1", m_pFrameKey))
+                CSceneManager::Get_Instance()->ChangeScene(SCENE01);
 
-            else if (!lstrcmp(L"Edit", m_pFrameKey))
-                CSceneManager::Get_Instance()->ChangeScene(SC_EDIT);
+            else if (!lstrcmp(L"Stage2", m_pFrameKey))
+                CSceneManager::Get_Instance()->ChangeScene(SCENE02);
 
-            else if (!lstrcmp(L"Exit", m_pFrameKey))
-                DestroyWindow(g_hWnd);
-
+            else if (!lstrcmp(L"Stage3", m_pFrameKey))
+                CSceneManager::Get_Instance()->ChangeScene(SCENE03);
+            else if (!lstrcmp(L"Stage4", m_pFrameKey))
+                CSceneManager::Get_Instance()->ChangeScene(SCENE04);
             return;
         }
-
-        m_iDrawID = 1;
-    }
-    else
-    {
-        m_iDrawID = 0;
     }
 }
 
 void CButton::Render(HDC hDC)
 {
-    HDC	hMemDC = CBmpManager::Get_Instance()->Find_Img(m_pFrameKey);
+    HDC	hMemDC = CBmpManager::Get_Instance()->Find_Img(L"Button");
 
     GdiTransparentBlt(hDC,
-        m_tRect.left,
-        m_tRect.top,
-        (int)m_tInfo.fCX,
-        (int)m_tInfo.fCY,
+        rct.left,
+        rct.top,
+        (int)m_tInfo.vSize.x,
+        (int)m_tInfo.vSize.y,
         hMemDC,
-        m_iDrawID * (int)m_tInfo.fCX,
+        m_iDrawID * (int)m_tInfo.vSize.y,
         0,
-        (int)m_tInfo.fCX,
-        (int)m_tInfo.fCY,
-        RGB(255, 255, 255));		// 제거할 픽셀의 색상
+        (int)m_tInfo.vSize.x,
+        (int)m_tInfo.vSize.y,
+        RGB(0, 0, 0));
 }
 
 void CButton::Release()

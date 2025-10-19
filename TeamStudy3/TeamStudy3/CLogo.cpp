@@ -1,13 +1,15 @@
 ﻿#include "pch.h"
 #include "CLogo.h"
 #include "CBmpManager.h"
-#define BUTTON_WIDTH  100
-#define BUTTON_HEIGHT 100
-#define BUTTON_GAP_X  10
-#define BUTTON_GAP_Y  10
+#include "CButton.h"
+
 
 CLogo::CLogo()
 {
+    for(int i = 0; i < 4; ++i)
+    {
+        pButton[i] = nullptr;
+    }
 }
 
 CLogo::~CLogo()
@@ -17,6 +19,21 @@ CLogo::~CLogo()
 
 void CLogo::Initialize()
 {
+    pButton[0] = new CButton(100.f, 450.f, 0);
+    pButton[0]->Initialize();
+    dynamic_cast<CButton*>(pButton[0])->SetFrameKey(L"Stage1");
+
+    pButton[1] = new CButton(300.f, 450.f, 1);
+    pButton[1]->Initialize();
+    dynamic_cast<CButton*>(pButton[1])->SetFrameKey(L"Stage2");
+
+    pButton[2] = new CButton(500.f, 450.f, 2);
+    pButton[2]->Initialize();
+    dynamic_cast<CButton*>(pButton[2])->SetFrameKey(L"Stage3");
+
+    pButton[3] = new CButton(700.f, 450.f, 3);
+    pButton[3]->Initialize();
+    dynamic_cast<CButton*>(pButton[3])->SetFrameKey(L"Stage4");
 }
 
 int CLogo::Update()
@@ -26,31 +43,25 @@ int CLogo::Update()
 
 void CLogo::Late_Update()
 {
+    for(int i = 0; i < 4; ++i)
+    {
+        pButton[i]->Late_Update();
+    }
 }
 
 void CLogo::Render(HDC _hDC)
 {
-    HDC	hMemDC = CBmpManager::Get_Instance()->Find_Img(L"Button");
     Rectangle(_hDC, -10, -10, WINCX + 10, WINCY + 10); 
-
-    for (int i = 0; i < 4; ++i)
+    for(int i = 0; i < 4; ++i)
     {
-        GdiTransparentBlt(
-            _hDC,
-            50 + i * (BUTTON_WIDTH + BUTTON_GAP_X),
-            450,
-            100,
-            100,
-            hMemDC,
-            i * BUTTON_WIDTH,
-            0,
-            100,
-            100,
-            RGB(255, 255, 255)
-        );
+        pButton[i]->Render(_hDC);
     }
 }
 
 void CLogo::Release()
 {
+    for(int i = 0; i < 4; ++i)
+    {
+        Safe_Delete<CObject*>(pButton[i]);
+    }
 }
