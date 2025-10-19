@@ -17,8 +17,11 @@ public:
     void Release() override;
     void On_Collision(CObject* _pColObj, Vec3 _vColSize) override;
 
-    void Set_PlatformSize(float w, float h);
-    void Update_Rect();
+    void Set_PlatformPos(Vec3 _vPlatformPos);
+    void Set_PlatformSize(Vec3 _vPlatformSize);
+    void Set_PlatformPoint();
 
+private:
+    Vec3 m_vPlatformPoint[4];
 };
 

@@ -22,14 +22,11 @@ public:
 
 private:
     void		Key_Input();
-
+    void        Set_Point();
 private:
     float		m_fGravity = 0.f;
     bool		m_bGrounded = false;
-    bool		m_bMovingHoriz = false;
     float		m_fPrevBottom = 0.f;
 
-    Vec3 m_vSize;
-    Vec3 m_vPos;
-
+    Vec3 m_Point[4];
 };

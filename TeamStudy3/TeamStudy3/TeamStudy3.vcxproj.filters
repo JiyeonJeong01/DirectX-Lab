@@ -70,6 +70,9 @@
     <Filter Include="01.Object\05. Etc">
       <UniqueIdentifier>{1fc27635-cc67-435c-99f4-057f9aa27064}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Object\06. Oribiter">
+      <UniqueIdentifier>{becd1ee6-bf61-45d5-a674-2110a590b739}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -177,14 +180,20 @@
     <ClInclude Include="CWallFourth.h">
       <Filter>01.Object\04. KimJun</Filter>
     </ClInclude>
-    <ClInclude Include="CObstacleFourth.h">
-      <Filter>01.Object\04. KimJun</Filter>
+    <ClInclude Include="CPlayer02.h">
+      <Filter>01.Object\00. Player</Filter>
+    </ClInclude>
+    <ClInclude Include="COribiters.h">
+      <Filter>01.Object\06. Oribiter</Filter>
     </ClInclude>
     <ClInclude Include="CGoalFourth.h">
-      <Filter>01.Object\04. KimJun</Filter>
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CObstacleFourth.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CSceneOver04.h">
-      <Filter>02.Scene</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CLogo.h">
       <Filter>02.Scene</Filter>
@@ -278,14 +287,20 @@
     <ClCompile Include="CWallFourth.cpp">
       <Filter>01.Object\04. KimJun</Filter>
     </ClCompile>
-    <ClCompile Include="CObstacleFourth.cpp">
-      <Filter>01.Object\04. KimJun</Filter>
+    <ClCompile Include="CPlayer02.cpp">
+      <Filter>01.Object\00. Player</Filter>
+    </ClCompile>
+    <ClCompile Include="COribiters.cpp">
+      <Filter>01.Object\06. Oribiter</Filter>
     </ClCompile>
     <ClCompile Include="CGoalFourth.cpp">
-      <Filter>01.Object\04. KimJun</Filter>
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CObstacleFourth.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CSceneOver04.cpp">
-      <Filter>02.Scene</Filter>
+      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CLogo.cpp">
       <Filter>02.Scene</Filter>
