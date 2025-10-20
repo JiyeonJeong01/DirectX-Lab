@@ -2,6 +2,7 @@
 #include "CPlayer.h"
 
 class COribiters;
+class CEnemy;
 
 class CPlayer02 :  public CPlayer
 {
@@ -34,42 +35,47 @@ public :
 
 public :
     list<COribiters*>* Get_OrbiterList() { return &m_OrbiterList;  }
-
+    
 public :
     const D3DXMATRIX& Get_WorldMatrix() { return m_tInfo.matWorld; }
 
+private :
+    void Progress_Knockback();
+
 private:
+#pragma region 변환
     Vec3    m_vStartPos;
     Vec3		m_vPoint[4];
     Vec3		m_vOriginPoint[4];
 
-    Vec3		m_vPosin;
-    Vec3		m_vOriginPosin;
+    D3DXMATRIX matScale, matRotZ, matTrans;
+#pragma endregion
 
-    float       m_FireHandler = 0.f;
-    float       m_FireInterval = 0.5f;
-    float       m_PosinLength = 50.f;
-
-    // 회전체
+#pragma region 회전체
     list <COribiters*> m_OrbiterList;
 
     int iOrbitTotalCnt;
     int iOrbitCurLv;
+#pragma endregion
 
-    // 클라이언트 입력
+#pragma region 클라이언트 입력
     float fVerticalInput;
     float fHorizontalIput;
 
     POINT pCursorPos;
     bool bLeftClicked;
+#pragma endregion
 
-    D3DXMATRIX matScale, matRotZ, matTrans;
-
+#pragma region 이동
     bool bTransProgress;
     bool bTransDone;
     Vec3 vTransPos;
-    
 
+    bool bKnockback;
+    Vec3 vKnockbackDir;
+    DWORD dwKnockbackElpasedTime;
+#pragma endregion
     const float fEpsilone = 1.f;
+    
 };
 

@@ -2,7 +2,6 @@
 #include "CPlayer02.h"
 
 #include "CAbstractFactory.h"
-#include "CBullet_Base.h"
 #include "CComponent.h"
 #include "CKeyManager.h"
 #include "CObjectManager.h"
@@ -17,8 +16,6 @@ CPlayer02::CPlayer02()
 
     bTransProgress = false;
     bTransDone = false;
-
-
 }
 
 CPlayer02::~CPlayer02()
@@ -41,6 +38,8 @@ void CPlayer02::Initialize()
 
     m_fSpeed = 3.f;
 
+    m_iHp = 10;
+
     m_vPoint[0] = { m_tInfo.vPos.x - m_tInfo.vSize.x, m_tInfo.vPos.y - m_tInfo.vSize.y, 0.f };
     m_vPoint[1] = { m_tInfo.vPos.x + m_tInfo.vSize.x, m_tInfo.vPos.y - m_tInfo.vSize.y, 0.f };
     m_vPoint[2] = { m_tInfo.vPos.x + m_tInfo.vSize.x, m_tInfo.vPos.y + m_tInfo.vSize.y, 0.f };
@@ -53,7 +52,7 @@ void CPlayer02::Initialize()
 
     iOrbitCurLv = 0;
 
-    int iOrbitStartCnt = 1;
+    int iOrbitStartCnt = 3;
 
     // 무기 생성
     float fAngleStep = 360.f / (float)iOrbitTotalCnt;
@@ -62,6 +61,8 @@ void CPlayer02::Initialize()
         COribiters* pOrbiter = static_cast<COribiters*>(CAbstractFactory<COribiters>::Create());
         Add_Orbiter(pOrbiter);
     }
+
+    bKnockback = true;
 }
 
 int CPlayer02::Update()
@@ -101,6 +102,37 @@ void CPlayer02::Render(HDC hDC)
     }
 
     LineTo(hDC, (int)m_vPoint[0].x, (int)m_vPoint[0].y);
+
+#pragma region Print HUID
+    wchar_t szTmp[64];
+    wsprintf(szTmp, L"Player HP: %d", m_iHp);
+
+    HFONT hFont = CreateFont(
+        30, 0, 0, 0, FW_BOLD,
+        FALSE, FALSE, FALSE,
+        HANGEUL_CHARSET,
+        OUT_DEFAULT_PRECIS,
+        CLIP_DEFAULT_PRECIS,
+        ANTIALIASED_QUALITY,
+        VARIABLE_PITCH | FF_SWISS,
+        L"Segoe UI"
+    );
+
+    HFONT hOldFont = (HFONT)SelectObject(hDC, hFont);
+
+    SetTextColor(hDC, RGB(0, 0, 0));
+    SetBkMode(hDC, TRANSPARENT);
+
+    SIZE textSize;
+    GetTextExtentPoint32(hDC, szTmp, lstrlen(szTmp), &textSize);
+
+    int x = 20;
+    int y = 20;
+    TextOut(hDC, x, y, szTmp, lstrlen(szTmp));
+
+    SelectObject(hDC, hOldFont);
+    DeleteObject(hFont);
+#pragma endregion
 }
 
 void CPlayer02::Release()
@@ -132,6 +164,17 @@ void CPlayer02::Apply_InputToPlayer()
     // 값 초기화
 
 
+
+    // 넉백
+    if (bKnockback)
+    {
+        if (dwKnockbackElpasedTime + 300 < GetTickCount())
+        {
+            bKnockback = false;
+        }
+
+    }
+
     // 바라보는 방향 구하기
     Vec3 vCursorPos = { (float)pCursorPos.x, (float)pCursorPos.y, 0.f };
     Vec3 vDiff = vCursorPos - m_tInfo.vPos;
@@ -153,8 +196,6 @@ void CPlayer02::Apply_InputToPlayer()
         bTransDone = false;
 
         vTransPos = { (float)pCursorPos.x, (float)pCursorPos.y, 0.f };
-
-
     }
 
     // 이동 중 
@@ -212,6 +253,7 @@ void CPlayer02::Add_Orbiter(COribiters* pOribiter)
     {
         pOrbit->Set_StartAngle(iIdx * fAngleStep);
         pOrbit->Set_RotationAngle(iIdx++ * fAngleStep);
+        pOrbit->Set_TeamID(BULLET);
     }
 }
 
@@ -242,4 +284,9 @@ void CPlayer02::Set_OrbiterLv(int iLv)
     }
 
     iOrbitCurLv = iLv;
+}
+
+void CPlayer02::Progress_Knockback()
+{
+
 }

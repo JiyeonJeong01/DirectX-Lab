@@ -23,6 +23,7 @@ public:
 public:
 	list<CObject*>* Get_MonsterList() { return  &m_ObjectList[MONSTER]; }
 	list<CObject*>* Get_Player() { return &m_ObjectList[PLAYER]; }
+    list<CObject*>* Get_ObjList(OBJECT Id) { return &m_ObjectList[Id]; }
 
 public:
 	static CObjectManager* Get_Instance()

@@ -146,6 +146,7 @@
     <ClInclude Include="CCollisionMgr04.h" />
     <ClInclude Include="CComponent.h" />
     <ClInclude Include="CDelegate.h" />
+    <ClInclude Include="CEnemy.h" />
     <ClInclude Include="CFire.h" />
     <ClInclude Include="CGoalFourth.h" />
     <ClInclude Include="CHelper.h" />
@@ -198,6 +199,7 @@
     <ClCompile Include="CCollisionMgr04.cpp" />
     <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CDelegate.cpp" />
+    <ClCompile Include="CEnemy.cpp" />
     <ClCompile Include="CFire.cpp" />
     <ClCompile Include="CGoalFourth.cpp" />
     <ClCompile Include="CItem.cpp" />

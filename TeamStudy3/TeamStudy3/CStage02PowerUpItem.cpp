@@ -8,6 +8,7 @@ void CStage02PowerUpItem::Render(HDC hDC)
     CStage02Item::Render(hDC);
 
 
+
 }
 
 

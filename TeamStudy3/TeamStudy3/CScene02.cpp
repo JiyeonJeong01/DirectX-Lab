@@ -4,16 +4,18 @@
 #include "CAbstractFactory.h"
 #include "CObjectManager.h"
 #include "CBmpManager.h"
-#include "CMonster.h"
+#include "CEnemy.h"
 #include "CPlayer.h"
 #include "CPlayer02.h"
 #include "CScrollManager.h"
+#include "CSceneManager.h"
 
 #include "CStage02PowerUpItem.h"
 #include "CStage02AddItem.h"
 
 CScene02::CScene02()
 {
+    dwEnemySpawnElapsedTime = 0;
     dwItemSpawnElapsedTime = 0;
     pPlayer = nullptr;
 }
@@ -30,13 +32,16 @@ void CScene02::Initialize()
     pPlayer = static_cast<CPlayer02*>(CAbstractFactory<CPlayer02>::Create());
     CObjectManager::Get_Instance()->AddObject(PLAYER, pPlayer);
 
-    // CObjectManager::Get_Instance()->AddObject(MONSTER, CAbstractFactory<CMonster>::Create());
-
+    dwEnemySpawnElapsedTime = GetTickCount();
     dwItemSpawnElapsedTime = GetTickCount();
+
+    bClear = false;
 }
 
 int CScene02::Update()
 {
+    if (bClear) return 0;
+    Should_SpawnEnemy();
     Should_SpawnItem();
 
     CObjectManager::Get_Instance()->Update();
@@ -46,7 +51,35 @@ int CScene02::Update()
 
 void CScene02::Late_Update()
 {
+
+    if (iSpawnedEnemyCnt >= iTotalEnemyCnt &&
+        (CObjectManager::Get_Instance()->Get_MonsterList()->size() == 0) && !bClear)
+    {
+        bClear = true;
+        dwClearElapsedTime = GetTickCount();
+    }
+
+    if (bClear && (dwClearElapsedTime + 2000 < GetTickCount()))
+    {
+        // 씬 전환 요청
+        for (int i = 0; i < OBJ_END; i++)
+        {
+            list<CObject*>& objList = *CObjectManager::Get_Instance()->Get_ObjList((OBJECT)i);
+
+            for_each(objList.begin(), objList.end(), [&](CObject* pObj)->void {
+                pObj->Set_Dead();
+                });
+
+            // 임시로 설정 
+            CSceneManager::Get_Instance()->ChangeScene(SCENE01);
+        }
+
+    }
+
+    if (bClear) return;
+
     CObjectManager::Get_Instance()->Late_Update();
+
 }
 
 void CScene02::Render(HDC _hDC)
@@ -57,11 +90,73 @@ void CScene02::Render(HDC _hDC)
     HDC	hGroundDC = CBmpManager::Get_Instance()->Find_Img(L"Ground");
     BitBlt(_hDC, iScrollX, iScrollY, 1920, 1280, hGroundDC, 0, 0, SRCCOPY);
 
-    CObjectManager::Get_Instance()->Render(_hDC);
+    if (!bClear)
+        CObjectManager::Get_Instance()->Render(_hDC);
+
+#pragma region Print Clear
+    if (!bClear) return;
+    HFONT hFont = CreateFont(
+        80, 0, 0, 0, FW_BOLD,    
+        FALSE, FALSE, FALSE,      
+        HANGEUL_CHARSET,          
+        OUT_DEFAULT_PRECIS,
+        CLIP_DEFAULT_PRECIS,
+        ANTIALIASED_QUALITY,       
+        VARIABLE_PITCH | FF_SWISS, 
+        L"Segoe UI"   
+    );
+
+    HFONT hOldFont = (HFONT)SelectObject(_hDC, hFont);
+
+    SetTextColor(_hDC, RGB(0, 0, 0)); 
+    SetBkMode(_hDC, TRANSPARENT);
+
+    const wchar_t* szText = L"Clear";
+    SIZE textSize;
+    GetTextExtentPoint32(_hDC, szText, 5, &textSize);
+
+    int x = (WINCX - textSize.cx) / 2;
+    int y = 100;
+
+    TextOut(_hDC, x, y, szText, 5);
+
+    SelectObject(_hDC, hOldFont);
+    DeleteObject(hFont);
+#pragma endregion
+
+    if (bClear) return ;
+
 }
 
 void CScene02::Release()
 {
+}
+
+void CScene02::Should_SpawnEnemy()
+{
+    if (dwEnemySpawnElapsedTime + 3000 < GetTickCount() &&
+        (CObjectManager::Get_Instance()->Get_MonsterList()->size() < iMaxEnemyCnt))
+    {
+        dwEnemySpawnElapsedTime = GetTickCount();
+        Spawn_Enemy();
+    }
+}
+
+void CScene02::Spawn_Enemy()
+{
+    float fRandX = float(rand() % (WINCX - 100) + 50);
+    float fRandY = float(rand() % (WINCY - 100) + 50);
+
+    CEnemy* pEnemy = static_cast<CEnemy*>(CAbstractFactory<CEnemy>::Create());
+
+    pEnemy->Set_Player(pPlayer);
+    pEnemy->Set_Pos({ fRandX, fRandY, 0.f });
+
+    pEnemy->Set_OrbiterLv(max(iSpawnedEnemyCnt / 2 - 1, 0));
+
+    CObjectManager::Get_Instance()->AddObject(MONSTER, pEnemy);
+
+    iSpawnedEnemyCnt++;
 }
 
 void CScene02::Should_SpawnItem()

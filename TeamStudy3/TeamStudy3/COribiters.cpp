@@ -1,6 +1,10 @@
 ﻿#include "pch.h"
 #include "COribiters.h"
 
+#include "CEnemy.h"
+#include "CPlayer02.h"
+#include "CObjectManager.h"
+
 COribiters::COribiters(CObject* pObj)
 {
 
@@ -13,7 +17,7 @@ COribiters::~COribiters()
 
 void COribiters::Initialize()
 {
-    fDistToCenter = 80.f;
+    fDistToCenter = 70.f;
     fCenterToCenter = 7.f;
 
     m_vStartPos = { 0.f, -fDistToCenter, 0.f };
@@ -31,7 +35,6 @@ void COribiters::Initialize()
     m_tInfo.vSize = Vec3(30.f, 30.f, 0.f);
 
     m_fSpeed = 2.f;
-
 }
 
 int COribiters::Update()
@@ -41,6 +44,8 @@ int COribiters::Update()
 
     Orbit_Center();
     Transform_LocalToWorld();
+
+    Detect_Opponent();
 
     return OBJ_NOEVENT;
 }
@@ -68,7 +73,6 @@ void COribiters::Render(HDC _hDC)
     HRGN hCrescent = CreateRectRgn(0, 0, 0, 0);
     CombineRgn(hCrescent, hDrawRgn, hEraseRgn, RGN_DIFF);
 #pragma endregion
-
 
 #pragma region 색 지정하기
     HBRUSH hFillColor = NULL;
@@ -104,13 +108,14 @@ void COribiters::Render(HDC _hDC)
     FillRgn(_hDC, hCrescent, hFillColor);
 #pragma endregion
 
-
-
+#pragma region 해제
     DeleteObject(hFillColor);
 
     DeleteObject(hDrawRgn);
     DeleteObject(hEraseRgn);
     DeleteObject(hCrescent);
+#pragma endregion
+
 }
 
 void COribiters::Release()
@@ -169,7 +174,241 @@ void COribiters::Orbit_Center()
     m_fAngle += D3DXToRadian(1.5f);
 
     // 자전
-    fOrbitAngle += D3DXToRadian(3.f);
+    if (m_TeamID == BULLET)
+        fOrbitAngle += D3DXToRadian(3.f);
+    else
+        fOrbitAngle = 0;
+}
+
+void COribiters::Detect_Opponent()
+{
+#pragma region Player Orbiter
+    if (m_TeamID == BULLET)
+    {
+        // 플레이어의 회전체인 경우
+        Detect_EnemySide();
+    }
+#pragma endregion
+#pragma region Enemy Orbiter
+    else if (m_TeamID == MONBULLET)
+    {
+        // 적의 회전체인 경우
+        Detect_PlayerSide();
+    }
+#pragma endregion
+}
+
+void COribiters::Detect_PlayerSide()
+{
+    // 적이 플레이어와의 충돌 확인
+    CPlayer02* pPlayer = static_cast<CPlayer02*>(CObjectManager::Get_Instance()->Get_Player()->front());
+
+    // 적 회전체(this) <-> 플레이어
+    INFO player = *pPlayer->Get_Info();
+    bool bCollision = true;
+
+#pragma region 투영할 단위 벡터 구하기
+    Vec3 vUnits[4];
+    Vec3 vTmp;
+    int iIndex = 0;
+
+    // 플레이어의 단위 벡터
+    for (int i = 0; i < 2; i++)
+    {
+        Vec3 vTmpUnit = pPlayer->Get_Vertices()[i + 1] - pPlayer->Get_Vertices()[i];
+        D3DXVec3Normalize(&vTmpUnit, &vTmpUnit);
+        vUnits[iIndex++] = vTmpUnit;
+    }
+
+    // 회전체의 단위 벡터
+    vTmp = { m_tInfo.vSize.x, 0.f, 0.f };
+    D3DXVec3Normalize(&vTmp, &vTmp);
+    vUnits[iIndex++] = vTmp;
+
+    vTmp = { 0.f, m_tInfo.vSize.y, 0.f };
+    D3DXVec3Normalize(&vTmp, &vTmp);
+    vUnits[iIndex++] = vTmp;
+#pragma endregion
+
+#pragma region 단위 벡터에 투영하기
+    for (int i = 0; i < 4; i++)
+    {
+        // 투영된 길이 구하기
+        // 적
+        // 0번 점
+        vTmp = player.vPos - pPlayer->Get_Vertices()[0];
+        float fDot1 = fabsf(D3DXVec3Dot(&vUnits[i], &vTmp));
+
+        // 1번 점
+        vTmp = player.vPos - pPlayer->Get_Vertices()[0];
+        float fDot2 = fabsf(D3DXVec3Dot(&vUnits[i], &vTmp));
+
+        float fMaxDotEnemy = fmaxf(fDot1, fDot2);
+
+        // 회전체의 콜라이더는 고정된 투영
+        vTmp = { m_tInfo.vSize.x,  0.f,   0.f };
+        float fDot3 = fabsf(D3DXVec3Dot(&vUnits[i], &vTmp));
+
+        vTmp = { 0.f, m_tInfo.vSize.y,  0.f };
+        float fDot4 = fabsf(D3DXVec3Dot(&vUnits[i], &vTmp));
+
+        float fMaxDotItem = fmaxf(fDot3, fDot4);
+
+        float fDotRes = fMaxDotEnemy + fMaxDotItem;
+
+        // 원점 간 벡터를 투영하기
+        vTmp = m_vDrawCenter - player.vPos;
+        float fDistDot = fabsf(D3DXVec3Dot(&vTmp, &vUnits[i]));
+
+        if (fDistDot > fDotRes)
+        {
+            bCollision = false;
+            break;
+        }
+    }
+
+#pragma endregion
+
+#pragma region 적 회전체 <-> 플레이어 몸체 충돌
+    if (bCollision)
+    {
+        if (pPlayer->Get_Hp() > 2)
+        {
+            pPlayer->Set_Hp(pPlayer->Get_Hp()-1);
+        }
+        m_bDead = true;
+    }
+#pragma endregion
+}
+
+void COribiters::Detect_EnemySide()
+{
+    // 플레이어가 적과의 충돌 확인할 때 사용
+    for (CObject* pObj : *CObjectManager::Get_Instance()->Get_MonsterList())
+    {
+        CEnemy* pEnemy = dynamic_cast<CEnemy*>(pObj);
+
+        // 플레이어 회전체(this) <-> 적
+        INFO enemy = *pEnemy->Get_Info();
+        bool bCollision = true;
+
+#pragma region 투영할 단위 벡터 구하기
+        Vec3 vUnits[4];
+        Vec3 vTmp;
+        int iIndex = 0;
+
+        // 적의 단위 벡터
+        for (int i = 0; i < 2; i++)
+        {
+            Vec3 vTmpUnit = pEnemy->Get_Vertices()[i + 1] - pEnemy->Get_Vertices()[i];
+            D3DXVec3Normalize(&vTmpUnit, &vTmpUnit);
+            vUnits[iIndex++] = vTmpUnit;
+        }
+
+        // 회전체의 단위 벡터
+        vTmp = { m_tInfo.vSize.x, 0.f, 0.f };
+        D3DXVec3Normalize(&vTmp, &vTmp);
+        vUnits[iIndex++] = vTmp;
+
+        vTmp = { 0.f, m_tInfo.vSize.y, 0.f };
+        D3DXVec3Normalize(&vTmp, &vTmp);
+        vUnits[iIndex++] = vTmp;
+#pragma endregion
+
+#pragma region 단위 벡터에 투영하기
+        for (int i = 0; i < 4; i++)
+        {
+            // 투영된 길이 구하기
+            // 적
+            // 0번 점
+            vTmp = enemy.vPos - pEnemy->Get_Vertices()[0];
+            float fDot1 = fabsf(D3DXVec3Dot(&vUnits[i], &vTmp));
+
+            // 1번 점
+            vTmp = enemy.vPos - pEnemy->Get_Vertices()[0];
+            float fDot2 = fabsf(D3DXVec3Dot(&vUnits[i], &vTmp));
+
+            float fMaxDotEnemy = fmaxf(fDot1, fDot2);
+
+            // 회전체의 콜라이더는 고정된 투영
+            vTmp = { m_tInfo.vSize.x,  0.f,   0.f };
+            float fDot3 = fabsf(D3DXVec3Dot(&vUnits[i], &vTmp));
+
+            vTmp = { 0.f, m_tInfo.vSize.y,  0.f };
+            float fDot4 = fabsf(D3DXVec3Dot(&vUnits[i], &vTmp));
+
+            float fMaxDotItem = fmaxf(fDot3, fDot4);
+
+            float fDotRes = fMaxDotEnemy + fMaxDotItem;
+
+            // 원점 간 벡터를 투영하기
+            vTmp = m_vDrawCenter - enemy.vPos;
+            float fDistDot = fabsf(D3DXVec3Dot(&vTmp, &vUnits[i]));
+
+            if (fDistDot > fDotRes)
+            {
+                bCollision = false;
+                break;
+            }
+        }
+
+#pragma endregion
+
+#pragma region 플레이어 회전체 <-> 적 몸체 충돌
+        if (bCollision)
+        {
+            pEnemy->Set_Hp(0);
+            pEnemy->Set_Dead();
+            for_each(pEnemy->Get_OrbiterList()->begin(), pEnemy->Get_OrbiterList()->end(), [&](COribiters* pOrbiter)->void {
+                pOrbiter->Set_Dead();
+                });
+        }
+
+#pragma endregion
+
+        // 플레이어 회전체(this) <-> 적의 회전체
+        list<COribiters*> pOrbitList = *pEnemy->Get_OrbiterList();
+        for (COribiters* pOrbiter : pOrbitList)
+        {
+            INFO enemy = *pOrbiter->Get_Info();
+            // 거리 먼저 확인 후 일정 범위 안에 들어오면
+            Vec3 vDiff = m_vDrawCenter - pOrbiter->Get_DrawPos();
+
+            // 충돌 확인하기 - AABA
+            float fDist = D3DXVec3Length(&vDiff) - 2.f; // epsilon
+            float fRadiusSum = (m_tInfo.vSize.x + enemy.vSize.x) * 0.5f;
+
+            if (fDist > fRadiusSum)
+            {
+                // 충돌 아님
+                bCollision = false;
+                continue;
+            }
+            else
+            {
+                // 충돌
+                bCollision = true;
+                if (iPowerLevel > pOrbiter->Get_PowerLevel())
+                {
+                    pOrbiter->Set_Dead();
+                    pEnemy->Get_OrbiterList()->remove(pOrbiter);
+                }
+                else if (iPowerLevel < pOrbiter->Get_PowerLevel())
+                {
+                    m_bDead = true;
+                    dynamic_cast<CPlayer02*>(CObjectManager::Get_Instance()->Get_Player()->front())
+                        ->Get_OrbiterList()->remove(this);
+                }
+                else
+                {
+                    //pOrbiter->Set_Dead();
+                    //m_bDead = true;
+                    //dynamic_cast<CPlayer02*>(CObjectManager::Get_Instance()->Get_Player()->front())
+                    //    ->Set_Pos()
+                }
+            }
+        }
+    }
 }
 
 void COribiters::Set_PowerLevel(int iLv)
