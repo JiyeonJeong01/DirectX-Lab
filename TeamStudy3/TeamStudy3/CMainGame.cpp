@@ -25,6 +25,7 @@ void CMainGame::Initialize()
     CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Back.bmp", L"Back");
     CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/button.bmp", L"Button");
     CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Title_BG.bmp", L"Title");
+    CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/StageClear.bmp", L"Clear");
 }
 
 void CMainGame::Update()

@@ -15,6 +15,8 @@ private:
     CObjectFourth* pObstacle;
     CObjectFourth* pGoal[2];
     short sScore;
+    int time;
+    ULONGLONG timer;
 public:
 	CScene04();
 	virtual ~CScene04();

@@ -182,6 +182,7 @@
     <ClInclude Include="CScene02.h" />
     <ClInclude Include="CScene03.h" />
     <ClInclude Include="CScene04.h" />
+    <ClInclude Include="CSceneClear.h" />
     <ClInclude Include="CSceneManager.h" />
     <ClInclude Include="CSceneOver04.h" />
     <ClInclude Include="CScrollManager.h" />
@@ -243,6 +244,7 @@
     <ClCompile Include="CScene02.cpp" />
     <ClCompile Include="CScene03.cpp" />
     <ClCompile Include="CScene04.cpp" />
+    <ClCompile Include="CSceneClear.cpp" />
     <ClCompile Include="CSceneManager.cpp" />
     <ClCompile Include="CSceneOver04.cpp" />
     <ClCompile Include="CScrollManager.cpp" />

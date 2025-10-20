@@ -53,6 +53,7 @@ enum SCENENUMBER {
     SCENE04,
     SCENEOVER04,
     LOGO,
+    CLEAR,
     SCENE_END
 };
 

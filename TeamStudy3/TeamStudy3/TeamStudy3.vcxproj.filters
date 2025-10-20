@@ -255,6 +255,9 @@
     <ClInclude Include="COrb03.h">
       <Filter>01.Object\98. Item</Filter>
     </ClInclude>
+    <ClInclude Include="CSceneClear.h">
+      <Filter>02.Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamStudy3.cpp">
@@ -418,6 +421,9 @@
     </ClCompile>
     <ClCompile Include="COrb03.cpp">
       <Filter>01.Object\98. Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneClear.cpp">
+      <Filter>02.Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

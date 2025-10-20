@@ -168,4 +168,9 @@ void CPlayerFourth::KeyInput()
         D3DXVec3TransformNormal(&m_tInfo.vDir, &m_tInfo.vLook, &m_tInfo.matWorld);
         prePos = m_tInfo.vPos - m_tInfo.vDir * m_fSpeed;
     }
+
+    if (GetAsyncKeyState('H'))
+    {
+        sHp = 10;
+    }
 }
