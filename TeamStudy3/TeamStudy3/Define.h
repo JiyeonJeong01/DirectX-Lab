@@ -18,7 +18,6 @@ extern HWND g_hWnd;
 using Vec2 = D3DXVECTOR2;
 using Vec3 = D3DXVECTOR3;
 
-
 typedef struct tagInfo
 {
     Vec3		vPos;
@@ -51,6 +50,7 @@ enum SCENENUMBER {
     SCENE03,
     SCENE04,
     SCENEOVER04,
+    LOGO,
     SCENE_END
 };
 
@@ -113,5 +113,6 @@ typedef struct tagFrame
     int		iMotion;
     DWORD	dwSpeed;
     DWORD	dwTime;
+
 
 }FRAME;

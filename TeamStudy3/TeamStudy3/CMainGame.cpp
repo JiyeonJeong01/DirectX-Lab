@@ -23,6 +23,8 @@ void CMainGame::Initialize()
 
     CSceneManager::Get_Instance()->ChangeScene(SCENE02);
     CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Back.bmp", L"Back");
+    CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/button.bmp", L"Button");
+    CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Title_BG.bmp", L"Title");
 }
 
 void CMainGame::Update()
@@ -42,14 +44,9 @@ void CMainGame::Late_Update()
 
 void CMainGame::Render()
 {
-    HDC hBackDC = m_hDC;
+    HDC	hBackDC = CBmpManager::Get_Instance()->Find_Img(L"Back");
     CSceneManager::Get_Instance()->Render(hBackDC);
-
-    //HDC hBackDC = CBmpManager::Get_Instance()->Find_Img(L"Back");
-    //
-    //CSceneManager::Get_Instance()->Render(hBackDC);
-    //
-    //BitBlt(m_hDC, 0, 0, WINCX, WINCY, hBackDC, 0, 0, SRCCOPY);
+    BitBlt(m_hDC, 0, 0, WINCX, WINCY, hBackDC, 0, 0, SRCCOPY);
 }
 
 void CMainGame::Release()

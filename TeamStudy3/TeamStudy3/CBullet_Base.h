@@ -2,6 +2,7 @@
 
 #include "CObject.h"
 
+
 class CBullet_Base : public CObject
 {
 public:
@@ -19,9 +20,9 @@ public:
 
 public:
     bool CheckToBounds();
-    
 
 private:
+    
 
 };
 

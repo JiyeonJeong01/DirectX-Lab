@@ -27,7 +27,7 @@ int CSceneOver04::Update()
     if (GetAsyncKeyState(VK_RETURN))
     {
         PlaySound(NULL, 0, 0);
-        CSceneManager::Get_Instance()->ChangeScene(SCENE04);
+        CSceneManager::Get_Instance()->ChangeScene(LOGO);
         return 0;
     }
     m_fTime += 0.05f;

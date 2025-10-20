@@ -34,12 +34,24 @@ void CFire::BeginFire(bool bFlag)
     m_Firing = true;
 
     if (bFlag)
-    {
         DoShoot();
-    }
 }
 
 void CFire::EndFire()
 {
     m_Firing = false;
+}
+
+void CFire::DoShoot()
+{
+    if (m_AnglesDeg.empty())
+    {
+        FOnShoot.Broadcast(0.f);     
+        return;
+    }
+
+    for (float deg : m_AnglesDeg)
+    {
+        FOnShoot.Broadcast(deg);
+    }
 }

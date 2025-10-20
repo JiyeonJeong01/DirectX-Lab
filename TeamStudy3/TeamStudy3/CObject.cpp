@@ -18,13 +18,13 @@ void CObject::OnComponentBeginOverlap(CObject* _Dst)
     // 자식에서 처리 ex) TakeDamage, UseItem
 }
 
-void CObject::TakeDamage(int _iAttack)
+void CObject::TakeDamage(CObject* other, int _iAttack)
 {
-    int currentHP = Get_Hp(); 
+    int currentHP = other->Get_Hp();
 
-    Set_Hp(currentHP - _iAttack);
+    other->Set_Hp(currentHP - _iAttack);
 
-    if (Get_Hp() <= 0)
+    if (other->Get_Hp() <= 0)
         Set_Dead();
 }
 
@@ -51,7 +51,10 @@ void CObject::Move_Frame()
         ++m_tFrame.iStart;
 
         if (m_tFrame.iStart > m_tFrame.iEnd)
+        {
             m_tFrame.iStart = 0;
+            
+        }
 
         m_tFrame.dwTime = GetTickCount64();
     }

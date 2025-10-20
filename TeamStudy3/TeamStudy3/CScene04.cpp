@@ -75,7 +75,7 @@ int CScene04::Update()
 {
     if (dynamic_cast<CPlayerFourth*>(pPlayer)->GetDead())
     {
-        CSceneManager::Get_Instance()->ChangeScene(SCENEOVER04);
+        CSceneManager::Get_Instance()->ChangeScene(LOGO);
         return 0;
     }
 
@@ -244,6 +244,7 @@ void CScene04::Late_Update()
 
     if (dynamic_cast<CGoalFourth*>(pGoal[0])->GetGoal() && dynamic_cast<CGoalFourth*>(pGoal[1])->GetGoal())
     {
+        CSceneManager::Get_Instance()->ChangeScene(LOGO);
         return;
     }
     for (int i = 0; i < 2; ++i)

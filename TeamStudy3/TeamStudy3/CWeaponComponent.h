@@ -6,14 +6,15 @@
 
 class CFire;
 
-enum class EWeaponType { Base, Rifle, END };
+enum class EWeaponType { Base, Rifle, Rifle2, END };
 
 struct FWeaponPreset
 {
     EWeaponType type = EWeaponType::Base;
 
-    float       fireInterval = 0.25f; 
-    int         magSize = -1;        
+    vector<float> multiAnglesDeg;   
+    float         fireInterval = 0.25f; 
+    int           magSize = -1;        
 };
 
 class CWeaponComponent : public CComponent
@@ -33,6 +34,7 @@ public:
 
     void BeginFire();
     void EndFire();
+	float GetShotAngleDeg() const { return m_ShotAngleDeg; }
 
 public:
     CDelegate<EWeaponType, EWeaponType> FOnWeaponChanged;
@@ -40,6 +42,7 @@ public:
 
     FWeaponPreset Preset_Base();
     FWeaponPreset Preset_Rifle();
+    FWeaponPreset Preset_Rifle2();
 
 private:
     void ChangeWeaponType(EWeaponType _Type);
@@ -49,4 +52,5 @@ private:
 private:
     EWeaponType m_WeaponType = EWeaponType::Base;
     CFire*      m_Fire = nullptr;
+	float       m_ShotAngleDeg = 0.f;
 };
