@@ -14,6 +14,7 @@ CMonster03_Base::CMonster03_Base()
 
 CMonster03_Base::~CMonster03_Base()
 {
+    Release();
 }
 
 void CMonster03_Base::Initialize()

@@ -121,6 +121,6 @@ void CStage02Item::Detect_Player()
     if (bCollision)
     {
         Apply_ItemEffect(pPlayer);
-        cout << "충돌 : " << GetTickCount() << endl;
+        //cout << "충돌 : " << GetTickCount() << endl;
     }
 }

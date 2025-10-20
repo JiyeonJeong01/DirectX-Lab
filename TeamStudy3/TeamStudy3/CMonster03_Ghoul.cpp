@@ -14,7 +14,7 @@ CMonster03_Ghoul::CMonster03_Ghoul()
 
 CMonster03_Ghoul::~CMonster03_Ghoul()
 {
-
+    Release();
 }
 
 void CMonster03_Ghoul::Initialize()

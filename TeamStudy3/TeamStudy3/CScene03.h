@@ -51,16 +51,11 @@ private:
     float   m_StartMaxCool = 0.9f;
     float   m_EndMaxCool = 0.35f;
 
-    int     m_BaseSpawnCount = 1;
-    int     m_MaxSpawnCount = 6;
-
-    int     m_StartAliveCap = 999999;
-    int     m_EndAliveCap = 999999;
-
-private:
     float   m_MinCoolFloor = 0.14f;
-    int     m_MaxSpawnPerBurst = 6;
+    int     m_BaseSpawnCount = 1;
+    int     m_MaxSpawnCount = 4;
+    int     m_MaxSpawnPerBurst = 4;
 
-
-
+    int     m_StartAliveCap = 24;
+    int     m_EndAliveCap = 48;
 };

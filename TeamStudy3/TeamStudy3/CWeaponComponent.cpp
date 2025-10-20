@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "CWeaponComponent.h"
 #include "CFire.h"
+#include "CObject.h"
 #include "Define.h"
 
 CWeaponComponent::CWeaponComponent()

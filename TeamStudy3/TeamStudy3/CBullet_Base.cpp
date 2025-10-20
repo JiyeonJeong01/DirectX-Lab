@@ -18,7 +18,7 @@ void CBullet_Base::Initialize()
     m_tInfo.vDir     = Vec3(0.f, -1.f, 0.f);
     m_tInfo.vSize  = Vec3(30.f, 30.f, 0.f);
 
-    m_iAttack = 50.f;
+    m_iAttack = 70.f;
     m_fSpeed = 250.f;
 
     CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Object/HeavyMachineGunProjectile_Up.bmp", L"HeavyBullet");

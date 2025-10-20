@@ -71,7 +71,7 @@ void CScene02::Late_Update()
                 });
 
             // 임시로 설정 
-            CSceneManager::Get_Instance()->ChangeScene(SCENE01);
+            CSceneManager::Get_Instance()->ChangeScene(LOGO);
         }
 
     }

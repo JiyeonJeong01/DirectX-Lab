@@ -70,17 +70,27 @@ int CScene03::Update()
     if (curMaxCool < m_MinCooltime) curMaxCool = m_MinCooltime + 0.01f;
 
     int curSpawnCount = m_BaseSpawnCount + (int)((m_MaxSpawnCount - m_BaseSpawnCount) * t + 0.5f);
+    if (curSpawnCount < 1) curSpawnCount = 1;
+    if (curSpawnCount > m_MaxSpawnPerBurst) curSpawnCount = m_MaxSpawnPerBurst;
 
-    if (curSpawnCount < 1)
-        curSpawnCount = 1;
-
-    if (curSpawnCount > m_MaxSpawnPerBurst)
-        curSpawnCount = m_MaxSpawnPerBurst;
+    int curAliveCap = m_StartAliveCap + (int)((m_EndAliveCap - m_StartAliveCap) * t + 0.5f);
 
     if (m_SpawnTime >= m_SpawnCooltime)
     {
-        for (int i = 0; i < curSpawnCount; ++i)
-            SpawnMonster();
+        bool canSpawn = true;
+
+        size_t alive = 0;
+        if (auto monList = CObjectManager::Get_Instance()->Get_MonsterList())
+            alive = monList->size();
+
+        if (alive >= (size_t)curAliveCap)
+            canSpawn = false;
+
+        if (canSpawn)
+        {
+            for (int i = 0; i < curSpawnCount; ++i)
+                SpawnMonster();
+        }
 
         m_SpawnTime = 0.f;
         m_SpawnCooltime = m_MinCooltime + (float)rand() / RAND_MAX * (curMaxCool - m_MinCooltime);
@@ -93,7 +103,6 @@ int CScene03::Update()
     CObjectManager::Get_Instance()->Update();
     return OBJ_NOEVENT;
 }
-
 
 void CScene03::Late_Update()
 {
@@ -136,7 +145,7 @@ void CScene03::Render(HDC _hDC)
     }
 
     if (m_TimerFont)
-    {    
+    {
         wchar_t buf[64];
         swprintf_s(buf, L"Timer : %d", (int)m_SceneTimer);
 
@@ -156,6 +165,8 @@ void CScene03::Render(HDC _hDC)
 
 void CScene03::Release()
 {
+    if (m_ScoreFont) { DeleteObject(m_ScoreFont); m_ScoreFont = nullptr; }
+    if (m_TimerFont) { DeleteObject(m_TimerFont); m_TimerFont = nullptr; }
 }
 
 void CScene03::SpawnMonster()
@@ -187,4 +198,3 @@ void CScene03::SpawnMonster()
     if (pMonster)
         CObjectManager::Get_Instance()->AddObject(MONSTER, pMonster);
 }
-

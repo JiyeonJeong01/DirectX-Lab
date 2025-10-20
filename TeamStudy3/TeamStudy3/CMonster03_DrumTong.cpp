@@ -17,7 +17,7 @@ CMonster03_DrumTong::CMonster03_DrumTong()
 
 CMonster03_DrumTong::~CMonster03_DrumTong()
 {
-
+    Release();
 }
 
 void CMonster03_DrumTong::Initialize()
@@ -80,8 +80,6 @@ int CMonster03_DrumTong::Update()
     }
 
     CMonster03_Base::Update();
-
-    cout << "드럼통 현재 체력 : " << m_iHp << endl;
 
     m_tInfo.vPos.y += m_fSpeed * DELTA;
 

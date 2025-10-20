@@ -14,7 +14,7 @@ CMonster03_Golem::CMonster03_Golem()
 
 CMonster03_Golem::~CMonster03_Golem()
 {
-
+    Release();
 }
 
 void CMonster03_Golem::Initialize()
