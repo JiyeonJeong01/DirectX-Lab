@@ -2,6 +2,7 @@
 #include "CScene04.h"
 #include "CBmpManager.h"
 #include "CCollisionMgr04.h"
+#include "CKeyManager.h"
 #include "CSceneManager.h"
 #define EPSILON 0.03f
 
@@ -97,6 +98,11 @@ int CScene04::Update()
 
 void CScene04::Late_Update()
 {
+    if (CKeyManager::Get_Instance()->Key_Pressing('G'))
+    {
+        CSceneManager::Get_Instance()->ChangeScene(CLEAR);
+    }
+
     D3DXVECTOR3* playerPoint = pPlayer->GetPoint();
     D3DXVECTOR3* obstaclePoint = pObstacle->GetPoint();
     D3DXVECTOR3* goalPoint[2] = {};

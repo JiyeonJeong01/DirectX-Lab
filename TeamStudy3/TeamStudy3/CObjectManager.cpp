@@ -122,3 +122,15 @@ void CObjectManager::Add_Goal(Vec3 _vPos)
     CObject* pGoal = CAbstractFactory<CStage01Goal>::Create(_vPos);
     AddObject(GOAL, pGoal);
 }
+
+void CObjectManager::ClearObjectList()
+{
+    for (int i = 0; i < OBJ_END; ++i)
+    {
+        for (auto pObject : m_ObjectList[i])
+        {
+            delete pObject;
+        }
+        m_ObjectList[i].clear();
+    }
+}

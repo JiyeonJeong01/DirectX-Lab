@@ -34,8 +34,8 @@ typedef struct tagInfo
 
 enum OBJECT
 {
-    PLAYER,
     MONSTER,
+    PLAYER,
     BULLET,
     ITEM,
     MOUSE,

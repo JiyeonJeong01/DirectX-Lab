@@ -45,7 +45,7 @@ private:
     COLORREF m_TimerColor = RGB(255, 255, 255);
     POINT    m_TimerPos = { 80, 20 };
 
-    float   m_MaxSceneTime = 40.f;
+    float   m_MaxSceneTime = 30.f;
     float   m_StartMinCool = 0.5f;
     float   m_EndMinCool = 0.22f;
     float   m_StartMaxCool = 0.9f;

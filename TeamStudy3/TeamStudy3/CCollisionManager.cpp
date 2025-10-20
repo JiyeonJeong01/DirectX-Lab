@@ -216,8 +216,8 @@ void CCollisionManager::Stage01_Collision_Goal(list<CObject*> _Dst, list<CObject
                 continue;
 
             Vec3 pen = { 0.f, 0.f, 0.f };
-            Dst->On_Collision(Src, pen);
-            Src->On_Collision(Dst, pen);
+            //Dst->On_Collision(Src, pen);
+            //Src->On_Collision(Dst, pen);
         }
     }
 }

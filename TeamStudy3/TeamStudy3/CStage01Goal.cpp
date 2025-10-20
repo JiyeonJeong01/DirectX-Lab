@@ -67,7 +67,7 @@ void CStage01Goal::On_Collision(CObject* _pColObj, Vec3 _vColSize)
 {
     if (dynamic_cast<CStage01Player*>(_pColObj))
     {
-        CSceneManager::Get_Instance()->ChangeScene(SCENEOVER04);
+        CSceneManager::Get_Instance()->ChangeScene(CLEAR);
     }
 }
 

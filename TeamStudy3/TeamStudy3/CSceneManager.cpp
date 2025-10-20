@@ -84,7 +84,10 @@ int CSceneManager::ChangeScene(SCENENUMBER _eSceneNumber)
 {
 	if (m_SceneNumber == _eSceneNumber)
 		return 0;
+
 	CScene* newScene = nullptr;
+
+    CObjectManager::Get_Instance()->ClearObjectList();
 
 	switch (_eSceneNumber)
 	{

@@ -186,7 +186,10 @@
     <ClInclude Include="CSceneManager.h" />
     <ClInclude Include="CSceneOver04.h" />
     <ClInclude Include="CScrollManager.h" />
+    <ClInclude Include="CStage01Goal.h" />
     <ClInclude Include="CStage01Player.h" />
+    <ClInclude Include="CStage01Trap01.h" />
+    <ClInclude Include="CStage01Trap02.h" />
     <ClInclude Include="CStage02AddItem.h" />
     <ClInclude Include="CStage02Item.h" />
     <ClInclude Include="CStage02PowerUpItem.h" />
@@ -248,7 +251,10 @@
     <ClCompile Include="CSceneManager.cpp" />
     <ClCompile Include="CSceneOver04.cpp" />
     <ClCompile Include="CScrollManager.cpp" />
+    <ClCompile Include="CStage01Goal.cpp" />
     <ClCompile Include="CStage01Player.cpp" />
+    <ClCompile Include="CStage01Trap01.cpp" />
+    <ClCompile Include="CStage01Trap02.cpp" />
     <ClCompile Include="CStage02AddItem.cpp" />
     <ClCompile Include="CStage02Item.cpp" />
     <ClCompile Include="CStage02PowerUpItem.cpp" />

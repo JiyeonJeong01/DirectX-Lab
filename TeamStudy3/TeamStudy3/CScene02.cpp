@@ -5,6 +5,7 @@
 #include "CObjectManager.h"
 #include "CBmpManager.h"
 #include "CEnemy.h"
+#include "CKeyManager.h"
 #include "CPlayer.h"
 #include "CPlayer02.h"
 #include "CScrollManager.h"
@@ -51,6 +52,10 @@ int CScene02::Update()
 
 void CScene02::Late_Update()
 {
+    if (CKeyManager::Get_Instance()->Key_Pressing('G'))
+    {
+        CSceneManager::Get_Instance()->ChangeScene(CLEAR);
+    }
 
     if (iSpawnedEnemyCnt >= iTotalEnemyCnt &&
         (CObjectManager::Get_Instance()->Get_MonsterList()->size() == 0) && !bClear)
@@ -71,7 +76,7 @@ void CScene02::Late_Update()
                 });
 
             // 임시로 설정 
-            CSceneManager::Get_Instance()->ChangeScene(LOGO);
+            CSceneManager::Get_Instance()->ChangeScene(CLEAR);
         }
 
     }

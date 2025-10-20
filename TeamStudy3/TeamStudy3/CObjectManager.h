@@ -49,6 +49,8 @@ public:
 
 	}
 
+    void     ClearObjectList();
+
 private:
 	list<CObject*> m_ObjectList[OBJ_END];
 	static CObjectManager* m_pInstance;

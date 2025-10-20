@@ -4,6 +4,7 @@
 #include "CAbstractFactory.h"
 #include "CObjectManager.h"
 #include "CBmpManager.h"
+#include "CKeyManager.h"
 #include "CMonster.h"
 #include "CMonster03_Base.h"
 #include "CMonster03_DrumTong.h"
@@ -46,7 +47,7 @@ int CScene03::Update()
 {
     if (m_SceneTimer >= m_MaxSceneTime)
     {
-        CSceneManager::Get_Instance()->ChangeScene(LOGO);
+        CSceneManager::Get_Instance()->ChangeScene(CLEAR);
         return 0;
     }
 
@@ -107,6 +108,11 @@ int CScene03::Update()
 void CScene03::Late_Update()
 {
     CObjectManager::Get_Instance()->Late_Update();
+
+    if (CKeyManager::Get_Instance()->Key_Pressing('G'))
+    {
+        CSceneManager::Get_Instance()->ChangeScene(CLEAR);
+    }
 }
 
 void CScene03::Render(HDC _hDC)

@@ -24,6 +24,7 @@ int CSceneClear::Update()
         CSceneManager::Get_Instance()->ChangeScene(LOGO);
         return 0;
     }
+
     return OBJ_NOEVENT;
 }
 

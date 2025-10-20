@@ -243,20 +243,32 @@
     <ClInclude Include="CLogo.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CItem_Player.h">
-      <Filter>01.Object\98. Item</Filter>
-    </ClInclude>
     <ClInclude Include="CPlayer_Item.h">
       <Filter>01.Object\00. Player</Filter>
     </ClInclude>
-    <ClInclude Include="CItem_Orb.h">
-      <Filter>01.Object\98. Item</Filter>
-    </ClInclude>
-    <ClInclude Include="COrb03.h">
-      <Filter>01.Object\98. Item</Filter>
-    </ClInclude>
     <ClInclude Include="CSceneClear.h">
       <Filter>02.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemy.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CItem_Orb.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CItem_Player.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="COrb03.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage01Goal.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage01Trap01.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage01Trap02.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -410,20 +422,32 @@
     <ClCompile Include="CLogo.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CItem_Player.cpp">
-      <Filter>01.Object\98. Item</Filter>
-    </ClCompile>
     <ClCompile Include="CPlayer_Item.cpp">
       <Filter>01.Object\00. Player</Filter>
     </ClCompile>
-    <ClCompile Include="CItem_Orb.cpp">
-      <Filter>01.Object\98. Item</Filter>
-    </ClCompile>
-    <ClCompile Include="COrb03.cpp">
-      <Filter>01.Object\98. Item</Filter>
-    </ClCompile>
     <ClCompile Include="CSceneClear.cpp">
       <Filter>02.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CEnemy.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CItem_Orb.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CItem_Player.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="COrb03.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage01Goal.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage01Trap01.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage01Trap02.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
