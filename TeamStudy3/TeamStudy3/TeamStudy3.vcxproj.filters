@@ -222,6 +222,9 @@
     <ClInclude Include="CButton.h">
       <Filter>01.Object</Filter>
     </ClInclude>
+    <ClInclude Include="CSceneClear.h">
+      <Filter>02.Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamStudy3.cpp">
@@ -349,6 +352,9 @@
     </ClCompile>
     <ClCompile Include="CButton.cpp">
       <Filter>01.Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneClear.cpp">
+      <Filter>02.Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

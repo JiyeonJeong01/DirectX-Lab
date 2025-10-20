@@ -250,7 +250,7 @@ void CScene04::Late_Update()
 
     if (dynamic_cast<CGoalFourth*>(pGoal[0])->GetGoal() && dynamic_cast<CGoalFourth*>(pGoal[1])->GetGoal())
     {
-        CSceneManager::Get_Instance()->ChangeScene(LOGO);
+        CSceneManager::Get_Instance()->ChangeScene(CLEAR);
         return;
     }
     for (int i = 0; i < 2; ++i)
