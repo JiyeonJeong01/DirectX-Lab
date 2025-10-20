@@ -6,13 +6,6 @@
 #include "CStage01Player.h"
 #include "CStage01Goal.h"
 
-static inline bool IsTrap(CObject* o) {
-    return dynamic_cast<CStage01Trap01*>(o) != nullptr
-        || dynamic_cast<CStage01Trap02*>(o) != nullptr;
-}
-
-
-
 void CCollisionManager::Collision_Rect(list<CObject*> _Dst, list<CObject*> _Src)
 {
 	/*RECT	rcCol{};
