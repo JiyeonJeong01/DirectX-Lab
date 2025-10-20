@@ -21,6 +21,7 @@ public:
 	float		Get_Offset() { return m_fOffset; }
 
 	void		Scroll_Lock();
+    void        Stage01_Scroll_Lock();
 
 public:
 	static CScrollManager* Get_Instance()

@@ -33,12 +33,13 @@ void CPlatform::Render(HDC hDC)
     int iScrollX = (int)CScrollManager::Get_Instance()->Get_ScrollX();
     int iScrollY = (int)CScrollManager::Get_Instance()->Get_ScrollY();
 
-    MoveToEx(hDC, (int)m_vPlatformPoint[0].x + iScrollX, (int)m_vPlatformPoint[0].y + iScrollY, nullptr);
-
+    POINT points[4];
     for (int i = 0; i < 4; ++i)
-        LineTo(hDC, (int)m_vPlatformPoint[i].x + iScrollX, (int)m_vPlatformPoint[i].y + iScrollY);
+    {
+        points[i].x = (int)m_vPlatformPoint[i].x + iScrollX;
+        points[i].y = (int)m_vPlatformPoint[i].y + iScrollY;
+    }
 
-    LineTo(hDC, (int)m_vPlatformPoint[0].x + iScrollX, (int)m_vPlatformPoint[0].y + iScrollY);
 
 }
 

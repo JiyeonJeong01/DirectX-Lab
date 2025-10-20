@@ -21,6 +21,8 @@
 #include <Vfw.h>
 #pragma comment(lib, "vfw32.lib")
 
+#pragma comment(lib, "msimg32.lib")
+
 #include <d3d9.h>
 #include <d3dx9.h>
 

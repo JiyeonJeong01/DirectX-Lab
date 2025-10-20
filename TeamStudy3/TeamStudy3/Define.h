@@ -41,6 +41,8 @@ enum OBJECT
     MOUSE,
     BLOCK,
     MONBULLET,
+    TRAP,
+    GOAL,
     OBJ_END
 };
 
