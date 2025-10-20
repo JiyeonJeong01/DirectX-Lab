@@ -24,7 +24,7 @@ void CMonster03_Golem::Initialize()
     m_tInfo.vSize = { 48.f, 64.f, 0.f };
     m_fSpeed = 50.f;
 
-    m_iHp = 15.f;
+    m_iHp = 250.f;
 
     // 스프라이트
     {

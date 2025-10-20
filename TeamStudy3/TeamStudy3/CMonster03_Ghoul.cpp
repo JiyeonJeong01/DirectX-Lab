@@ -22,9 +22,9 @@ void CMonster03_Ghoul::Initialize()
     CMonster03_Base::Initialize();
 
     m_tInfo.vSize = { 48.f, 64.f, 0.f };
-    m_fSpeed = 100.f;
+    m_fSpeed = 70.f;
 
-    m_iHp = 15.f;
+    m_iHp = 150.f;
 
     CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Monster/GoulKingWalk.bmp", L"Monster_Walk");
     CBmpManager::Get_Instance()->Insert_Bmp(L"../../Image/Monster/GhoulLargeDead.bmp", L"Monster_Dead");

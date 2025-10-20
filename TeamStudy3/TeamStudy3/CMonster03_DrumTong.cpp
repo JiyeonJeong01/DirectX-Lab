@@ -26,9 +26,9 @@ void CMonster03_DrumTong::Initialize()
 
     m_tInfo.vSize = { 48.f, 64.f, 0.f };
     //m_fSpeed = 50.f;
-    m_fSpeed = 5.f;
+    m_fSpeed = 15.f;
 
-    m_iHp = 150.f;
+    m_iHp = 100.f;
 
     m_DeadDuration = 0.1f;
 
@@ -157,7 +157,26 @@ void CMonster03_DrumTong::OnComponentBeginOverlap(CObject* _Dst)
 
 void CMonster03_DrumTong::SpawnItem()
 {
-    CObjectManager::Get_Instance()->AddObject(
-        ITEM, CAbstractFactory<CItem_Orb>::Create(m_tInfo.vPos));
+    int randomValue = rand() % 3;
+
+    if (randomValue == 0)
+    {
+        CObjectManager::Get_Instance()->AddObject(
+            ITEM, CAbstractFactory<CItem_Orb>::Create(m_tInfo.vPos));
+    }
+
+    else if (randomValue == 1)
+    {
+        CObjectManager::Get_Instance()->AddObject(
+            ITEM, CAbstractFactory<CItem_Player>::Create(m_tInfo.vPos));
         //ITEM, CAbstractFactory<CItem_Player>::Create(m_tInfo.vPos));
+    }
+
+    else if (randomValue == 2)
+    {
+        CObjectManager::Get_Instance()->AddObject(
+            ITEM, CAbstractFactory<CItem_Rifle>::Create(m_tInfo.vPos));
+        //ITEM, CAbstractFactory<CItem_Player>::Create(m_tInfo.vPos));
+    }
+
 }

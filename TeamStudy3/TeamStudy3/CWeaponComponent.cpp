@@ -77,7 +77,7 @@ FWeaponPreset CWeaponComponent::Preset_Rifle()
     FWeaponPreset preset;
 
     preset.type = EWeaponType::Rifle;
-    preset.fireInterval = 0.1f;
+    preset.fireInterval = 0.2f;
 
     return preset;
 }
@@ -87,7 +87,7 @@ FWeaponPreset CWeaponComponent::Preset_Rifle2()
     FWeaponPreset preset;
 
     preset.type = EWeaponType::Rifle2;
-    preset.fireInterval = 0.1f;
+    preset.fireInterval = 0.15f;
 
 	preset.multiAnglesDeg.clear();
 	const int count = 3;
